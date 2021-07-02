@@ -4,6 +4,8 @@
 # ingres
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)
 <!-- badges: end -->
 
 Given a gene regulatory boolean network and a RNA-seq dataset, ingres
