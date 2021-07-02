@@ -36,7 +36,7 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay, slot, netwo
          call. = FALSE)
   }
 
-  expression.matrix = as.matrix(Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = "scale.data"))
+  expression.matrix = as.matrix(Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = slot))
   idents = data.frame(cell = names(Seurat::Idents(seurat.object)),
                       cluster = as.character(Seurat::Idents(seurat.object)),
                       check.names = F)
