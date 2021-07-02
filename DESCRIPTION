@@ -1,5 +1,5 @@
 Package: ingres
-Title: What the Package Does (One Line, Title Case)
+Title: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores
 Version: 0.0.1
 Authors@R: 
     person(given = "Pedro",
@@ -7,11 +7,16 @@ Authors@R:
            role = c("aut", "cre"),
            email = "pedroluisvictori@gmail.com",
            comment = c(ORCID = "https://orcid.org/0000-0001-6321-5584"))
-Description: What the package does (one paragraph).
-License: MIT + file LICENSE
+Description: Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
+Imports: 
+    methods,
+    tidygraph
+Suggests: 
+    Seurat
