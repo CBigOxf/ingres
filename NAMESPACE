@@ -2,5 +2,7 @@
 
 export(createIngresObject)
 export(createIngresObjectFromSeurat)
+export(performViper)
 exportClasses(ingres)
+import(dplyr)
 import(methods)

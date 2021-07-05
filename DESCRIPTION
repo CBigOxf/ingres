@@ -17,7 +17,14 @@ Depends:
     R (>= 2.10)
 Imports: 
     methods,
-    tidygraph
+    viper,
+    tidygraph,
+    AnnotationDbi,
+    org.Hs.eg.db,
+    dplyr,
+    tidyr,
+    tidyselect,
+    scales
 Suggests: 
     testthat (>= 3.0.0),
     Seurat

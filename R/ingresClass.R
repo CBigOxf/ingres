@@ -13,12 +13,12 @@ setOldClass("tbl_graph")
 #' @return An \code{ingres} object.
 #' @export
 ingres = setClass("ingres", slots = list(expression = "matrix",
-                                       idents = "data.frame",
-                                       network.genes = "data.frame",
-                                       viper = "data.frame",
-                                       cluster.pbn = "data.frame",
-                                       single.cell.pbn = "data.frame",
-                                       network = "tbl_graph"))
+                                         idents = "data.frame",
+                                         network.genes = "data.frame",
+                                         viper = "data.frame",
+                                         cluster.pbn = "data.frame",
+                                         single.cell.pbn = "data.frame",
+                                         network = "tbl_graph"))
 
 #' Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
 #'
