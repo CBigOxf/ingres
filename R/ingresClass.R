@@ -1,7 +1,7 @@
 setOldClass("tbl_graph")
 
 #' The ingres class.
-#'
+#' @aliases ingresClass ingresObject
 #' @slot expression matrix.
 #' @slot idents data.frame.
 #' @slot network.genes data.frame.

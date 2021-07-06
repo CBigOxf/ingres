@@ -2,8 +2,8 @@
 % Please edit documentation in R/ingres-package.R
 \docType{package}
 \name{ingres-package}
-\alias{ingres}
 \alias{ingres-package}
+\alias{_PACKAGE}
 \title{ingres: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores}
 \description{
 Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions.

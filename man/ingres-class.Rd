@@ -4,6 +4,8 @@
 \name{ingres-class}
 \alias{ingres-class}
 \alias{ingres}
+\alias{ingresClass}
+\alias{ingresObject}
 \title{The ingres class.}
 \value{
 An \code{ingres} object.
