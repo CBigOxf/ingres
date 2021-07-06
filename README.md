@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check-bioc](https://github.com/CBigOxf/ingres/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/CBigOxf/ingres/actions)
+[![R-CMD-check](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml)
 <!-- badges: end -->
 
 ***I**nferring Probabilistic Boolean **N**etworks of **G**ene
