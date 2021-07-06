@@ -8,4 +8,6 @@
 ## usethis namespace: end
 #' @import methods
 #' @import dplyr
+#' @importFrom tidyr pivot_longer
+#' @importFrom tidyr pivot_wider
 NULL
