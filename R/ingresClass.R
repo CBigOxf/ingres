@@ -11,7 +11,6 @@ setOldClass("tbl_graph")
 #' @slot network \code{tbl_graph}.
 #'
 #' @return An \code{ingres} object.
-#' @export
 ingres = setClass("ingres", slots = list(expression = "matrix",
                                          idents = "data.frame",
                                          network.genes = "data.frame",
