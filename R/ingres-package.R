@@ -8,6 +8,8 @@
 ## usethis namespace: end
 #' @import methods
 #' @import dplyr
+#' @import ggplot2
+#' @import ggraph
 #' @importFrom tidyr pivot_longer
 #' @importFrom tidyr pivot_wider
 NULL

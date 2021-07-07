@@ -24,7 +24,10 @@ Imports:
     dplyr,
     tidyr,
     tidyselect,
-    scales
+    scales,
+    ggplot2,
+    ggraph,
+    stringr
 Suggests: 
     testthat (>= 3.0.0),
     Seurat
