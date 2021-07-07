@@ -28,7 +28,10 @@ Imports:
     ggplot2,
     ggraph,
     stringr,
-    ggpubr
+    ggpubr,
+    shiny,
+    plotly,
+    tibble
 Suggests: 
     testthat (>= 3.0.0),
     Seurat
