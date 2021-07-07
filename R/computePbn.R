@@ -1,3 +1,13 @@
+#' Compute a Probabilistic Boolean Network (PBN) for each cluster.
+#'
+#' After running \code{\link{performViper}}, this can be run to produce a PBN with
+#' the identity function probability for each node relative to the median VIPER
+#' normalised enrichment score (NES) for each cluster.
+#'
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
+#'
+#' @return An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled
+#' @export
 computePbnByCluster = function(ingres.object){
   viper.result = ingres.object@viper
   counts = viper.result %>% select(c(1,2)) %>% count(cluster)
@@ -21,6 +31,16 @@ computePbnByCluster = function(ingres.object){
   ingres.object
 }
 
+#' Compute a Probabilistic Boolean Network (PBN) for each cell.
+#'
+#' After running \code{\link{performViper}}, this can be run to produce a PBN with
+#' the identity function probability for each node relative to the VIPER
+#' normalised enrichment score (NES) for every cell.
+#'
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
+#'
+#' @return An \code{\linkS4class{ingres}} object with the \code{single.cell.pbn slot} filled
+#' @export
 computePbnBySingleCell = function(ingres.object){
   viper.result = ingres.object@viper
   identities = viper.result %>% select(c(1,2))
