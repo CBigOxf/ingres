@@ -7,10 +7,10 @@
 computePbnBySingleCell(ingres.object)
 }
 \arguments{
-\item{ingres.object}{An \linkS4class{ingres} object with a non-null VIPER slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null VIPER slot.}
 }
 \value{
-An \linkS4class{ingres} object with the single.cell.pbn slot filled
+An \code{\linkS4class{ingres}} object with the \code{single.cell.pbn slot} filled
 }
 \description{
 After running \code{\link{performViper}}, this can be run to produce a PBN with
