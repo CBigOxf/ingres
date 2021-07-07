@@ -1,10 +1,10 @@
 #' Plot a cell PBN
 #'
-#' Plots the PBN produced by \code{\link{computePbnBySingleCell}} and returns it as
-#' a ggplot object
+#' Plots the PBN produced by \code{\link{computePbnBySingleCell}} for a given cell
+#' and returns it as a ggplot object
 #'
-#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{single.cell.pbn slot} slot.
-#' @param cell.id A string containing the id of the cell to be added.
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{single.cell.pbn} slot.
+#' @param cell.id A string containing the id of the cell to be plotted.
 #'
 #' @return A \code{ggplot} object containing the cell PBN plot.
 #' @export
@@ -19,11 +19,11 @@ cellPbnPlot = function(ingres.object, cell.id){
 
 #' Plot a cluster PBN
 #'
-#' Plots the PBN produced by \code{\link{computePbnByCluster}} and returns it as
-#' a ggplot object
+#' Plots the PBN produced by \code{\link{computePbnByCluster}} for a given cluster
+#' and returns it as a ggplot object
 #'
-#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn slot} slot.
-#' @param cluster.id A string containing the id of the cluster to be added.
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn} slot.
+#' @param cluster.id A string containing the id of the cluster to be plotted.
 #'
 #' @return A \code{ggplot} object containing the cluster PBN plot.
 #' @export

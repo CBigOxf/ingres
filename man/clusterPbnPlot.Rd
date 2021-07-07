@@ -7,14 +7,14 @@
 clusterPbnPlot(ingres.object, cluster.id)
 }
 \arguments{
-\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn slot} slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn} slot.}
 
-\item{cluster.id}{A string containing the id of the cluster to be added.}
+\item{cluster.id}{A string containing the id of the cluster to be plotted.}
 }
 \value{
 A \code{ggplot} object containing the cluster PBN plot.
 }
 \description{
-Plots the PBN produced by \code{\link{computePbnByCluster}} and returns it as
-a ggplot object
+Plots the PBN produced by \code{\link{computePbnByCluster}} for a given cluster
+and returns it as a ggplot object
 }
