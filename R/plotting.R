@@ -61,3 +61,51 @@ networkPlot = function(network, pbn.df, title){
     ggtitle(title)
   p
 }
+
+#' Plot a cluster heatmap
+#'
+#' Plots the probabilities for the identity function produced by \code{\link{computePbnByCluster}}
+#' as a heatmap, with nodes on the x axis and clusters on the y axis, and returns
+#' it as a ggplot object.
+#'
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn} slot.
+#'
+#' @return A \code{ggplot} object containing the cluster PBN heatmap plot.
+#' @export
+clusterGenesHeatmap = function(ingres.object){
+  p = ingres.object@cluster.pbn %>%
+    select(-2) %>%
+    pivot_longer(!cluster, names_to = "node", values_to = "p") %>%
+    mutate(p = p/1000) %>%
+    ggplot(aes(x=node, y=cluster)) +
+    geom_raster(aes(fill=p)) +
+    scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
+    ggpubr::theme_pubr() +
+    theme(axis.text.x = element_text(angle=-45, vjust = 1, hjust = 0))
+  p
+}
+
+#' Plot a cell heatmap
+#'
+#' Plots the probabilities for the identity function produced by \code{\link{computePbnBySingleCell}}
+#' as a heatmap, with nodes on the x axis and cells on the y axis, grouped by cluster,
+#' and returns it as a ggplot object.
+#'
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null \code{single.cell.pbn} slot.
+#'
+#' @return A \code{ggplot} object containing the cell PBN heatmap plot.
+#' @export
+cellGenesHeatmap = function(ingres.object){
+  p = ingres.object@single.cell.pbn %>%
+    pivot_longer(!c(cell, cluster), names_to = "node", values_to = "p") %>%
+    mutate(p = p/1000, clustern = substring(cluster, first = 1, last = 20)) %>%
+    ggplot(aes(x=node, y=cell)) +
+    geom_tile(aes(fill=p)) +
+    scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
+    ggpubr::theme_pubr(legend = "none") +
+    theme(axis.text.x = element_text(angle=-45, vjust = 1, hjust = 0),
+          axis.text.y = element_blank(),
+          axis.title.y = element_blank()) +
+    facet_grid(clustern ~ ., scales = "free")
+  p
+}

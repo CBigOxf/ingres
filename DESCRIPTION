@@ -27,7 +27,8 @@ Imports:
     scales,
     ggplot2,
     ggraph,
-    stringr
+    stringr,
+    ggpubr
 Suggests: 
     testthat (>= 3.0.0),
     Seurat
