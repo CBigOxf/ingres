@@ -11,6 +11,11 @@
 #'
 #' @export
 plotSelectedCell = function(ingres.object, seurat.object){
+  if (!requireNamespace("Seurat", quietly = TRUE)) {
+    stop("Package \"Seurat\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
   ui = fillPage(
     titlePanel("Click on a cell to see its PBN"),
     h4("You can zoom in by dragging the mouse"),
