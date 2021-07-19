@@ -8,6 +8,7 @@
 ## usethis namespace: end
 #' @import methods
 #' @import dplyr
+#' @import magrittr
 #' @import ggplot2
 #' @import ggraph
 #' @import shiny
