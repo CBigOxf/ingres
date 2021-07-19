@@ -17,5 +17,5 @@ An ingres object with the result of the VIPER inference in the \code{viper} slot
 \description{
 Performs VIPER analysis on a RNA-seq dataset contained by an ingres object.
 This function is merely a wrapper around the \code{\link[viper:viper]{original VIPER function}},
-designed to suit the ingres workflow.
+designed to suit the ingres workflow and properly prepare the input data.
 }
