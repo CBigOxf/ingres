@@ -31,10 +31,12 @@ Imports:
     ggpubr,
     shiny,
     plotly,
-    tibble
+    tibble,
+    magrittr
 Suggests: 
     testthat (>= 3.0.0),
-    Seurat
+    Seurat,
+    aracne.networks
 Config/testthat/edition: 3
 URL: https://github.com/CBigOxf/ingres
 BugReports: https://github.com/CBigOxf/ingres/issues
