@@ -53,7 +53,7 @@ computePbnBySingleCell = function(ingres.object){
     group_by(node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
     mutate(across(!node, ~ scales::rescale_mid(.x, to = c(-1000,1000), mid = 0))) %>%
-     mutate(across(!node, round)) %>%
+    mutate(across(!node, round)) %>%
     pivot_longer(!node, names_to = "cell") %>%
     pivot_wider(names_from = node, values_from = value) %>%
     merge(identities) %>%

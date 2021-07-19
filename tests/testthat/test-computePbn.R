@@ -1,31 +1,48 @@
-test_that("computePbn functions work", {
-  obj = createIngresObjectFromSeurat(pbmc_small,
-                                     "RNA", "scale.data",
-                                     network_genes,
-                                     network)
-  obj@viper = viperResults
+test_that("computePbnByCluster results don't contain NAs", {
+  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
+                                        network_genes, network)
+  ingres.object@viper = viperResults
+  data = computePbnByCluster(ingres.object)@cluster.pbn
+  expect_false(anyNA(data))
+})
 
-  numericTests <- function(data) {
-    expect_true(is.numeric(data))
-    min = data %>% min()
-    max = data %>% max()
-    expect_gte(min, -1000)
-    expect_lte(max, 1000)
-  }
-
-  obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
-  result.cluster = obj@cluster.pbn
-  result.sc = obj@single.cell.pbn
-
-  expect_false(anyNA(result.cluster))
-  expect_false(anyNA(result.sc))
-
-  pivoted_df.cluster = result.cluster %>%
+test_that("computePbnByCluster results are within the intended range", {
+  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
+                                        network_genes, network)
+  ingres.object@viper = viperResults
+  data = computePbnByCluster(ingres.object)@cluster.pbn %>%
     select(-n) %>%
     pivot_longer(!cluster, names_to = "var")
-  numericTests(pivoted_df.cluster$value)
 
-  pivoted_df.sc = result.sc %>%
+  data = data$value
+
+  expect_true(is.numeric(data))
+  expect_gte(min(data), -1000)
+  expect_lte(max(data), 1000)
+})
+
+
+test_that("computePbnBySingleCell results don't contain NAs", {
+  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
+                                        network_genes, network)
+  ingres.object@viper = viperResults
+
+  data = computePbnBySingleCell(ingres.object)@single.cell.pbn
+  expect_false(anyNA(data))
+})
+
+
+test_that("computePbnBySingleCell results are within the intended range", {
+  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
+                                        network_genes, network)
+  ingres.object@viper = viperResults
+
+  data = computePbnBySingleCell(ingres.object)@single.cell.pbn %>%
     pivot_longer(!c(cell, cluster), names_to = "var")
-  numericTests(pivoted_df.sc$value)
+
+  data = data$value
+
+  expect_true(is.numeric(data))
+  expect_gte(min(data), -1000)
+  expect_lte(max(data), 1000)
 })

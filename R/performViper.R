@@ -20,7 +20,7 @@ performViper = function(ingres.object, regulon){
   rownames(expression.matrix) = geneIds #renaming rows as entrez ids
 
   #run viper on matrix using provided regulon/s
-  viperMatrix = viper::viper(expression.matrix, regulon)
+  viperMatrix = viper::viper(expression.matrix, regulon) #todo include viper settings as performViper settings
   gc() #it's a good idea to run the garbage collector now to free up memory
 
   viperMatrix %<>% t()
