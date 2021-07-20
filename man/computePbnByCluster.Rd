@@ -4,10 +4,13 @@
 \alias{computePbnByCluster}
 \title{Compute a Probabilistic Boolean Network (PBN) for each cluster.}
 \usage{
-computePbnByCluster(ingres.object)
+computePbnByCluster(ingres.object, range = c(-1, 1))
 }
 \arguments{
 \item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null VIPER slot.}
+
+\item{range}{A vector representing the range to which the NES are to be calculated.
+\code{range[1]+range[2] == 0 & range[2] <= 1} should be TRUE. Defaults to [-1, 1]}
 }
 \value{
 An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled

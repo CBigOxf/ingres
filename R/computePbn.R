@@ -5,10 +5,13 @@
 #' normalised enrichment score (NES) for each cluster.
 #'
 #' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
+#' @param range A vector representing the range to which the NES are to be calculated.
+#'  \code{range[1]+range[2] == 0 & range[2] <= 1} should be TRUE. Defaults to \[-1, 1\]
 #'
 #' @return An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled
 #' @export
-computePbnByCluster = function(ingres.object){
+computePbnByCluster = function(ingres.object, range = c(-1, 1)){
+  checkRange(range)
   viper.result = ingres.object@viper
   counts = viper.result %>% select(c(1,2)) %>% count(cluster)
   result = viper.result %>%
@@ -21,7 +24,7 @@ computePbnByCluster = function(ingres.object){
     select(-symbol) %>%
     group_by(node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
-    mutate(across(!node, ~ scales::rescale_mid(.x, to = c(-1000,1000), mid = 0))) %>%
+    mutate(across(!node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
     mutate(across(!node, round)) %>%
     pivot_longer(!node, names_to = "cluster") %>%
     pivot_wider(names_from = node, values_from = value) %>%
@@ -38,10 +41,12 @@ computePbnByCluster = function(ingres.object){
 #' normalised enrichment score (NES) for every cell.
 #'
 #' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
-#'
+#' @param range A vector representing the range to which the NES are to be calculated.
+#'  \code{range[1]+range[2] == 0 & range[2] <= 1} should be TRUE. Defaults to \[-1, 1\].
 #' @return An \code{\linkS4class{ingres}} object with the \code{single.cell.pbn slot} filled
 #' @export
-computePbnBySingleCell = function(ingres.object){
+computePbnBySingleCell = function(ingres.object, range = c(-1, 1)){
+  checkRange(range)
   viper.result = ingres.object@viper
   identities = viper.result %>% select(c(1,2))
   result = viper.result %>%
@@ -52,7 +57,7 @@ computePbnBySingleCell = function(ingres.object){
     select(-symbol) %>%
     group_by(node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
-    mutate(across(!node, ~ scales::rescale_mid(.x, to = c(-1000,1000), mid = 0))) %>%
+    mutate(across(!node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
     mutate(across(!node, round)) %>%
     pivot_longer(!node, names_to = "cell") %>%
     pivot_wider(names_from = node, values_from = value) %>%
@@ -60,4 +65,25 @@ computePbnBySingleCell = function(ingres.object){
     relocate(cluster, .after = cell)
   ingres.object@single.cell.pbn = result
   ingres.object
+}
+
+checkRange = function(range){
+  if(!is.numeric(range)){
+    stop("'range' must be a numeric vector")
+  }
+  if(length(range) != 2){
+    stop("Length of 'range' must be 2")
+  }
+
+  if((range[1] + range[2]) != 0){
+    stop("The sum of the elements of 'range' must be equal to 0")
+  }
+
+  if((range[1] > range[2])){
+    stop("The second element of 'range' should be greater than the first")
+  }
+
+  if((range[2] > 1)){
+    stop("'range' should be inside [-1, 1]")
+  }
 }
