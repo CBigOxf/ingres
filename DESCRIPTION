@@ -32,7 +32,8 @@ Imports:
     shiny,
     plotly,
     tibble,
-    magrittr
+    magrittr,
+    igraph
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,
