@@ -4,3 +4,9 @@ createExampleIngresObject = function(){
                                      network_genes,
                                      network)
 }
+
+createExampleIngresObjectWithViper = function(){
+  obj = createExampleIngresObject()
+  obj@viper = viperResults
+  obj
+}

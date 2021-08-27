@@ -1,14 +1,11 @@
 test_that("computePbnByCluster results don't contain NAs", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
+  ingres.object = createExampleIngresObjectWithViper()
   data = computePbnByCluster(ingres.object)@cluster.pbn
   expect_false(anyNA(data))
 })
 
 test_that("computePbnByCluster results are within the intended range", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
-
+  ingres.object = createExampleIngresObjectWithViper()
 
   testRange = function(data, min, max){
     data %<>% select(-n) %>%
@@ -33,8 +30,7 @@ test_that("computePbnByCluster results are within the intended range", {
 
 
 test_that("computePbnBySingleCell results don't contain NAs", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
+  ingres.object = createExampleIngresObjectWithViper()
 
   data = computePbnBySingleCell(ingres.object)@single.cell.pbn
   expect_false(anyNA(data))
@@ -42,9 +38,7 @@ test_that("computePbnBySingleCell results don't contain NAs", {
 
 
 test_that("computePbnBySingleCell results are within the intended range", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
-
+  ingres.object = createExampleIngresObjectWithViper()
 
   testRange = function(data, min, max){
     data %<>% pivot_longer(!c(cell, cluster), names_to = "var")
@@ -67,8 +61,7 @@ test_that("computePbnBySingleCell results are within the intended range", {
 })
 
 test_that("computePbnByCluster throws the corresponding errors with wrong ranges", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
+  ingres.object = createExampleIngresObjectWithViper()
 
   expect_error(ingres.object %>% computePbnByCluster(), NA)
   expect_error(ingres.object %>% computePbnByCluster(c(-0.5, 0.5)), NA)
@@ -90,8 +83,7 @@ test_that("computePbnByCluster throws the corresponding errors with wrong ranges
 })
 
 test_that("computePbnBySingleCell throws the corresponding errors with wrong ranges", {
-  ingres.object = createExampleIngresObject()
-  ingres.object@viper = viperResults
+  ingres.object = createExampleIngresObjectWithViper()
 
   expect_error(ingres.object %>% computePbnBySingleCell(), NA)
   expect_error(ingres.object %>% computePbnBySingleCell(c(-0.5, 0.5)), NA)
