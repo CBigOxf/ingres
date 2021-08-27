@@ -12,7 +12,7 @@ cellPbnPlot = function(ingres.object, cell.id){
   p.cell = ingres.object@single.cell.pbn %>%
     filter(cell == cell.id) %>%
     select(-c(1,2)) %>%
-    pivot_longer(tidyselect::everything(), names_to = "label", values_to = "p")
+    pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
 
   networkPlot(ingres.object@network, p.cell, paste0("PBN for cell ", cell.id))
 }
@@ -31,7 +31,7 @@ clusterPbnPlot = function(ingres.object, cluster.id){
   p.cluster = ingres.object@cluster.pbn %>%
     filter(cluster == cluster.id) %>%
     select(-c(1,2)) %>%
-    pivot_longer(tidyselect::everything(), names_to = "label", values_to = "p")
+    pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
 
   networkPlot(ingres.object@network, p.cluster, paste0("PBN for cluster ", cluster.id))
 }
@@ -40,10 +40,10 @@ clusterPbnPlot = function(ingres.object, cluster.id){
 networkPlot = function(network, pbn.df, title){
   plot.data = network %>%
     tidygraph::activate(nodes) %>%
-    left_join(pbn.df, by="label") %>%
+    left_join(pbn.df, by="id") %>%
     mutate(p.sign = as.character(sign(p)), p = abs(round(p/1000, digits = 2))) %>%
-    mutate(label = stringr::str_replace(label, "_", "\n")) %>%
-    mutate(label.p = paste0(label, "\np=",p))
+    mutate(id = stringr::str_replace(id, "_", "\n")) %>%
+    mutate(id.p = paste0(id, "\np=",p))
 
   p = ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
@@ -51,8 +51,8 @@ networkPlot = function(network, pbn.df, title){
                    arrow = arrow(angle = 30, length = unit(3, "mm"),
                                  ends = "last", type = "open")) +
     geom_node_point(aes(fill = p.sign, shape = kind), size = 25) +
-    geom_node_text(aes(filter = is.na(p), label = label)) +
-    geom_node_text(aes(filter = !is.na(p), label = label.p)) +
+    geom_node_text(aes(filter = is.na(p), label = id)) +
+    geom_node_text(aes(filter = !is.na(p), label = id.p)) +
     scale_fill_manual(values = c("#DB1F48", "#01949A", "#004369")) +
     scale_shape_manual(values = c(22, 21, 23)) +
     scale_edge_width(range = c(0.2,3)) +
