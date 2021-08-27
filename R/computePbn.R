@@ -12,12 +12,14 @@
 #' @export
 computePbnByCluster = function(ingres.object, range = c(-1, 1)){
   checkRange(range)
-  viper.result = ingres.object@viper
+  viper.result = tibble(ingres.object@viper,
+                        .name_repair = "unique") #ensure unique, non empty column names
   counts = viper.result %>% select(c(1,2)) %>% count(cluster)
   result = viper.result %>%
     select(-1) %>%
     group_by(cluster) %>%
-    summarise(across(.cols = tidyselect::everything(), stats::median)) %>% #why median here but mean below?
+    summarise(across(.cols = tidyselect::everything(),
+                     stats::median)) %>% #why median here but mean below?
     pivot_longer(!cluster, names_to = "symbol") %>%
     pivot_wider(names_from = cluster, values_from = value) %>%
     merge(ingres.object@network.genes) %>%
@@ -46,7 +48,8 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)){
 #' @export
 computePbnBySingleCell = function(ingres.object, range = c(-1, 1)){
   checkRange(range)
-  viper.result = ingres.object@viper
+  viper.result = tibble(ingres.object@viper,
+                        .name_repair = "unique") #ensure unique, non empty column names
   identities = viper.result %>% select(c(1,2))
   result = viper.result %>%
     select(-2) %>%
