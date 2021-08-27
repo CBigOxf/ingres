@@ -1,14 +1,12 @@
 test_that("computePbnByCluster results don't contain NAs", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
   data = computePbnByCluster(ingres.object)@cluster.pbn
   expect_false(anyNA(data))
 })
 
 test_that("computePbnByCluster results are within the intended range", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
 
 
@@ -35,8 +33,7 @@ test_that("computePbnByCluster results are within the intended range", {
 
 
 test_that("computePbnBySingleCell results don't contain NAs", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
 
   data = computePbnBySingleCell(ingres.object)@single.cell.pbn
@@ -45,8 +42,7 @@ test_that("computePbnBySingleCell results don't contain NAs", {
 
 
 test_that("computePbnBySingleCell results are within the intended range", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
 
 
@@ -71,8 +67,7 @@ test_that("computePbnBySingleCell results are within the intended range", {
 })
 
 test_that("computePbnByCluster throws the corresponding errors with wrong ranges", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
 
   expect_error(ingres.object %>% computePbnByCluster(), NA)
@@ -95,8 +90,7 @@ test_that("computePbnByCluster throws the corresponding errors with wrong ranges
 })
 
 test_that("computePbnBySingleCell throws the corresponding errors with wrong ranges", {
-  ingres.object = createIngresObjectFromSeurat(pbmc_small, "RNA", "data",
-                                               network_genes, network)
+  ingres.object = createExampleIngresObject()
   ingres.object@viper = viperResults
 
   expect_error(ingres.object %>% computePbnBySingleCell(), NA)
