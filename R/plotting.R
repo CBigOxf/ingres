@@ -9,12 +9,8 @@
 #' @return A \code{ggplot} object containing the cell PBN plot.
 #' @export
 cellPbnPlot = function(ingres.object, cell.id){
-  p.cell = ingres.object@single.cell.pbn %>%
-    filter(cell == cell.id) %>%
-    select(-c(1,2)) %>%
-    pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
-
-  networkPlot(ingres.object@network, p.cell, paste0("PBN for cell ", cell.id))
+  networkPlot(produceNetworkForCell(ingres.object, cell.id),
+              paste0("PBN for cell ", cell.id))
 }
 
 #' Plot a cluster PBN
@@ -28,31 +24,26 @@ cellPbnPlot = function(ingres.object, cell.id){
 #' @return A \code{ggplot} object containing the cluster PBN plot.
 #' @export
 clusterPbnPlot = function(ingres.object, cluster.id){
-  p.cluster = ingres.object@cluster.pbn %>%
-    filter(cluster == cluster.id) %>%
-    select(-c(1,2)) %>%
-    pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
 
-  networkPlot(ingres.object@network, p.cluster, paste0("PBN for cluster ", cluster.id))
+  networkPlot(produceNetworkForCluster(ingres.object, cluster.id),
+              paste0("PBN for cluster ", cluster.id))
 }
 
 #for internal use only
-networkPlot = function(network, pbn.df, title){
+networkPlot = function(network, title){
   plot.data = network %>%
     tidygraph::activate(nodes) %>%
-    left_join(pbn.df, by="id") %>%
-    mutate(p.sign = as.character(sign(p)), p = abs(round(p/1000, digits = 2))) %>%
-    mutate(id = stringr::str_replace(id, "_", "\n")) %>%
-    mutate(id.p = paste0(id, "\np=",p))
+    mutate(print.id = stringr::str_replace(id, "_", "\n")) %>%
+    mutate(print.id.p = paste0(print.id, "\np=", round(fixed_p, digits = 2)))
 
   p = ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
                    start_cap = circle(12, 'mm'), end_cap = circle(12, "mm"),
                    arrow = arrow(angle = 30, length = unit(3, "mm"),
                                  ends = "last", type = "open")) +
-    geom_node_point(aes(fill = p.sign, shape = kind), size = 25) +
-    geom_node_text(aes(filter = is.na(p), label = id)) +
-    geom_node_text(aes(filter = !is.na(p), label = id.p)) +
+    geom_node_point(aes(fill = as.factor(fixed_function), shape = kind), size = 25) +
+    geom_node_text(aes(filter = is.na(fixed_p),label = print.id)) +
+    geom_node_text(aes(filter = !is.na(fixed_p), label = print.id.p)) +
     scale_fill_manual(values = c("#DB1F48", "#01949A", "#004369")) +
     scale_shape_manual(values = c(22, 21, 23)) +
     scale_edge_width(range = c(0.2,3)) +
@@ -76,7 +67,6 @@ clusterGenesHeatmap = function(ingres.object){
   p = ingres.object@cluster.pbn %>%
     select(-2) %>%
     pivot_longer(!cluster, names_to = "node", values_to = "p") %>%
-    mutate(p = p/1000) %>%
     ggplot(aes(x=node, y=cluster)) +
     geom_raster(aes(fill=p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
@@ -98,7 +88,7 @@ clusterGenesHeatmap = function(ingres.object){
 cellGenesHeatmap = function(ingres.object){
   p = ingres.object@single.cell.pbn %>%
     pivot_longer(!c(cell, cluster), names_to = "node", values_to = "p") %>%
-    mutate(p = p/1000, clustern = substring(cluster, first = 1, last = 20)) %>%
+    mutate(clustern = substring(cluster, first = 1, last = 20)) %>%
     ggplot(aes(x=node, y=cell)) +
     geom_tile(aes(fill=p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +

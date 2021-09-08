@@ -33,11 +33,14 @@ Imports:
     plotly,
     tibble,
     magrittr,
-    igraph
+    igraph,
+    purrr,
+    readr
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,
-    aracne.networks
+    aracne.networks,
+    BoolNet
 Config/testthat/edition: 3
 URL: https://github.com/CBigOxf/ingres
 BugReports: https://github.com/CBigOxf/ingres/issues
