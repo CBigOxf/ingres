@@ -15,5 +15,6 @@
 #' # With the example file:
 #' graphmlAsTidy(system.file("extdata", "network.graphml", package = "ingres"))
 graphmlAsTidy = function(filename){
-  tidygraph::as_tbl_graph(igraph::read_graph(filename, format = "graphml"))
+  tidygraph::as_tbl_graph(igraph::read_graph(filename, format = "graphml")) %>%
+    filter(id != 'null')
 }
