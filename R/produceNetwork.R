@@ -71,9 +71,9 @@ produceBoolnetNetwork = function(tidy.network){
         "")) %>%
     select(line1, line2) %>%
     as.data.frame() %>% t() %>% as.vector() %>%
-    stringr::str_replace_all(c("and" = "&",
-                      "or"  = "|",
-                      "not" = "!")) %>%
+    stringr::  str_replace_all(c("\\band\\b" = "&",
+                                 "\\bor\\b"  = "|",
+                                 "\\bnot\\b" = "!")) %>%
     purrr::discard(~ .x == "") %>%
     purrr::prepend("targets, factors, probabilities") %>%
     readr::write_lines("network.bn")
