@@ -56,6 +56,8 @@ produceBoolnetNetwork = function(tidy.network){
   }
 
   sep = ","
+  hash = digest::digest(tidy.network, algo = 'xxhash32')
+  tmp_file = paste0("network_", hash, ".bn")
   network.boolnet.text = tidy.network %>%
     activate(nodes) %>%
     mutate(
@@ -76,9 +78,11 @@ produceBoolnetNetwork = function(tidy.network){
                                  "\\bnot\\b" = "!")) %>%
     purrr::discard(~ .x == "") %>%
     purrr::prepend("targets, factors, probabilities") %>%
-    readr::write_lines("network.bn")
+    readr::write_lines(tmp_file)
 
-  BoolNet::loadNetwork("network.bn")
+  network = BoolNet::loadNetwork(tmp_file)
+  file.remove(tmp_file)
+  return(network)
 }
 
 
