@@ -59,7 +59,7 @@ produceBoolnetNetwork = function(tidy.network){
   hash = digest::digest(tidy.network, algo = 'xxhash32')
   tmp_file = paste0("network_", hash, ".bn")
   network.boolnet.text = tidy.network %>%
-    activate(nodes) %>%
+    tidygraph::activate(nodes) %>%
     mutate(
       line1 = case_when(
         kind == "input"   ~ paste(id, id, 1, sep = sep), #inputs are constant
@@ -73,7 +73,7 @@ produceBoolnetNetwork = function(tidy.network){
         "")) %>%
     select(line1, line2) %>%
     as.data.frame() %>% t() %>% as.vector() %>%
-    stringr::  str_replace_all(c("\\band\\b" = "&",
+    stringr::str_replace_all(c("\\band\\b" = "&",
                                  "\\bor\\b"  = "|",
                                  "\\bnot\\b" = "!")) %>%
     purrr::discard(~ .x == "") %>%
