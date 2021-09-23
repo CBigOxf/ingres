@@ -30,16 +30,17 @@ Imports:
     stringr,
     ggpubr,
     shiny,
-    plotly,
     tibble,
     magrittr,
     igraph,
     purrr,
     readr,
-    digest
+    digest,
+    usethis
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,
+    plotly,
     aracne.networks,
     BoolNet
 Config/testthat/edition: 3

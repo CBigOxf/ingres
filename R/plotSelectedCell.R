@@ -11,9 +11,12 @@
 #'
 #' @export
 plotSelectedCell = function(ingres.object, seurat.object){
-  if (!requireNamespace("Seurat", quietly = TRUE)) {
-    stop("Package \"Seurat\" needed for this function to work. Please install it.",
-         call. = FALSE)
+  optionalPkgs = c("Seurat", "plotly")
+  for(pkg in optionalPkgs){
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(paste0("Package \"", pkg,"\" needed for this function to work. Please install it."),
+           call. = FALSE)
+    }
   }
 
   ui = fillPage(
