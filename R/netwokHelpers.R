@@ -94,85 +94,71 @@ createNetworkGenesTemplate = function(network, dir = getwd(), modify = T){
   return(networkGenes)
 }
 
-ginmlToGraphml = function(ginzipFile){
+
+#' Convert a GinSim file into GraphML
+#' GinSim files have the extension .zginml. This utility function converts such
+#' files into the GraphML format. keeping the kind - fate, input or gene -, the
+#' edge sign and the rule - formulae - data.
+#' @param ginzipFile The path to the .zginml file. The GraphML file will be created
+#' in the same directory.
+#' @param fates A vector of fate names. If left empty, both fate and gene nodes
+#' will be labelled as kind='gene'
+#'
+#' @return A vector with the lines of the newly created GraphML file.
+#' @export
+ginmlToGraphml = function(ginzipFile, fates = c()){
   dest = paste0(unlist(strsplit(ginzipFile, split = ".zginml")), ".graphml")
 
-			header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">",
-			"<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>",
-			"<key attr.name=\"rule\" attr.type=\"string\" for=\"node\" id=\"rule\"/>",
-			"<key attr.name=\"sign\" attr.type=\"string\" for=\"edge\" id=\"sign\"/>",
-			"<graph edgedefault=\"directed\">")
+  header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">",
+             "<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>",
+             "<key attr.name=\"rule\" attr.type=\"string\" for=\"node\" id=\"rule\"/>",
+             "<key attr.name=\"sign\" attr.type=\"string\" for=\"edge\" id=\"sign\"/>",
+             "<graph edgedefault=\"directed\">")
 
-	lines = header
-	offset = length(lines)
+  result = c()
   gin = unz(description = ginzipFile, filename = "GINsim-data/regulatoryGraph.ginml")
+  rule = F
+  id = ""
 
   lin =readLines(gin)
   for (i in 1:length(lin)){
-    lines[[i + offset]] = lin[i] #test
+    line = stringr::str_squish(lin[i])
+    if(stringr::str_starts(line, "<node id=")){ #node start tag
+      id = strsplit(line, "\"", fixed = T)[[1]][2]
+      nodeTag = paste0("<node id=\"", id, "\">")
+      result[length(result)+1] = nodeTag
+    } else if(stringr::str_starts(line, "<exp str=")){ #rule tag
+      expr = strsplit(line, "\"", fixed = T)[[1]][2]
+      rule = T
+      expr = stringr::str_replace_all(expr,
+                                      c("&amp;" = "and", "\\|" = "or", "!" = "not "))
+      ruleTag = paste0("<data key=\"rule\">", expr, "</data>")
+      result[length(result)+1] = ruleTag
+    } else if(stringr::str_starts(line, "</node>")){ # node end tag
+      kind = "input"
+      if(rule){
+        if(id %in% fates) kind = "fate"
+        else kind = "gene"
+      }
+      kindTag = paste0("<data key=\"kind\">", kind, "</data>")
+      endTag = "</node>"
+      result = append(result, c(kindTag, endTag), after = length(result))
+      rule = F
+    } else if(stringr::str_starts(line, "<edge id=")){ # edge tag
+      pattern = "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
+      matches = stringr::str_match(line, pattern)
+      from = matches[1, 2]
+      to = matches[1, 3]
+      sign = matches[1, 4]
+      edgeTag = paste0("<edge source=\"", from, "\" target=\"", to, "\">")
+      signTag = paste0("<data key=\"sign\">", sign, "</data>")
+      edgeEndTag = "</edge>"
+      result = append(result, c(edgeTag, signTag, edgeEndTag), after = length(result))
+    }
   }
   close(gin)
-
-  readr::write_lines(lines, dest)
+  result = append(result, header, 0)
+  result = append(result, c("</graph>", "</graphml>"), after = length(result))
+  readr::write_lines(result, dest)
+  return(result)
 }
-
-
-#
-#   String line;
-#   boolean rule = false;
-#   String id = null;
-#   while ((line = reader.readLine()) != null) {
-#     line = line.strip();
-#     if (line.startsWith("<node id=")) { //start of node element
-#       id = line.split("\"")[1];
-#       String node = "<node id=\"" + id + "\">";
-#       sj.add(node);
-#     } else if (line.startsWith("<exp str=")) { //rule for node element
-#       String expr = line.split("\"")[1];
-#       if (!expr.equals("")) {
-#         rule = true;
-#         expr = expr.replaceAll("&amp;", "and");
-#         expr = expr.replaceAll("\\|", "or");
-#         expr = expr.replaceAll("!", "not ");
-#
-#         sj.add("<data key=\"rule\">" + expr + "</data>");
-#       }
-#     } else if (line.startsWith("</node>")) { //end of node element
-#       if (rule) {
-#         String kind = "gene";
-#         for (Fate fate : Fate.values()) {
-#           if (Objects.requireNonNull(id).equalsIgnoreCase(fate.toString())) {
-#             kind = "fate";
-#             break;
-#           }
-#         }
-#         sj.add("<data key=\"kind\">" + kind + "</data>");
-#       } else {
-#         sj.add("<data key=\"kind\">input</data>");
-#       }
-#       sj.add("</node>");
-#       rule = false;
-#     } else if (line.startsWith("<edge id=")) { //edge node
-#       Pattern p = Pattern.compile("(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)");
-#       Matcher m = p.matcher(line);
-#       String from = null;
-#       String to = null;
-#       String sign = null;
-#       while (m.find()) {
-#         from = m.group(1);
-#         to = m.group(2);
-#         sign = m.group(3);
-#       }
-#       sj.add("<edge source=\"" + from + "\" target=\"" + to + "\">");
-#       sj.add("<data key=\"sign\">" + sign + "</data>");
-#       sj.add("</edge>");
-#
-#     }
-#   }
-#   sj.add("</graph>");
-#   sj.add("</graphml>");
-#   String graphml = sj.toString();
-#   var writer = new BufferedWriter(new FileWriter(dest));
-#   writer.write(graphml);
-#   writer.close();
-# }
