@@ -22,10 +22,12 @@ graphmlAsTidy = function(filename){
 #' Converts a tidygraph network into a BoolNet one.
 #'
 #' @param tidy.network The network to be converted.
+#' @param remove.file if true - the default - remove the BoolNet file after loading
+#' the BoolNet object.
 #'
 #' @return A BoolNet object.
 #' @export
-produceBoolnetNetwork = function(tidy.network){
+produceBoolnetNetwork = function(tidy.network, remove.file = T){
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
     stop("Package \"BoolNet\" needed for this function to work. Please install it.",
          call. = FALSE)
@@ -57,7 +59,7 @@ produceBoolnetNetwork = function(tidy.network){
     readr::write_lines(tmp_file)
 
   network = BoolNet::loadNetwork(tmp_file)
-  file.remove(tmp_file)
+  if(remove.file) file.remove(tmp_file)
   return(network)
 }
 
