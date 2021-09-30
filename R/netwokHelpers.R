@@ -164,3 +164,17 @@ ginmlToGraphml = function(ginzipFile, fates = c()){
   readr::write_lines(result, dest)
   return(result)
 }
+
+
+#' Print all nodes in a network.
+#' For testing and checks purposes.
+#'
+#' @param network The network which nodes will be printed.
+#'
+#' @export
+printAllNodes = function(network){
+  tb = network %>% tidygraph::activate('nodes') %>%
+    tidygraph::as_tibble()
+  le = nrow(tb)
+  print(tb, n = le)
+}
