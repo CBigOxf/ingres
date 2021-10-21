@@ -4,13 +4,16 @@
 \alias{produceBoolnetNetwork}
 \title{Converts a tidygraph network into a BoolNet one.}
 \usage{
-produceBoolnetNetwork(tidy.network, remove.file = T)
+produceBoolnetNetwork(tidy.network, remove.file = T, filename = "")
 }
 \arguments{
 \item{tidy.network}{The network to be converted.}
 
 \item{remove.file}{if true - the default - remove the BoolNet file after loading
 the BoolNet object.}
+
+\item{filename}{the name of the BoolNet file that will be created, only relevant
+if remove.file = F}
 }
 \value{
 A BoolNet object.

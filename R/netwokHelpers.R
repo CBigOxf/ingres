@@ -24,10 +24,12 @@ graphmlAsTidy = function(filename){
 #' @param tidy.network The network to be converted.
 #' @param remove.file if true - the default - remove the BoolNet file after loading
 #' the BoolNet object.
+#' @param filename the name of the BoolNet file that will be created, only relevant
+#' if remove.file = F
 #'
 #' @return A BoolNet object.
 #' @export
-produceBoolnetNetwork = function(tidy.network, remove.file = T){
+produceBoolnetNetwork = function(tidy.network, remove.file = T, filename = ''){
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
     stop("Package \"BoolNet\" needed for this function to work. Please install it.",
          call. = FALSE)
@@ -35,7 +37,8 @@ produceBoolnetNetwork = function(tidy.network, remove.file = T){
 
   sep = ","
   hash = digest::digest(tidy.network, algo = 'xxhash32')
-  tmp_file = paste0("network_", hash, ".bn")
+  if(filename == '') tmp_file = paste0("network_", hash, ".bn")
+  else tmp_file = paste0(filename, '.bn')
   network.boolnet.text = tidy.network %>%
     tidygraph::activate(nodes) %>%
     mutate(
