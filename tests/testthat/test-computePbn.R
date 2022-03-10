@@ -78,8 +78,6 @@ test_that("computePbnByCluster throws the corresponding errors with wrong ranges
   expect_error(ingres.object %>% computePbnByCluster(c(1, -1)),
                "The second element of 'range' should be greater than the first")
 
-  expect_error(ingres.object %>% computePbnByCluster(c(-1.01, 1.01)),
-               "'range' should be inside \\[-1, 1\\]")
 })
 
 test_that("computePbnBySingleCell throws the corresponding errors with wrong ranges", {
@@ -99,7 +97,4 @@ test_that("computePbnBySingleCell throws the corresponding errors with wrong ran
 
   expect_error(ingres.object %>% computePbnBySingleCell(c(1, -1)),
                "The second element of 'range' should be greater than the first")
-
-  expect_error(ingres.object %>% computePbnBySingleCell(c(-1.01, 1.01)),
-               "'range' should be inside \\[-1, 1\\]")
 })

@@ -6,7 +6,7 @@
 #'
 #' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
 #' @param range A vector representing the range to which the NES are to be calculated.
-#'  \code{range[1]+range[2] == 0 & range[2] <= 1} should be TRUE. Defaults to \[-1, 1\]
+#'  \code{range[1]+range[2] == 0} should be TRUE. Defaults to \[-1, 1\]
 #'
 #' @return An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled
 #' @export
@@ -43,7 +43,7 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)){
 #'
 #' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
 #' @param range A vector representing the range to which the NES are to be calculated.
-#'  \code{range[1]+range[2] == 0 & range[2] <= 1} should be TRUE. Defaults to \[-1, 1\].
+#'  \code{range[1]+range[2] == 0} should be TRUE. Defaults to \[-1, 1\].
 #' @return An \code{\linkS4class{ingres}} object with the \code{single.cell.pbn slot} filled
 #' @export
 computePbnBySingleCell = function(ingres.object, range = c(-1, 1)){
@@ -82,9 +82,5 @@ checkRange = function(range){
 
   if((range[1] > range[2])){
     stop("The second element of 'range' should be greater than the first")
-  }
-
-  if((range[2] > 1)){
-    stop("'range' should be inside [-1, 1]")
   }
 }
