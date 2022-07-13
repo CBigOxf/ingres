@@ -1,6 +1,6 @@
 Package: ingres
 Title: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores
-Version: 0.0.1
+Version: 0.0.0.9000
 Authors@R: 
     person(given = "Pedro",
            family = "Victori",
