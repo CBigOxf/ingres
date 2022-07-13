@@ -6,7 +6,7 @@
 \title{An example network,
 in the format required by the package}
 \format{
-An object of class \code{tbl_graph} (inherits from \code{igraph}) of length 10.
+An object of class \code{tbl_graph} (inherits from \code{igraph}) of length 58.
 }
 \usage{
 network
