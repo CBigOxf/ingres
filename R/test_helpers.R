@@ -23,7 +23,7 @@ save_gg = function(code, width = 4, height = 2) {
 expect_snapshot_plot = function(name, code, width = 4, height = 2) {
   skip_on_cran()
   skip_on_bioc()
-  skip_on_os(c("windows", "mac", "solaris")) # only test on linux
+  skip_on_ci()
 
   name = paste0(name, ".png")
 
