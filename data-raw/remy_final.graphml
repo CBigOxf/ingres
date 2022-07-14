@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+<key attr.name="kind" attr.type="string" for="node" id="kind"/>
+<key attr.name="rule" attr.type="string" for="node" id="rule"/>
+<key attr.name="sign" attr.type="string" for="edge" id="sign"/>
+<graph edgedefault="directed">
+  <node id="DNAdamage">
+    <data key="kind">input</data>
+  </node>
+  <node id="GrowthInhibitors">
+    <data key="kind">input</data>
+  </node>
+  <node id="Proliferation">
+    <data key="rule">CyclinE1 or CyclinA</data>
+    <data key="kind">fate</data>
+  </node>
+  <node id="Apoptosis">
+    <data key="rule">E2F1_2 or TP53</data>
+    <data key="kind">fate</data>
+  </node>
+  <node id="Growth_Arrest">
+    <data key="rule">p21CIP or RB1 or RBL2</data>
+    <data key="kind">fate</data>
+  </node>
+  <node id="EGFR">
+    <data key="rule">SPRY and not FGFR3 and not GRB2</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="FGFR3">
+    <data key="rule">not EGFR and not GRB2</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="RAS">
+    <data key="rule">EGFR or FGFR3 or GRB2</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="E2F1_1">
+    <data key="rule">not RB1 and not RBL2 and ((not (CHEK1_2_2 and ATM_2) and (RAS or (E2F3_1 or E2F3_2))) or (CHEK1_2_2 and ATM_2 and not RAS and E2F3_2))</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="E2F1_2">
+    <data key="rule">not RBL2 and not RB1 and ATM_2 and CHEK1_2_2 and (RAS or E2F3_2)</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="E2F3_1">
+    <data key="rule">not RB1 and not CHEK1_2_2 and RAS</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="E2F3_2">
+    <data key="rule">not RB1 and CHEK1_2_2 and RAS</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CyclinD1">
+    <data key="rule">(RAS or AKT) and not p16INK4a and not p21CIP</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CyclinE1">
+    <data key="rule">not RBL2 and not p21CIP and CDC25A and ((E2F1_1 or E2F1_2) or (E2F3_1 or E2F3_2))</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CyclinA">
+    <data key="rule">not RBL2 and not p21CIP and CDC25A and ((E2F1_1 or E2F1_2) or (E2F3_1 or E2F3_2))</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CDC25A">
+    <data key="rule">not (CHEK1_2_1 or CHEK1_2_2) and not RBL2 and ((E2F1_1 or E2F1_2) or (E2F3_1 or E2F3_2))</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="p16INK4a">
+    <data key="rule">GrowthInhibitors and not RB1</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="RB1">
+    <data key="rule">not CyclinD1 and not CyclinE1 and not p16INK4a and not CyclinA</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="RBL2">
+    <data key="rule">not CyclinD1 and not CyclinE1</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="p21CIP">
+    <data key="rule">not CyclinE1 and (GrowthInhibitors or TP53) and not AKT</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="ATM_1">
+    <data key="rule">DNAdamage and not (E2F1_1 or E2F1_2)</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="ATM_2">
+    <data key="rule">(E2F1_1 or E2F1_2) and DNAdamage</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CHEK1_2_1">
+    <data key="rule">(ATM_1 or ATM_2) and not (E2F1_1 or E2F1_2)</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="CHEK1_2_2">
+    <data key="rule">(E2F1_1 or E2F1_2) and (ATM_1 or ATM_2)</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="MDM2">
+    <data key="rule">(TP53 or AKT) and not (E2F1_1 or E2F1_2) and not (ATM_1 or ATM_2) and not RB1</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="TP53">
+    <data key="rule">not MDM2 and (((ATM_1 or ATM_2) and (CHEK1_2_1 or CHEK1_2_2)) or E2F1_2)</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="PI3K">
+    <data key="rule">GRB2 and RAS and not TP53</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="AKT">
+    <data key="rule">PI3K</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="GRB2">
+    <data key="rule">(FGFR3 and not GRB2 and not SPRY) or EGFR</data>
+    <data key="kind">gene</data>
+  </node>
+  <node id="SPRY">
+    <data key="rule">RAS</data>
+    <data key="kind">gene</data>
+  </node>
+  <edge source="RAS" target="SPRY">
+    <data key="sign">positive</data>
+  </edge>
+
+  <edge source="CyclinE1" target="Proliferation">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CyclinA" target="Proliferation">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="Apoptosis">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="TP53" target="Apoptosis">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="p21CIP" target="Growth_Arrest">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RBL2" target="Growth_Arrest">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RB1" target="Growth_Arrest">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="SPRY" target="EGFR">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="FGFR3" target="EGFR">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="GRB2" target="EGFR">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="EGFR" target="FGFR3">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="GRB2" target="FGFR3">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="EGFR" target="RAS">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="FGFR3" target="RAS">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="GRB2" target="RAS">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RAS" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_1" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="ATM_2" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="E2F1_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RB1" target="E2F1_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RBL2" target="E2F1_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="E2F1_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_2" target="E2F1_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RB1" target="E2F3_2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="E2F3_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RAS" target="E2F3_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RAS" target="E2F3_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RB1" target="E2F3_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="E2F3_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_2" target="E2F1_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="E2F1_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RAS" target="E2F1_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="E2F1_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RBL2" target="E2F1_2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RB1" target="E2F1_2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RAS" target="CyclinD1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="AKT" target="CyclinD1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="p16INK4a" target="CyclinD1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="p21CIP" target="CyclinD1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RBL2" target="CyclinE1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="p21CIP" target="CyclinE1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CDC25A" target="CyclinE1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="CyclinE1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="CyclinE1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_1" target="CyclinE1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="CyclinE1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RBL2" target="CyclinA">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="p21CIP" target="CyclinA">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CDC25A" target="CyclinA">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="CyclinA">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="CyclinA">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_1" target="CyclinA">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="CyclinA">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CHEK1_2_1" target="CDC25A">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="CDC25A">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RBL2" target="CDC25A">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="E2F1_1" target="CDC25A">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="CDC25A">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_1" target="CDC25A">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F3_2" target="CDC25A">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="GrowthInhibitors" target="p16INK4a">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RB1" target="p16INK4a">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinD1" target="RB1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinE1" target="RB1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="p16INK4a" target="RB1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinA" target="RB1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinD1" target="RBL2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinE1" target="RBL2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="CyclinE1" target="p21CIP">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="AKT" target="p21CIP">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="GrowthInhibitors" target="p21CIP">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="TP53" target="p21CIP">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="DNAdamage" target="ATM_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="ATM_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="E2F1_2" target="ATM_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="DNAdamage" target="ATM_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="ATM_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="ATM_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="ATM_1" target="CHEK1_2_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="ATM_2" target="CHEK1_2_1">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="CHEK1_2_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="E2F1_2" target="CHEK1_2_1">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_1" target="CHEK1_2_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="ATM_2" target="CHEK1_2_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="CHEK1_2_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="CHEK1_2_2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="TP53" target="MDM2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="AKT" target="MDM2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_1" target="MDM2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="E2F1_2" target="MDM2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_1" target="MDM2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_2" target="MDM2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="RB1" target="MDM2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="MDM2" target="TP53">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="ATM_1" target="TP53">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="ATM_2" target="TP53">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CHEK1_2_1" target="TP53">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="CHEK1_2_2" target="TP53">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="E2F1_2" target="TP53">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="GRB2" target="PI3K">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="RAS" target="PI3K">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="TP53" target="PI3K">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="PI3K" target="AKT">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="FGFR3" target="GRB2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="EGFR" target="GRB2">
+    <data key="sign">positive</data>
+  </edge>
+  <edge source="GRB2" target="GRB2">
+    <data key="sign">negative</data>
+  </edge>
+  <edge source="SPRY" target="GRB2">
+    <data key="sign">negative</data>
+  </edge>
+</graph>
+</graphml>
