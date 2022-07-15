@@ -4,6 +4,12 @@ test_that("computePbnByCluster results don't contain NAs", {
   expect_false(anyNA(data))
 })
 
+test_that("computePbnByCluster results are not empty", {
+  ingres.object = createExampleIngresObjectWithViper()
+  data = computePbnByCluster(ingres.object)@cluster.pbn
+  expect_true(nrow(data) > 0)
+})
+
 test_that("computePbnByCluster results are within the intended range", {
   ingres.object = createExampleIngresObjectWithViper()
 
@@ -31,11 +37,15 @@ test_that("computePbnByCluster results are within the intended range", {
 
 test_that("computePbnBySingleCell results don't contain NAs", {
   ingres.object = createExampleIngresObjectWithViper()
-
   data = computePbnBySingleCell(ingres.object)@single.cell.pbn
   expect_false(anyNA(data))
 })
 
+test_that("computePbnBySingleCell results are not empty", {
+  ingres.object = createExampleIngresObjectWithViper()
+  data = computePbnBySingleCell(ingres.object)@single.cell.pbn
+  expect_true(nrow(data) > 0)
+})
 
 test_that("computePbnBySingleCell results are within the intended range", {
   ingres.object = createExampleIngresObjectWithViper()
