@@ -36,3 +36,19 @@ expect_snapshot_plot = function(name, code, width = 4, height = 2) {
   expect_snapshot_file(path, name)
 }
 
+# Load all regulons in aracne.networks
+aracneRegulons = function(){
+  c(aracne.networks::regulonblca, aracne.networks::regulonbrca,
+    aracne.networks::reguloncesc, aracne.networks::reguloncoad,
+    aracne.networks::regulonesca, aracne.networks::regulongbm,
+    aracne.networks::regulonhnsc, aracne.networks::regulonkirc,
+    aracne.networks::regulonkirp, aracne.networks::regulonlaml,
+    aracne.networks::regulonlihc, aracne.networks::regulonluad,
+    aracne.networks::regulonlusc, aracne.networks::regulonnet,
+    aracne.networks::regulonov, aracne.networks::regulonpaad,
+    aracne.networks::regulonpcpg, aracne.networks::regulonprad,
+    aracne.networks::regulonread, aracne.networks::regulonsarc,
+    aracne.networks::regulonstad, aracne.networks::regulontgct,
+    aracne.networks::regulonthca, aracne.networks::regulonthym,
+    aracne.networks::regulonucec)
+}
