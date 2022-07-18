@@ -1,8 +1,8 @@
 test_that("no errors are thrown from plotting functions", {
-  obj = createExampleIngresObjectWithViper()
+  obj = createExampleIngresObjectAndPerformViper()
   obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
-  cell.id = 'AAACCTGCACGACGAA'
-  cluster.id = '3-Proliferation'
+  cell.id = 'sample1@ACAGCTAAGATCCCGC-1'
+  cluster.id = '1'
   expect_error(obj %>% cellPbnPlot(cell.id), NA)
   expect_error(obj %>% clusterPbnPlot(cluster.id), NA)
   expect_error(obj %>% clusterGenesHeatmap(), NA)
@@ -10,14 +10,18 @@ test_that("no errors are thrown from plotting functions", {
 })
 
 test_that("The plots produced match the snapshots", {
-  obj = createExampleIngresObjectWithViper()
+  obj = createExampleIngresObjectAndPerformViper()
   obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
-  cell.id = 'AAACCTGCACGACGAA'
-  cluster.id = '3-Proliferation'
-  expect_snapshot_plot('cellPbnPlotSnap', obj %>% cellPbnPlot(cell.id), 10, 15)
-  expect_snapshot_plot('clusterPbnPlotSnap', obj %>% clusterPbnPlot(cluster.id), 10, 15)
-  expect_snapshot_plot('clusterGenesHeatmapSnap', obj %>% clusterGenesHeatmap(), 10, 15)
-  expect_snapshot_plot('cellGenesHeatmapSnap', obj %>% cellGenesHeatmap(), 10, 15)
+  cell.id = 'sample1@ACAGCTAAGATCCCGC-1'
+  cluster.id = '1'
+  expect_snapshot_plot('cellPbnPlotSnap',
+                       obj %>% cellPbnPlot(cell.id), 10, 15)
+  expect_snapshot_plot('clusterPbnPlotSnap',
+                       obj %>% clusterPbnPlot(cluster.id), 10, 15)
+  expect_snapshot_plot('clusterGenesHeatmapSnap',
+                       obj %>% clusterGenesHeatmap(), 10, 15)
+  expect_snapshot_plot('cellGenesHeatmapSnap',
+                       obj %>% cellGenesHeatmap(), 10, 15)
 })
 
 

@@ -1,16 +1,14 @@
 createExampleIngresObject = function(){
-  obj = createIngresObjectFromSeurat(pbmc_small,
+  obj = createIngresObjectFromSeurat(small_blca_wang,
                                      "RNA", "data",
                                      network_genes,
                                      network)
 }
 
-createExampleIngresObjectWithViper = function(){
-  obj = createExampleIngresObject()
-  obj@viper = viperResults
-  obj
+createExampleIngresObjectAndPerformViper = function(){
+  createExampleIngresObject() %>%
+    performViper(aracne.networks::regulonblca, verbose = F)
 }
-
 
 # Save a ggplot returned by code and return the path.
 save_gg = function(code, width = 4, height = 2) {
