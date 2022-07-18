@@ -1,5 +1,5 @@
 test_that("no errors are thrown from plotting functions", {
-  obj = createExampleIngresObjectAndPerformViper()
+  obj = ingresAfterViper
   obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
   cell.id = 'sample1@ACAGCTAAGATCCCGC-1'
   cluster.id = '1'
@@ -10,7 +10,7 @@ test_that("no errors are thrown from plotting functions", {
 })
 
 test_that("The plots produced match the snapshots", {
-  obj = createExampleIngresObjectAndPerformViper()
+  obj = ingresAfterViper
   obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
   cell.id = 'sample1@ACAGCTAAGATCCCGC-1'
   cluster.id = '1'

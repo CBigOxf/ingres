@@ -10,6 +10,10 @@ createExampleIngresObjectAndPerformViper = function(){
     performViper(aracne.networks::regulonblca, verbose = F)
 }
 
+#create a object shared by all tests so it only needs to be created once,
+#except when testing the creation of the object itself.
+ingresAfterViper = createExampleIngresObjectAndPerformViper()
+
 # Save a ggplot returned by code and return the path.
 save_gg = function(code, width = 4, height = 2) {
   path = tempfile(fileext = ".png")
