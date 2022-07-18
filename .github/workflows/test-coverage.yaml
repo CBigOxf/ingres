@@ -20,7 +20,11 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           use-public-rspm: true
-
+          
+      - name: Install plotly devel version
+        run: remotes::install_github("plotly/plotly")
+        shell: Rscript {0}
+        
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: covr
