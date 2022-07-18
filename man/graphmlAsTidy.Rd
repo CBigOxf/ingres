@@ -16,11 +16,3 @@ A tidygraph object
 In order to be used by ingres,
 GraphML files have to be converted to tidygraph format. This helper does that.
 }
-\examples{
-\dontrun{
-graphmlAsTidy("network.graphml")
-}
-
-# With the example file:
-graphmlAsTidy(system.file("extdata", "network.graphml", package = "ingres"))
-}
