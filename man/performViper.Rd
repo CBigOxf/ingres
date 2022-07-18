@@ -4,12 +4,14 @@
 \alias{performViper}
 \title{Perform VIPER}
 \usage{
-performViper(ingres.object, regulon)
+performViper(ingres.object, regulon, verbose = T)
 }
 \arguments{
 \item{ingres.object}{An ingres object.}
 
 \item{regulon}{Object of class regulon or list of objects of class regulon for metaVIPER analysis}
+
+\item{verbose}{Logical, whether progression messages should be printed in the terminal}
 }
 \value{
 An ingres object with the result of the VIPER inference in the \code{viper} slot
