@@ -6,7 +6,7 @@
 \title{An example dataframe with the genes contained in the network,
 in the format required by the package}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 28 rows and 2 columns.
+An object of class \code{data.frame} with 28 rows and 2 columns.
 }
 \usage{
 network_genes
