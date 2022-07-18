@@ -4,15 +4,19 @@
 \name{network}
 \alias{network}
 \title{An example network,
-in the format required by the package}
+in the format required by the package.
+The network is a modified version of the one in
+Remy et al. Cancer Res 75, 4042–4052 (2015)}
 \format{
-An object of class \code{tbl_graph} (inherits from \code{igraph}) of length 58.
+An object of class \code{tbl_graph} (inherits from \code{igraph}) of length 30.
 }
 \usage{
 network
 }
 \description{
 An example network,
-in the format required by the package
+in the format required by the package.
+The network is a modified version of the one in
+Remy et al. Cancer Res 75, 4042–4052 (2015)
 }
 \keyword{datasets}
