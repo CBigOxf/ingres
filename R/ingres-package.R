@@ -13,7 +13,6 @@
 #' @import ggplot2
 #' @import ggraph
 #' @import shiny
-#' @import Seurat
 #' @importFrom tidyr pivot_longer
 #' @importFrom tidyr pivot_wider
 NULL
