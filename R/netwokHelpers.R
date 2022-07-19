@@ -11,27 +11,22 @@ graphmlAsTidy = function(filename){
     filter(id != 'null')
 }
 
-#' Converts a tidygraph network into a BoolNet one.
+#' Convert an ingres network into a BoolNet one.
 #'
-#' @param tidy.network The network to be converted.
-#' @param remove.file if true - the default - remove the BoolNet file after loading
-#' the BoolNet object.
-#' @param filename the name of the BoolNet file that will be created, only relevant
-#' if remove.file = F
+#' @param network The network to be converted, created
+#'  by [produceNetworkForCluster()] or [produceNetworkForCell()]
 #'
 #' @return A BoolNet object.
 #' @export
-produceBoolnetNetwork = function(tidy.network, remove.file = T, filename = ''){
+produceBoolnetNetwork = function(network){
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
     stop("Package \"BoolNet\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
 
   sep = ","
-  hash = digest::digest(tidy.network, algo = 'xxhash32')
-  if(filename == '') tmp_file = paste0("network_", hash, ".bn")
-  else tmp_file = paste0(filename, '.bn')
-  network.boolnet.text = tidy.network %>%
+  tmp_file = withr::local_tempfile(fileext = '.bn')
+  network.boolnet.text = network %>%
     tidygraph::activate(nodes) %>%
     mutate(
       line1 = case_when(
@@ -54,7 +49,6 @@ produceBoolnetNetwork = function(tidy.network, remove.file = T, filename = ''){
     readr::write_lines(tmp_file)
 
   network = BoolNet::loadNetwork(tmp_file)
-  if(remove.file) file.remove(tmp_file)
   return(network)
 }
 
@@ -68,14 +62,15 @@ produceBoolnetNetwork = function(tidy.network, remove.file = T, filename = ''){
 #'
 #' @param network A tidygraph network.
 #' @param dir The directory where the csv will be stored, if applicable.
-#' @param modify If true, store the data frame as a csv and open it to be modified
-#' by the user
-#'
+#' @param store If true, store the data frame as a csv
+#' @param modify If true, and store is also true,
+#'  open it to be modified by the user
 #' @return The template data frame.
 #' @export
 #'
 
-createNetworkGenesTemplate = function(network, dir = getwd(), modify = T){
+createNetworkGenesTemplate = function(network, dir = getwd(),
+                                      store = T, modify = T){
   networkGenes = network %>%
     tidygraph::activate('nodes') %>%
     as_tibble() %>%
@@ -83,16 +78,18 @@ createNetworkGenesTemplate = function(network, dir = getwd(), modify = T){
     select(node = id) %>%
     mutate(symbol = node)
 
-  if(modify){
+  if(store){
     path = paste0(dir, "/networkGenes.csv")
     readr::write_csv(networkGenes, path)
-    usethis::edit_file(path)
+    if(modify){
+      usethis::edit_file(path)
+    }
   }
   return(networkGenes)
 }
 
 
-#' Convert a GinSim file into GraphML
+#' Convert a GinSim file into a GraphML file
 #' GinSim files have the extension .zginml. This utility function converts such
 #' files into the GraphML format. keeping the kind - fate, input or gene -, the
 #' edge sign and the rule - formulae - data.
@@ -103,8 +100,10 @@ createNetworkGenesTemplate = function(network, dir = getwd(), modify = T){
 #'
 #' @return A vector with the lines of the newly created GraphML file.
 #' @export
-ginmlToGraphml = function(ginzipFile, fates = c()){
-  dest = paste0(unlist(strsplit(ginzipFile, split = ".zginml")), ".graphml")
+ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL){
+  if(is.null(dest)){
+    dest = paste0(unlist(strsplit(ginzipFile, split = ".zginml")), ".graphml")
+  }
 
   header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">",
              "<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>",
@@ -113,7 +112,8 @@ ginmlToGraphml = function(ginzipFile, fates = c()){
              "<graph edgedefault=\"directed\">")
 
   result = c()
-  gin = unz(description = ginzipFile, filename = "GINsim-data/regulatoryGraph.ginml")
+  gin = unz(description = ginzipFile,
+            filename = "GINsim-data/regulatoryGraph.ginml")
   rule = F
   id = ""
 

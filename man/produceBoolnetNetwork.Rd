@@ -2,22 +2,17 @@
 % Please edit documentation in R/netwokHelpers.R
 \name{produceBoolnetNetwork}
 \alias{produceBoolnetNetwork}
-\title{Converts a tidygraph network into a BoolNet one.}
+\title{Convert an ingres network into a BoolNet one.}
 \usage{
-produceBoolnetNetwork(tidy.network, remove.file = T, filename = "")
+produceBoolnetNetwork(network)
 }
 \arguments{
-\item{tidy.network}{The network to be converted.}
-
-\item{remove.file}{if true - the default - remove the BoolNet file after loading
-the BoolNet object.}
-
-\item{filename}{the name of the BoolNet file that will be created, only relevant
-if remove.file = F}
+\item{network}{The network to be converted, created
+by \code{\link[=produceNetworkForCluster]{produceNetworkForCluster()}} or \code{\link[=produceNetworkForCell]{produceNetworkForCell()}}}
 }
 \value{
 A BoolNet object.
 }
 \description{
-Converts a tidygraph network into a BoolNet one.
+Convert an ingres network into a BoolNet one.
 }
