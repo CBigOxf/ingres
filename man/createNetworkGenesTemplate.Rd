@@ -10,15 +10,17 @@ the process. If the gene nodes are correct gene symbols, then modification
 is not needed and the returned data frame can be directly passed to the ingres
 constructors.}
 \usage{
-createNetworkGenesTemplate(network, dir = getwd(), modify = T)
+createNetworkGenesTemplate(network, dir = getwd(), store = T, modify = T)
 }
 \arguments{
 \item{network}{A tidygraph network.}
 
 \item{dir}{The directory where the csv will be stored, if applicable.}
 
-\item{modify}{If true, store the data frame as a csv and open it to be modified
-by the user}
+\item{store}{If true, store the data frame as a csv}
+
+\item{modify}{If true, and store is also true,
+open it to be modified by the user}
 }
 \value{
 The template data frame.

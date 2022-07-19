@@ -2,12 +2,12 @@
 % Please edit documentation in R/netwokHelpers.R
 \name{ginmlToGraphml}
 \alias{ginmlToGraphml}
-\title{Convert a GinSim file into GraphML
+\title{Convert a GinSim file into a GraphML file
 GinSim files have the extension .zginml. This utility function converts such
 files into the GraphML format. keeping the kind - fate, input or gene -, the
 edge sign and the rule - formulae - data.}
 \usage{
-ginmlToGraphml(ginzipFile, fates = c())
+ginmlToGraphml(ginzipFile, fates = c(), dest = NULL)
 }
 \arguments{
 \item{ginzipFile}{The path to the .zginml file. The GraphML file will be created
@@ -15,12 +15,15 @@ in the same directory.}
 
 \item{fates}{A vector of fate names. If left empty, both fate and gene nodes
 will be labelled as kind='gene'}
+
+\item{dest}{The path to the graphml file that will be created. If NULL,
+defaults to the same path as the zginml file, but with the graphml extension.}
 }
 \value{
 A vector with the lines of the newly created GraphML file.
 }
 \description{
-Convert a GinSim file into GraphML
+Convert a GinSim file into a GraphML file
 GinSim files have the extension .zginml. This utility function converts such
 files into the GraphML format. keeping the kind - fate, input or gene -, the
 edge sign and the rule - formulae - data.

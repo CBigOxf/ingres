@@ -97,7 +97,8 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
 #' in the same directory.
 #' @param fates A vector of fate names. If left empty, both fate and gene nodes
 #' will be labelled as kind='gene'
-#'
+#' @param dest The path to the graphml file that will be created. If NULL,
+#' defaults to the same path as the zginml file, but with the graphml extension.
 #' @return A vector with the lines of the newly created GraphML file.
 #' @export
 ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL){
