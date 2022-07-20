@@ -21,3 +21,9 @@ An \code{ingres} object.
 \description{
 Create a new \code{ingres} object.
 }
+\examples{
+\dontrun{
+ing = createIngresObject(exp, idents, network.genes, network)
+}
+
+}

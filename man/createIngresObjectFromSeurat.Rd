@@ -29,3 +29,9 @@ An \code{ingres} object.
 \description{
 Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
 }
+\examples{
+createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+
+}
