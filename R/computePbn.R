@@ -1,19 +1,46 @@
-#' Compute a Probabilistic Boolean Network (PBN) for each cluster.
+#' Compute a Probabilistic Boolean Network (PBN) for each cluster or each cell
 #'
-#' After running \code{\link{performViper}}, this can be run to produce a PBN with
-#' the identity function probability for each node relative to the median VIPER
-#' normalised enrichment score (NES) for each cluster.
+#' After running \code{\link{performViper}}, this can be run to produce a
+#' PBN with the identity function probability for each node relative to the
+#' median VIPER normalised enrichment score (NES) for each cluster or cell.
 #'
-#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
-#' @param range A vector representing the range to which the NES are to be calculated.
-#'  \code{range[1]+range[2] == 0} should be TRUE. Defaults to \[-1, 1\]
+#' @param ingres.object An \code{\linkS4class{ingres}} object with a
+#' non-null VIPER slot.
+#' @param range A vector representing the range to which the NES are
+#' to be calculated. \code{range[1]+range[2] == 0} should be TRUE.
+#' Defaults to \[-1, 1\]
 #'
-#' @return An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled
+#' @return An \code{\linkS4class{ingres}} object with
+#' the `cluster.pbn` or the `single.cell.pbn` slot filled
+#'
+#' @describeIn computePbnByCluster
+#' Compute a Probabilistic Boolean Network (PBN) for each cluster
+#'
+#' @examples
+#' # Create an ingres object with viper slot
+#'   ing = createIngresObjectFromSeurat(
+#'   small_blca_wang, "RNA", "data", network_genes, network
+#' )
+#' ing@viper = viper_results
+#'
+#' ing = computePbnByCluster(ing)
+#' head(ing@cluster.pbn)
+#'
+#' ing = computePbnBySingleCell(ing)
+#' head(ing@single.cell.pbn)
+#'
+#' # Restrict range to (-0.5, 0.5)
+#' ing = computePbnByCluster(ing, range = c(-0.5, 0.5))
+#' head(ing@cluster.pbn)
+#'
+#' ing = computePbnBySingleCell(ing, range = c(-0.5, 0.5))
+#' head(ing@single.cell.pbn)
+#'
 #' @export
 computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
   viper.result = suppressMessages(tibble(ingres.object@viper,
-    .name_repair = "unique"
+                                         .name_repair = "unique"
   )) # ensure unique, non empty column names
   counts = viper.result %>%
     select(c(1, 2)) %>%
@@ -40,21 +67,13 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
   ingres.object
 }
 
-#' Compute a Probabilistic Boolean Network (PBN) for each cell.
-#'
-#' After running \code{\link{performViper}}, this can be run to produce a PBN with
-#' the identity function probability for each node relative to the VIPER
-#' normalised enrichment score (NES) for every cell.
-#'
-#' @param ingres.object An \code{\linkS4class{ingres}} object with a non-null VIPER slot.
-#' @param range A vector representing the range to which the NES are to be calculated.
-#'  \code{range[1]+range[2] == 0} should be TRUE. Defaults to \[-1, 1\].
-#' @return An \code{\linkS4class{ingres}} object with the \code{single.cell.pbn slot} filled
+#' @describeIn computePbnByCluster
+#' Compute a Probabilistic Boolean Network (PBN) for each cell
 #' @export
 computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
   viper.result = suppressMessages(tibble(ingres.object@viper,
-    .name_repair = "unique"
+                                         .name_repair = "unique"
   )) # ensure unique, non empty column names
   identities = viper.result %>% select(c(1, 2))
   result = viper.result %>%

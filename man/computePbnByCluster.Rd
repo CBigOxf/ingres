@@ -2,21 +2,55 @@
 % Please edit documentation in R/computePbn.R
 \name{computePbnByCluster}
 \alias{computePbnByCluster}
-\title{Compute a Probabilistic Boolean Network (PBN) for each cluster.}
+\alias{computePbnBySingleCell}
+\title{Compute a Probabilistic Boolean Network (PBN) for each cluster or each cell}
 \usage{
 computePbnByCluster(ingres.object, range = c(-1, 1))
+
+computePbnBySingleCell(ingres.object, range = c(-1, 1))
 }
 \arguments{
-\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null VIPER slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a
+non-null VIPER slot.}
 
-\item{range}{A vector representing the range to which the NES are to be calculated.
-\code{range[1]+range[2] == 0} should be TRUE. Defaults to [-1, 1]}
+\item{range}{A vector representing the range to which the NES are
+to be calculated. \code{range[1]+range[2] == 0} should be TRUE.
+Defaults to [-1, 1]}
 }
 \value{
-An \code{\linkS4class{ingres}} object with the \code{cluster.pbn slot} filled
+An \code{\linkS4class{ingres}} object with
+the \code{cluster.pbn} or the \code{single.cell.pbn} slot filled
 }
 \description{
-After running \code{\link{performViper}}, this can be run to produce a PBN with
-the identity function probability for each node relative to the median VIPER
-normalised enrichment score (NES) for each cluster.
+After running \code{\link{performViper}}, this can be run to produce a
+PBN with the identity function probability for each node relative to the
+median VIPER normalised enrichment score (NES) for each cluster or cell.
+}
+\section{Functions}{
+\itemize{
+\item \code{computePbnByCluster}: Compute a Probabilistic Boolean Network (PBN) for each cluster
+
+\item \code{computePbnBySingleCell}: Compute a Probabilistic Boolean Network (PBN) for each cell
+}}
+
+\examples{
+# Create an ingres object with viper slot
+  ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnByCluster(ing)
+head(ing@cluster.pbn)
+
+ing = computePbnBySingleCell(ing)
+head(ing@single.cell.pbn)
+
+# Restrict range to (-0.5, 0.5)
+ing = computePbnByCluster(ing, range = c(-0.5, 0.5))
+head(ing@cluster.pbn)
+
+ing = computePbnBySingleCell(ing, range = c(-0.5, 0.5))
+head(ing@single.cell.pbn)
+
 }
