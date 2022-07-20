@@ -32,9 +32,11 @@ ingres = setClass("ingres", slots = list(
 #'
 #' @return An \code{ingres} object.
 #' @export
-createIngresObjectFromSeurat = function(seurat.object, seurat.assay, slot, network.genes, network) {
+createIngresObjectFromSeurat = function(seurat.object, seurat.assay = 'RNA',
+                                        slot, network.genes, network) {
   if (!requireNamespace("Seurat", quietly = TRUE)) {
-    stop("Package \"Seurat\" needed for this function to work. Please install it.",
+    stop(
+      "Package \"Seurat\" needed for this function to work. Please install it.",
       call. = FALSE
     )
   }

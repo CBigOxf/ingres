@@ -6,7 +6,7 @@
 \usage{
 createIngresObjectFromSeurat(
   seurat.object,
-  seurat.assay,
+  seurat.assay = "RNA",
   slot,
   network.genes,
   network
