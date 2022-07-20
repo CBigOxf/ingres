@@ -22,6 +22,27 @@ ingres = setClass("ingres", slots = list(
   network = "tbl_graph"
 ))
 
+print.ingres = function(object){
+  ncells     = ncol(object@expression)
+  nfeat      = nrow(object@expression)
+  nclusters  = length(unique(object@idents$cluster))
+  nnodes     = object@network %>% tidygraph::activate('nodes') %>% length()
+  viper      = !is.null(object@viper)
+  pbnCell    = !is.null(object@single.cell.pbn)
+  pbnCluster = !is.null(object@cluster.pbn)
+
+  cat('An ingres object\n')
+  cat('--------------------\n')
+  cat(nfeat, 'features across', ncells, 'samples\n')
+  cat(nclusters, 'clusters\n')
+  cat('Its Boolean network has', nnodes, 'nodes\n')
+  cat('Viper', ifelse(viper, 'performed', 'not performed'), '\n')
+  cat(ifelse(pbnCell, 'PBNs computed for each cell\n', ''))
+  cat(ifelse(pbnCluster, 'PBNs computed for each cluster', ''))
+}
+
+setMethod('show', 'ingres', print.ingres)
+
 #' Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
 #'
 #' @param seurat.object A \code{Seurat} object with QC, scaling and clustering already executed.
