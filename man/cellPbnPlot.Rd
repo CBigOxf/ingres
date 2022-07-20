@@ -7,7 +7,8 @@
 cellPbnPlot(ingres.object, cell.id)
 }
 \arguments{
-\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null \code{single.cell.pbn} slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null
+\code{single.cell.pbn} slot.}
 
 \item{cell.id}{A string containing the id of the cell to be plotted.}
 }
@@ -15,6 +16,17 @@ cellPbnPlot(ingres.object, cell.id)
 A \code{ggplot} object containing the cell PBN plot.
 }
 \description{
-Plots the PBN produced by \code{\link{computePbnBySingleCell}} for a given cell
-and returns it as a ggplot object
+Plots the PBN produced by \code{\link{computePbnBySingleCell}} for a
+given cell and returns it as a ggplot object
+}
+\examples{
+# Create an ingres object with viper slot
+ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnBySingleCell(ing)
+cellPbnPlot(ing, "sample1@ACAGCTAAGATCCCGC-1")
+
 }

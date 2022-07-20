@@ -7,13 +7,26 @@
 cellGenesHeatmap(ingres.object)
 }
 \arguments{
-\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null \code{single.cell.pbn} slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null
+\code{single.cell.pbn} slot.}
 }
 \value{
 A \code{ggplot} object containing the cell PBN heatmap plot.
 }
 \description{
-Plots the probabilities for the identity function produced by \code{\link{computePbnBySingleCell}}
-as a heatmap, with nodes on the x axis and cells on the y axis, grouped by cluster,
-and returns it as a ggplot object.
+Plots the probabilities for the identity function produced by
+\code{\link{computePbnBySingleCell}} as a heatmap, with nodes on the x axis
+and cells on the y axis, grouped by cluster, and returns it as a
+ggplot object.
+}
+\examples{
+# Create an ingres object with viper slot
+ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnBySingleCell(ing)
+cellGenesHeatmap(ing)
+
 }

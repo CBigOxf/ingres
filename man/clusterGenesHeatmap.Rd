@@ -7,13 +7,26 @@
 clusterGenesHeatmap(ingres.object)
 }
 \arguments{
-\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null \code{cluster.pbn} slot.}
+\item{ingres.object}{An \code{\linkS4class{ingres}} object with a non-null
+\code{cluster.pbn} slot.}
 }
 \value{
 A \code{ggplot} object containing the cluster PBN heatmap plot.
 }
 \description{
-Plots the probabilities for the identity function produced by \code{\link{computePbnByCluster}}
-as a heatmap, with nodes on the x axis and clusters on the y axis, and returns
-it as a ggplot object.
+Plots the probabilities for the identity function produced by
+\code{\link{computePbnByCluster}}
+as a heatmap, with nodes on the x axis and clusters on the y axis, and
+returns it as a ggplot object.
+}
+\examples{
+# Create an ingres object with viper slot
+ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnByCluster(ing)
+clusterGenesHeatmap(ing)
+
 }

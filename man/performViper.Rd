@@ -4,7 +4,7 @@
 \alias{performViper}
 \title{Perform VIPER}
 \usage{
-performViper(ingres.object, regulon, verbose = T)
+performViper(ingres.object, regulon, verbose = F)
 }
 \arguments{
 \item{ingres.object}{An ingres object.}
