@@ -12,13 +12,15 @@ setOldClass("tbl_graph")
 #' @slot network \code{tbl_graph}.
 #'
 #' @return An \code{ingres} object.
-ingres = setClass("ingres", slots = list(expression = "matrix",
-                                         idents = "data.frame",
-                                         network.genes = "data.frame",
-                                         viper = "data.frame",
-                                         cluster.pbn = "data.frame",
-                                         single.cell.pbn = "data.frame",
-                                         network = "tbl_graph"))
+ingres = setClass("ingres", slots = list(
+  expression = "matrix",
+  idents = "data.frame",
+  network.genes = "data.frame",
+  viper = "data.frame",
+  cluster.pbn = "data.frame",
+  single.cell.pbn = "data.frame",
+  network = "tbl_graph"
+))
 
 #' Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
 #'
@@ -30,16 +32,19 @@ ingres = setClass("ingres", slots = list(expression = "matrix",
 #'
 #' @return An \code{ingres} object.
 #' @export
-createIngresObjectFromSeurat = function(seurat.object, seurat.assay, slot, network.genes, network){
+createIngresObjectFromSeurat = function(seurat.object, seurat.assay, slot, network.genes, network) {
   if (!requireNamespace("Seurat", quietly = TRUE)) {
     stop("Package \"Seurat\" needed for this function to work. Please install it.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   expression.matrix = as.matrix(Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = slot))
-  idents = data.frame(cell = names(Seurat::Idents(seurat.object)),
-                      cluster = as.character(Seurat::Idents(seurat.object)),
-                      check.names = F)
+  idents = data.frame(
+    cell = names(Seurat::Idents(seurat.object)),
+    cluster = as.character(Seurat::Idents(seurat.object)),
+    check.names = F
+  )
   createIngresObject(expression.matrix, idents, network.genes, network)
 }
 
@@ -52,6 +57,6 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay, slot, netwo
 #'
 #' @return An \code{ingres} object.
 #' @export
-createIngresObject = function(expression.matrix, idents, network.genes, network){
+createIngresObject = function(expression.matrix, idents, network.genes, network) {
   ingres(expression = expression.matrix, idents = idents, network.genes = network.genes, network = network)
 }

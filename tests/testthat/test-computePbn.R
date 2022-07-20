@@ -13,7 +13,7 @@ test_that("computePbnByCluster results are not empty", {
 test_that("computePbnByCluster results are within the intended range", {
   ingres.object = ingresAfterViper
 
-  testRange = function(data, min, max){
+  testRange = function(data, min, max) {
     data %<>% select(-n) %>%
       pivot_longer(!cluster, names_to = "var")
 
@@ -50,7 +50,7 @@ test_that("computePbnBySingleCell results are not empty", {
 test_that("computePbnBySingleCell results are within the intended range", {
   ingres.object = ingresAfterViper
 
-  testRange = function(data, min, max){
+  testRange = function(data, min, max) {
     data %<>% pivot_longer(!c(cell, cluster), names_to = "var")
 
     data = data$value
@@ -76,18 +76,25 @@ test_that("computePbnByCluster throws the corresponding errors with wrong ranges
   expect_error(ingres.object %>% computePbnByCluster(), NA)
   expect_error(ingres.object %>% computePbnByCluster(c(-0.5, 0.5)), NA)
 
-  expect_error(ingres.object %>% computePbnByCluster("1, 1"),
-               "'range' must be a numeric vector")
+  expect_error(
+    ingres.object %>% computePbnByCluster("1, 1"),
+    "'range' must be a numeric vector"
+  )
 
-  expect_error(ingres.object %>% computePbnByCluster(c(-1, 0, 1)),
-               "Length of 'range' must be 2")
+  expect_error(
+    ingres.object %>% computePbnByCluster(c(-1, 0, 1)),
+    "Length of 'range' must be 2"
+  )
 
-  expect_error(ingres.object %>% computePbnByCluster(c(-0.5, 1)),
-               "The sum of the elements of 'range' must be equal to 0")
+  expect_error(
+    ingres.object %>% computePbnByCluster(c(-0.5, 1)),
+    "The sum of the elements of 'range' must be equal to 0"
+  )
 
-  expect_error(ingres.object %>% computePbnByCluster(c(1, -1)),
-               "The second element of 'range' should be greater than the first")
-
+  expect_error(
+    ingres.object %>% computePbnByCluster(c(1, -1)),
+    "The second element of 'range' should be greater than the first"
+  )
 })
 
 test_that("computePbnBySingleCell throws the corresponding errors with wrong ranges", {
@@ -96,15 +103,23 @@ test_that("computePbnBySingleCell throws the corresponding errors with wrong ran
   expect_error(ingres.object %>% computePbnBySingleCell(), NA)
   expect_error(ingres.object %>% computePbnBySingleCell(c(-0.5, 0.5)), NA)
 
-  expect_error(ingres.object %>% computePbnBySingleCell("1, 1"),
-               "'range' must be a numeric vector")
+  expect_error(
+    ingres.object %>% computePbnBySingleCell("1, 1"),
+    "'range' must be a numeric vector"
+  )
 
-  expect_error(ingres.object %>% computePbnBySingleCell(c(-1, 0, 1)),
-               "Length of 'range' must be 2")
+  expect_error(
+    ingres.object %>% computePbnBySingleCell(c(-1, 0, 1)),
+    "Length of 'range' must be 2"
+  )
 
-  expect_error(ingres.object %>% computePbnBySingleCell(c(-0.5, 1)),
-               "The sum of the elements of 'range' must be equal to 0")
+  expect_error(
+    ingres.object %>% computePbnBySingleCell(c(-0.5, 1)),
+    "The sum of the elements of 'range' must be equal to 0"
+  )
 
-  expect_error(ingres.object %>% computePbnBySingleCell(c(1, -1)),
-               "The second element of 'range' should be greater than the first")
+  expect_error(
+    ingres.object %>% computePbnBySingleCell(c(1, -1)),
+    "The second element of 'range' should be greater than the first"
+  )
 })

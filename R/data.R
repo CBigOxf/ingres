@@ -11,5 +11,3 @@
 #' An example small Seurat object, using dataset GSE130001 from
 #' Wang et al. Genome Med. 2020 Dec;12(1):24.
 "small_blca_wang"
-
-

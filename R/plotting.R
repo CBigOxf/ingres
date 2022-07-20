@@ -8,9 +8,11 @@
 #'
 #' @return A \code{ggplot} object containing the cell PBN plot.
 #' @export
-cellPbnPlot = function(ingres.object, cell.id){
-  networkPlot(produceNetworkForCell(ingres.object, cell.id),
-              paste0("PBN for cell ", cell.id))
+cellPbnPlot = function(ingres.object, cell.id) {
+  networkPlot(
+    produceNetworkForCell(ingres.object, cell.id),
+    paste0("PBN for cell ", cell.id)
+  )
 }
 
 #' Plot a cluster PBN
@@ -23,14 +25,15 @@ cellPbnPlot = function(ingres.object, cell.id){
 #'
 #' @return A \code{ggplot} object containing the cluster PBN plot.
 #' @export
-clusterPbnPlot = function(ingres.object, cluster.id){
-
-  networkPlot(produceNetworkForCluster(ingres.object, cluster.id),
-              paste0("PBN for cluster ", cluster.id))
+clusterPbnPlot = function(ingres.object, cluster.id) {
+  networkPlot(
+    produceNetworkForCluster(ingres.object, cluster.id),
+    paste0("PBN for cluster ", cluster.id)
+  )
 }
 
-#for internal use only
-networkPlot = function(network, title){
+# for internal use only
+networkPlot = function(network, title) {
   plot.data = network %>%
     tidygraph::activate(nodes) %>%
     mutate(print.id = stringr::str_replace(id, "_", "\n")) %>%
@@ -38,15 +41,18 @@ networkPlot = function(network, title){
 
   p = ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
-                   start_cap = circle(12, 'mm'), end_cap = circle(12, "mm"),
-                   arrow = arrow(angle = 30, length = unit(3, "mm"),
-                                 ends = "last", type = "open")) +
+      start_cap = circle(12, "mm"), end_cap = circle(12, "mm"),
+      arrow = arrow(
+        angle = 30, length = unit(3, "mm"),
+        ends = "last", type = "open"
+      )
+    ) +
     geom_node_point(aes(fill = as.factor(fixed_function), shape = kind), size = 25) +
-    geom_node_text(aes(filter = is.na(fixed_p),label = print.id)) +
+    geom_node_text(aes(filter = is.na(fixed_p), label = print.id)) +
     geom_node_text(aes(filter = !is.na(fixed_p), label = print.id.p)) +
     scale_fill_manual(values = c("#DB1F48", "#01949A", "#004369")) +
     scale_shape_manual(values = c(22, 21, 23)) +
-    scale_edge_width(range = c(0.2,3)) +
+    scale_edge_width(range = c(0.2, 3)) +
     theme_graph() +
     theme(legend.position = "none") +
     ggtitle(title)
@@ -63,15 +69,15 @@ networkPlot = function(network, title){
 #'
 #' @return A \code{ggplot} object containing the cluster PBN heatmap plot.
 #' @export
-clusterGenesHeatmap = function(ingres.object){
+clusterGenesHeatmap = function(ingres.object) {
   p = ingres.object@cluster.pbn %>%
     select(-2) %>%
     pivot_longer(!cluster, names_to = "node", values_to = "p") %>%
-    ggplot(aes(x=node, y=cluster)) +
-    geom_raster(aes(fill=p)) +
+    ggplot(aes(x = node, y = cluster)) +
+    geom_raster(aes(fill = p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
     ggpubr::theme_pubr() +
-    theme(axis.text.x = element_text(angle=-45, vjust = 1, hjust = 0))
+    theme(axis.text.x = element_text(angle = -45, vjust = 1, hjust = 0))
   p
 }
 
@@ -85,17 +91,19 @@ clusterGenesHeatmap = function(ingres.object){
 #'
 #' @return A \code{ggplot} object containing the cell PBN heatmap plot.
 #' @export
-cellGenesHeatmap = function(ingres.object){
+cellGenesHeatmap = function(ingres.object) {
   p = ingres.object@single.cell.pbn %>%
     pivot_longer(!c(cell, cluster), names_to = "node", values_to = "p") %>%
     mutate(clustern = substring(cluster, first = 1, last = 20)) %>%
-    ggplot(aes(x=node, y=cell)) +
-    geom_tile(aes(fill=p)) +
+    ggplot(aes(x = node, y = cell)) +
+    geom_tile(aes(fill = p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
     ggpubr::theme_pubr(legend = "none") +
-    theme(axis.text.x = element_text(angle=-45, vjust = 1, hjust = 0),
-          axis.text.y = element_blank(),
-          axis.title.y = element_blank()) +
+    theme(
+      axis.text.x = element_text(angle = -45, vjust = 1, hjust = 0),
+      axis.text.y = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     facet_grid(clustern ~ ., scales = "free")
   p
 }
