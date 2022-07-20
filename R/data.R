@@ -11,3 +11,7 @@
 #' An example small Seurat object, using dataset GSE130001 from
 #' Wang et al. Genome Med. 2020 Dec;12(1):24.
 "small_blca_wang"
+
+#' The results of running [performViper()] on an ingres object created with
+#' `small_blca_wang`, intended to speed up vignettes and examples.
+'viper_results'

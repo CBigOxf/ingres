@@ -7,11 +7,10 @@ createExampleIngresObject = function() {
   )
 }
 
-createExampleIngresObjectAndPerformViper = function() {
-  createExampleIngresObject() %>%
-    performViper(aracne.networks::regulonblca, verbose = F)
+createExampleIngresObjectWithViper = function(){
+  ing = createExampleIngresObject()
+  ing@viper = viper_results
+  return(ing)
 }
 
-# create a object shared by all tests so it only needs to be created once,
-# except when testing the creation of the object itself.
-ingresAfterViper = createExampleIngresObjectAndPerformViper()
+ingresAfterViper = createExampleIngresObjectWithViper()
