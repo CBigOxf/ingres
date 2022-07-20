@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+<key attr.name="kind" attr.type="string" for="node" id="kind"/>
+<key attr.name="rule" attr.type="string" for="node" id="rule"/>
+<key attr.name="sign" attr.type="string" for="edge" id="sign"/>
+<graph edgedefault="directed">
+<node id="DNA_Damage">
+<data key="kind">input</data>
+</node>
+<node id="ATM">
+<data key="rule">DNA_Damage and (E2F1 or not Wip1 or not HDAC1)</data>
+<data key="kind">gene</data>
+</node>
+<node id="p38MAPK">
+<data key="rule">ATM and not Wip1</data>
+<data key="kind">gene</data>
+</node>
+<node id="Mdm2">
+<data key="rule">(not Wip1 or p53) and not ATM</data>
+<data key="kind">gene</data>
+</node>
+<node id="p53">
+<data key="rule">ATM or (not Mdm2 and p38MAPK)</data>
+<data key="kind">gene</data>
+</node>
+<node id="Wip1">
+<data key="rule">p53_A</data>
+<data key="kind">gene</data>
+</node>
+<node id="p53_A">
+<data key="rule">not Sirt_1 and not p53_K and (p53:1 or not p53_INP1)</data>
+<data key="kind">gene</data>
+</node>
+<node id="p53_K">
+<data key="rule">not p53_A and (not Sirt_1 or not Wip1) and p53</data>
+<data key="kind">gene</data>
+</node>
+<node id="miR_34a">
+<data key="rule">ATM</data>
+<data key="kind">gene</data>
+</node>
+<node id="p21">
+<data key="rule">p53_A or ((not HDAC1 or not c_Myc) and not Caspase3 and p38MAPK)</data>
+<data key="kind">gene</data>
+</node>
+<node id="p53_INP1">
+<data key="rule">p53_K or p53_A</data>
+<data key="kind">gene</data>
+</node>
+<node id="c_Myc">
+<data key="rule">(E2F1 or p38MAPK or not miR_34a) and not RB and not p21</data>
+<data key="kind">gene</data>
+</node>
+<node id="Cdc25A">
+<data key="rule">(not ATM and not miR_34a) or not p38MAPK</data>
+<data key="kind">gene</data>
+</node>
+<node id="cdk46_CycD">
+<data key="rule">Cdc25A and not miR_34a and not p21</data>
+<data key="kind">gene</data>
+</node>
+<node id="cdk2_CycE">
+<data key="rule">Cdc25A and E2F1 and not miR_34a and not p21</data>
+<data key="kind">gene</data>
+</node>
+<node id="RB">
+<data key="rule">not cdk46_CycD and not cdk2_CycE</data>
+<data key="kind">gene</data>
+</node>
+<node id="E2F1">
+<data key="rule">(not RB and ((Cdc25A and ATM) or not Sirt_1 or not miR_34a)) or c_Myc</data>
+<data key="kind">gene</data>
+</node>
+<node id="Sirt_1">
+<data key="rule">E2F1 and not (HDAC1 and miR_34a)</data>
+<data key="kind">gene</data>
+</node>
+<node id="HDAC1">
+<data key="rule">(not miR_34a and not Sirt_1) or not DNA_Damage</data>
+<data key="kind">gene</data>
+</node>
+<node id="PUMA">
+<data key="rule">p53_K</data>
+<data key="kind">gene</data>
+</node>
+<node id="BCL2">
+<data key="rule">not PUMA and not miR_34a</data>
+<data key="kind">gene</data>
+</node>
+<node id="BAX">
+<data key="rule">not BCL2 and p53_K</data>
+<data key="kind">gene</data>
+</node>
+<node id="Caspase3">
+<data key="rule">not (BCL2 and p21) and BAX</data>
+<data key="kind">gene</data>
+</node>
+<node id="Proliferation">
+<data key="rule">E2F1 and not p53</data>
+<data key="kind">gene</data>
+</node>
+<node id="SIPS">
+<data key="rule">p21 and not E2F1</data>
+<data key="kind">gene</data>
+</node>
+<node id="Apoptosis">
+<data key="rule">Caspase3</data>
+<data key="kind">gene</data>
+</node>
+<edge source="Sirt_1" target="p53_K">
+<data key="sign">negative</data>
+</edge>
+<edge source="Sirt_1" target="p53_A">
+<data key="sign">negative</data>
+</edge>
+<edge source="Sirt_1" target="E2F1">
+<data key="sign">negative</data>
+</edge>
+<edge source="Sirt_1" target="HDAC1">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53_INP1" target="p53_A">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53_A" target="p53_K">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53_A" target="p21">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53_A" target="Wip1">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53_A" target="p53_INP1">
+<data key="sign">positive</data>
+</edge>
+<edge source="Mdm2" target="p53">
+<data key="sign">negative</data>
+</edge>
+<edge source="Wip1" target="ATM">
+<data key="sign">negative</data>
+</edge>
+<edge source="Wip1" target="Mdm2">
+<data key="sign">negative</data>
+</edge>
+<edge source="Wip1" target="p53_K">
+<data key="sign">negative</data>
+</edge>
+<edge source="Wip1" target="p38MAPK">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53_K" target="p53_A">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53_K" target="p53_INP1">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53_K" target="BAX">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53_K" target="PUMA">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="Sirt_1">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="ATM">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="c_Myc">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="cdk2_CycE">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="Proliferation">
+<data key="sign">positive</data>
+</edge>
+<edge source="E2F1" target="SIPS">
+<data key="sign">negative</data>
+</edge>
+<edge source="cdk2_CycE" target="RB">
+<data key="sign">negative</data>
+</edge>
+<edge source="ATM" target="p53">
+<data key="sign">positive</data>
+</edge>
+<edge source="ATM" target="Mdm2">
+<data key="sign">negative</data>
+</edge>
+<edge source="ATM" target="E2F1">
+<data key="sign">positive</data>
+</edge>
+<edge source="ATM" target="Cdc25A">
+<data key="sign">negative</data>
+</edge>
+<edge source="ATM" target="p38MAPK">
+<data key="sign">positive</data>
+</edge>
+<edge source="ATM" target="miR_34a">
+<data key="sign">positive</data>
+</edge>
+<edge source="p38MAPK" target="p53">
+<data key="sign">positive</data>
+</edge>
+<edge source="p38MAPK" target="c_Myc">
+<data key="sign">positive</data>
+</edge>
+<edge source="p38MAPK" target="p21">
+<data key="sign">positive</data>
+</edge>
+<edge source="p38MAPK" target="Cdc25A">
+<data key="sign">negative</data>
+</edge>
+<edge source="PUMA" target="BCL2">
+<data key="sign">negative</data>
+</edge>
+<edge source="p21" target="cdk46_CycD">
+<data key="sign">negative</data>
+</edge>
+<edge source="p21" target="c_Myc">
+<data key="sign">negative</data>
+</edge>
+<edge source="p21" target="Caspase3">
+<data key="sign">negative</data>
+</edge>
+<edge source="p21" target="cdk2_CycE">
+<data key="sign">negative</data>
+</edge>
+<edge source="p21" target="SIPS">
+<data key="sign">positive</data>
+</edge>
+<edge source="miR_34a" target="HDAC1">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="E2F1">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="Sirt_1">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="BCL2">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="cdk46_CycD">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="cdk2_CycE">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="c_Myc">
+<data key="sign">negative</data>
+</edge>
+<edge source="miR_34a" target="Cdc25A">
+<data key="sign">negative</data>
+</edge>
+<edge source="c_Myc" target="p21">
+<data key="sign">negative</data>
+</edge>
+<edge source="c_Myc" target="E2F1">
+<data key="sign">positive</data>
+</edge>
+<edge source="DNA_Damage" target="ATM">
+<data key="sign">positive</data>
+</edge>
+<edge source="DNA_Damage" target="HDAC1">
+<data key="sign">negative</data>
+</edge>
+<edge source="Caspase3" target="p21">
+<data key="sign">negative</data>
+</edge>
+<edge source="Caspase3" target="Apoptosis">
+<data key="sign">positive</data>
+</edge>
+<edge source="HDAC1" target="p21">
+<data key="sign">negative</data>
+</edge>
+<edge source="HDAC1" target="Sirt_1">
+<data key="sign">negative</data>
+</edge>
+<edge source="HDAC1" target="ATM">
+<data key="sign">negative</data>
+</edge>
+<edge source="RB" target="E2F1">
+<data key="sign">negative</data>
+</edge>
+<edge source="RB" target="c_Myc">
+<data key="sign">negative</data>
+</edge>
+<edge source="p53" target="p53_A">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53" target="Mdm2">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53" target="p53_K">
+<data key="sign">positive</data>
+</edge>
+<edge source="p53" target="Proliferation">
+<data key="sign">negative</data>
+</edge>
+<edge source="Cdc25A" target="E2F1">
+<data key="sign">positive</data>
+</edge>
+<edge source="Cdc25A" target="cdk46_CycD">
+<data key="sign">positive</data>
+</edge>
+<edge source="Cdc25A" target="cdk2_CycE">
+<data key="sign">positive</data>
+</edge>
+<edge source="cdk46_CycD" target="RB">
+<data key="sign">negative</data>
+</edge>
+<edge source="BCL2" target="BAX">
+<data key="sign">negative</data>
+</edge>
+<edge source="BCL2" target="Caspase3">
+<data key="sign">negative</data>
+</edge>
+<edge source="BAX" target="Caspase3">
+<data key="sign">positive</data>
+</edge>
+</graph>
+</graphml>

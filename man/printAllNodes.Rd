@@ -2,7 +2,7 @@
 % Please edit documentation in R/netwokHelpers.R
 \name{printAllNodes}
 \alias{printAllNodes}
-\title{Print all nodes in a network.
+\title{Print all nodes in a network
 For testing and checks purposes.}
 \usage{
 printAllNodes(network)
@@ -11,6 +11,10 @@ printAllNodes(network)
 \item{network}{The network which nodes will be printed.}
 }
 \description{
-Print all nodes in a network.
+Print all nodes in a network
 For testing and checks purposes.
+}
+\examples{
+printAllNodes(network)
+
 }

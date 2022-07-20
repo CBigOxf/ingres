@@ -5,18 +5,40 @@
 #' @param filename The path to the the GraphML file.
 #'
 #' @return A tidygraph object
+#'
+#' @examples
+#' filename =
+#'   system.file("extdata", "example_network.graphml", package = "ingres")
+#' graphmlAsTidy(filename)
+#'
 #' @export
 graphmlAsTidy = function(filename) {
   tidygraph::as_tbl_graph(igraph::read_graph(filename, format = "graphml")) %>%
     filter(id != "null")
 }
 
-#' Convert an ingres network into a BoolNet one.
+#' Convert an ingres network into a BoolNet one
 #'
 #' @param network The network to be converted, created
 #'  by [produceNetworkForCluster()] or [produceNetworkForCell()]
 #'
 #' @return A BoolNet object.
+#'
+#' @examples
+#' # Create an ingres object with viper slot
+#' ing = createIngresObjectFromSeurat(
+#'   small_blca_wang, "RNA", "data", network_genes, network
+#' )
+#' ing@viper = viper_results
+#'
+#' # Compute PBNs by cluster
+#' ing = computePbnByCluster(ing)
+#'
+#' # Produce a network for an arbitrary cluster
+#' network = produceNetworkForCluster(ing, "1")
+#'
+#' produceBoolnetNetwork(network)
+#'
 #' @export
 produceBoolnetNetwork = function(network) {
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
@@ -59,7 +81,7 @@ produceBoolnetNetwork = function(network) {
 }
 
 #' Create a network genes data frame. Optionally store it as csv
-#'  and open it for editing.
+#' and open it for editing
 #' To create an ingres object, a data frame with the network nodes and
 #' the corresponding gene symbols must be provided. This function simplifies
 #' the process. If the gene nodes are correct gene symbols, then modification
@@ -72,9 +94,13 @@ produceBoolnetNetwork = function(network) {
 #' @param modify If true, and store is also true,
 #'  open it to be modified by the user
 #' @return The template data frame.
-#' @export
 #'
-
+#' @examples
+#' \dontrun{
+#' createNetworkGenesTemplate(network, dir = dir)
+#' }
+#'
+#' @export
 createNetworkGenesTemplate = function(network, dir = getwd(),
                                       store = T, modify = T) {
   networkGenes = network %>%
@@ -94,7 +120,6 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
   return(networkGenes)
 }
 
-
 #' Convert a GinSim file into a GraphML file
 #' GinSim files have the extension .zginml. This utility function converts such
 #' files into the GraphML format. keeping the kind - fate, input or gene -, the
@@ -106,6 +131,12 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
 #' @param dest The path to the graphml file that will be created. If NULL,
 #' defaults to the same path as the zginml file, but with the graphml extension.
 #' @return A vector with the lines of the newly created GraphML file.
+#'
+#' @examples
+#' filename =
+#'   system.file("extdata", "example_ginsim.zginml", package = "ingres")
+#' head(ginmlToGraphml(filename))
+#'
 #' @export
 ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
   if (is.null(dest)) {
@@ -177,10 +208,14 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
 }
 
 
-#' Print all nodes in a network.
+#' Print all nodes in a network
+
 #' For testing and checks purposes.
 #'
 #' @param network The network which nodes will be printed.
+#'
+#' @examples
+#' printAllNodes(network)
 #'
 #' @export
 printAllNodes = function(network) {

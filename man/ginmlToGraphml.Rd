@@ -28,3 +28,9 @@ GinSim files have the extension .zginml. This utility function converts such
 files into the GraphML format. keeping the kind - fate, input or gene -, the
 edge sign and the rule - formulae - data.
 }
+\examples{
+filename =
+  system.file("extdata", "example_ginsim.zginml", package = "ingres")
+head(ginmlToGraphml(filename))
+
+}

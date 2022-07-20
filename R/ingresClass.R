@@ -54,6 +54,12 @@ setMethod("show", "ingres", print.ingres)
 #' @param network A object of class \code{tbl_graph} representing our network of interest.
 #'
 #' @return An \code{ingres} object.
+#'
+#' @examples
+#' createIngresObjectFromSeurat(
+#'   small_blca_wang, "RNA", "data", network_genes, network
+#' )
+#'
 #' @export
 createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
                                         slot, network.genes, network) {
@@ -81,6 +87,10 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 #' @param network A object of class \code{tbl_graph} representing our network of interest.
 #'
 #' @return An \code{ingres} object.
+#'
+#' @examples
+#' \dontrun{ing = createIngresObject(exp, idents, network.genes, network)}
+#'
 #' @export
 createIngresObject = function(expression.matrix, idents, network.genes, network) {
   ingres(expression = expression.matrix, idents = idents, network.genes = network.genes, network = network)

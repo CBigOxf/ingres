@@ -3,7 +3,7 @@
 \name{createNetworkGenesTemplate}
 \alias{createNetworkGenesTemplate}
 \title{Create a network genes data frame. Optionally store it as csv
-and open it for editing.
+and open it for editing
 To create an ingres object, a data frame with the network nodes and
 the corresponding gene symbols must be provided. This function simplifies
 the process. If the gene nodes are correct gene symbols, then modification
@@ -27,10 +27,16 @@ The template data frame.
 }
 \description{
 Create a network genes data frame. Optionally store it as csv
-and open it for editing.
+and open it for editing
 To create an ingres object, a data frame with the network nodes and
 the corresponding gene symbols must be provided. This function simplifies
 the process. If the gene nodes are correct gene symbols, then modification
 is not needed and the returned data frame can be directly passed to the ingres
 constructors.
+}
+\examples{
+\dontrun{
+createNetworkGenesTemplate(network, dir = dir)
+}
+
 }
