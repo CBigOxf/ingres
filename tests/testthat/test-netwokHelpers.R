@@ -1,5 +1,7 @@
 test_that("graphmlAsTidy creates a valid tidygraph object", {
-  tidyg = graphmlAsTidy(test_path("example_network.graphml"))
+  tidyg = graphmlAsTidy(
+    system.file("extdata", "example_network.graphml", package = "ingres")
+  )
 
   expect_s3_class(tidyg, "tbl_graph")
 
@@ -45,11 +47,9 @@ test_that("createNetworkGenesTemplate correctly returns the template file", {
 })
 
 test_that("ginmlToGraphml correctly returns a graphml file as a vector", {
-  graphml = ginmlToGraphml(test_path("example_ginsim.zginml"),
-    dest = withr::local_tempfile(fileext = ".graphml")
-  )
   expect_snapshot(
-    ginmlToGraphml(test_path("example_ginsim.zginml"),
+    ginmlToGraphml(
+      system.file("extdata", "example_ginsim.zginml", package = "ingres"),
       dest =
         withr::local_tempfile(fileext = ".graphml")
     ),
@@ -60,7 +60,8 @@ test_that("ginmlToGraphml correctly returns a graphml file as a vector", {
 test_that("ginmlToGraphml correctly creates a graphml file", {
   createGraphml = function() {
     path = tempfile(fileext = ".graphml")
-    ginmlToGraphml(test_path("example_ginsim.zginml"),
+    ginmlToGraphml(
+      system.file("extdata", "example_ginsim.zginml", package = "ingres"),
       dest = path
     )
     return(path)
@@ -72,7 +73,8 @@ test_that("ginmlToGraphml correctly creates a graphml file", {
 test_that("ginmlToGraphml recognises given fates", {
   networkFates = c("Proliferation", "Apoptosis")
   path = withr::local_tempfile(fileext = ".graphml")
-  graphml = ginmlToGraphml(test_path("example_ginsim.zginml"),
+  graphml = ginmlToGraphml(
+    system.file("extdata", "example_ginsim.zginml", package = "ingres"),
     dest = path,
     fates = networkFates
   )

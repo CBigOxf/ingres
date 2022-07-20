@@ -21,8 +21,8 @@
 # ginmlToGraphml correctly returns a graphml file as a vector
 
     Code
-      ginmlToGraphml(test_path("example_ginsim.zginml"), dest = withr::local_tempfile(
-        fileext = ".graphml"))
+      ginmlToGraphml(system.file("extdata", "example_ginsim.zginml", package = "ingres"),
+      dest = withr::local_tempfile(fileext = ".graphml"))
     Output
         [1] "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">"
         [2] "<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>"                            
