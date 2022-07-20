@@ -22,6 +22,8 @@ An \code{ingres} object.
 Create a new \code{ingres} object.
 }
 \examples{
-\dontrun{ing = createIngresObject(exp, idents, network.genes, network)}
+\dontrun{
+ing = createIngresObject(exp, idents, network.genes, network)
+}
 
 }

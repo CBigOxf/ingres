@@ -40,7 +40,7 @@
 computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
   viper.result = suppressMessages(tibble(ingres.object@viper,
-                                         .name_repair = "unique"
+    .name_repair = "unique"
   )) # ensure unique, non empty column names
   counts = viper.result %>%
     select(c(1, 2)) %>%
@@ -73,7 +73,7 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
 computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
   viper.result = suppressMessages(tibble(ingres.object@viper,
-                                         .name_repair = "unique"
+    .name_repair = "unique"
   )) # ensure unique, non empty column names
   identities = viper.result %>% select(c(1, 2))
   result = viper.result %>%

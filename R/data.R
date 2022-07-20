@@ -14,4 +14,4 @@
 
 #' The results of running [performViper()] on an ingres object created with
 #' `small_blca_wang`, intended to speed up vignettes and examples.
-'viper_results'
+"viper_results"

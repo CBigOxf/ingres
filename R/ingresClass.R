@@ -89,7 +89,9 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 #' @return An \code{ingres} object.
 #'
 #' @examples
-#' \dontrun{ing = createIngresObject(exp, idents, network.genes, network)}
+#' \dontrun{
+#' ing = createIngresObject(exp, idents, network.genes, network)
+#' }
 #'
 #' @export
 createIngresObject = function(expression.matrix, idents, network.genes, network) {

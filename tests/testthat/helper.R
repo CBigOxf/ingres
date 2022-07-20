@@ -7,7 +7,7 @@ createExampleIngresObject = function() {
   )
 }
 
-createExampleIngresObjectWithViper = function(){
+createExampleIngresObjectWithViper = function() {
   ing = createExampleIngresObject()
   ing@viper = viper_results
   return(ing)
