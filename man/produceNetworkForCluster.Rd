@@ -2,18 +2,32 @@
 % Please edit documentation in R/produceNetwork.R
 \name{produceNetworkForCluster}
 \alias{produceNetworkForCluster}
-\title{Produce a tidygraph network for a given cluster.}
+\title{Produce a tidygraph network for a given cluster}
 \usage{
 produceNetworkForCluster(ingres.object, cluster.id)
 }
 \arguments{
 \item{ingres.object}{The ingres object containing the relevant data.}
 
-\item{cluster.id}{The id of the cluster for which the network is to be produced.}
+\item{cluster.id}{The id of the cluster for which the network is to be
+produced.}
 }
 \value{
 A tidygraph object containing the network for the given cluster.
 }
 \description{
-Produce a tidygraph network for a given cluster.
+Produce a tidygraph network for a given cluster
+}
+\examples{
+# Create an ingres object with viper slot
+ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnByCluster(ing)
+
+network = produceNetworkForCluster(ing, "1")
+print(network)
+
 }

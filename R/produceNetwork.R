@@ -1,9 +1,23 @@
-#' Produce a tidygraph network for a given cluster.
+#' Produce a tidygraph network for a given cluster
 #'
 #' @param ingres.object The ingres object containing the relevant data.
-#' @param cluster.id The id of the cluster for which the network is to be produced.
+#' @param cluster.id The id of the cluster for which the network is to be
+#' produced.
 #'
 #' @return A tidygraph object containing the network for the given cluster.
+#'
+#' @examples
+#' # Create an ingres object with viper slot
+#' ing = createIngresObjectFromSeurat(
+#'   small_blca_wang, "RNA", "data", network_genes, network
+#' )
+#' ing@viper = viper_results
+#'
+#' ing = computePbnByCluster(ing)
+#'
+#' network = produceNetworkForCluster(ing, "1")
+#' print(network)
+#'
 #' @export
 produceNetworkForCluster = function(ingres.object, cluster.id) {
   pbn.data = ingres.object@cluster.pbn %>%
@@ -14,12 +28,25 @@ produceNetworkForCluster = function(ingres.object, cluster.id) {
   produceNetwork(ingres.object@network, pbn.data)
 }
 
-#' Produce a tidygraph network for a given cell.
+#' Produce a tidygraph network for a given cell
 #'
 #' @param ingres.object The ingres object containing the relevant data.
 #' @param cell.id The id of the cell for which the network is to be produced.
 #'
 #' @return A tidygraph object containing the network for the given cell.
+#'
+#' @examples
+#' # Create an ingres object with viper slot
+#' ing = createIngresObjectFromSeurat(
+#'   small_blca_wang, "RNA", "data", network_genes, network
+#' )
+#' ing@viper = viper_results
+#'
+#' ing = computePbnBySingleCell(ing)
+#'
+#' network = produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
+#' print(network)
+#'
 #' @export
 produceNetworkForCell = function(ingres.object, cell.id) {
   pbn.data = ingres.object@single.cell.pbn %>%

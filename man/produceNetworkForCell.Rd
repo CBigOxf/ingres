@@ -2,7 +2,7 @@
 % Please edit documentation in R/produceNetwork.R
 \name{produceNetworkForCell}
 \alias{produceNetworkForCell}
-\title{Produce a tidygraph network for a given cell.}
+\title{Produce a tidygraph network for a given cell}
 \usage{
 produceNetworkForCell(ingres.object, cell.id)
 }
@@ -15,5 +15,18 @@ produceNetworkForCell(ingres.object, cell.id)
 A tidygraph object containing the network for the given cell.
 }
 \description{
-Produce a tidygraph network for a given cell.
+Produce a tidygraph network for a given cell
+}
+\examples{
+# Create an ingres object with viper slot
+ing = createIngresObjectFromSeurat(
+  small_blca_wang, "RNA", "data", network_genes, network
+)
+ing@viper = viper_results
+
+ing = computePbnBySingleCell(ing)
+
+network = produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
+print(network)
+
 }
