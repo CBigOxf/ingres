@@ -1,7 +1,7 @@
 # performViper returns the correct messages and output
 
     Code
-      performViper(obj, regulon = aracne.networks::regulonbrca)@viper
+      performViper(obj, regulon = aracne.networks::regulonbrca, verbose = T)@viper
     Message <simpleMessage>
       
       Computing the association scores
