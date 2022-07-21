@@ -80,7 +80,7 @@ networkPlot = function(network, title) {
     scale_fill_manual(values = c("#DB1F48", "#01949A", "#004369")) +
     scale_shape_manual(values = c(22, 21, 23)) +
     scale_edge_width(range = c(0.2, 3)) +
-    theme_graph() +
+    theme_graph(base_family = "sans") +
     theme(legend.position = "none") +
     ggtitle(title)
   p
