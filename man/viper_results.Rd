@@ -4,9 +4,11 @@
 \name{viper_results}
 \alias{viper_results}
 \title{The results of running \code{\link[=performViper]{performViper()}} on an ingres object created with
-\code{small_blca_wang}, intended to speed up vignettes and examples.}
+\code{small_blca_wang}, intended to speed up vignettes and examples.
+This data frame was subset to only contain the genes in the \code{network_genes}
+file, so to keep the file size small.}
 \format{
-An object of class \code{data.frame} with 90 rows and 4945 columns.
+An object of class \code{data.frame} with 90 rows and 25 columns.
 }
 \usage{
 viper_results
@@ -14,5 +16,7 @@ viper_results
 \description{
 The results of running \code{\link[=performViper]{performViper()}} on an ingres object created with
 \code{small_blca_wang}, intended to speed up vignettes and examples.
+This data frame was subset to only contain the genes in the \code{network_genes}
+file, so to keep the file size small.
 }
 \keyword{datasets}

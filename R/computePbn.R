@@ -2,12 +2,13 @@
 #'
 #' After running \code{\link{performViper}}, this can be run to produce a
 #' PBN with the identity function probability for each node relative to the
-#' median VIPER normalised enrichment score (NES) for each cluster or cell.
+#' VIPER normalised enrichment score (NES) for cell. For `computePbnByCluster`,
+#' the median NES for all cells in that cluster will be used.
 #'
 #' @param ingres.object An \code{\linkS4class{ingres}} object with a
 #' non-null VIPER slot.
 #' @param range A vector representing the range to which the NES are
-#' to be calculated. \code{range[1]+range[2] == 0} should be TRUE.
+#' to be re-scaled. \code{range[1]+range[2] == 0} should be TRUE.
 #' Defaults to \[-1, 1\]
 #'
 #' @return An \code{\linkS4class{ingres}} object with

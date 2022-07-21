@@ -45,13 +45,18 @@ print.ingres = function(object) {
 
 setMethod("show", "ingres", print.ingres)
 
-#' Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
+#' Create a new \code{ingres} object using the expression data in a
+#'  \code{Seurat} object.
 #'
-#' @param seurat.object A \code{Seurat} object with QC, scaling and clustering already executed.
-#' @param seurat.assay The name of the assay to be imported, normally 'RNA' or 'Spatial'.
+#' @param seurat.object A \code{Seurat} object with QC, scaling and
+#' clustering already executed.
+#' @param seurat.assay The name of the assay to be imported,
+#' normally 'RNA' or 'Spatial'.
 #' @param slot The name of the slot that contains the matrix to be used.
-#' @param network.genes A data frame with a column for node names and another column for the corresponding entrez IDs.
-#' @param network A object of class \code{tbl_graph} representing our network of interest.
+#' @param network.genes A data frame with a column for node names
+#' and another column for the corresponding entrez IDs.
+#' @param network A object of class \code{tbl_graph} representing
+#' our network of interest.
 #'
 #' @return An \code{ingres} object.
 #'
@@ -62,7 +67,7 @@ setMethod("show", "ingres", print.ingres)
 #'
 #' @export
 createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
-                                        slot, network.genes, network) {
+                                        slot = "data", network.genes, network) {
   if (!requireNamespace("Seurat", quietly = TRUE)) {
     stop(
       "Package \"Seurat\" needed for this function to work. Please install it.",
@@ -70,7 +75,9 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
     )
   }
 
-  expression.matrix = as.matrix(Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = slot))
+  expression.matrix = as.matrix(
+    Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = slot)
+  )
   idents = data.frame(
     cell = names(Seurat::Idents(seurat.object)),
     cluster = as.character(Seurat::Idents(seurat.object)),
@@ -81,10 +88,14 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 
 #' Create a new \code{ingres} object.
 #'
-#' @param expression.matrix A single-cell expression matrix, with cells in rows and genes in columns.
-#' @param idents A data frame with a column for cell barcode and another column for the corresponding cluster or subpopulation.
-#' @param network.genes A data frame with a column for node names and another column for the corresponding entrez IDs.
-#' @param network A object of class \code{tbl_graph} representing our network of interest.
+#' @param expression.matrix A single-cell expression matrix,
+#'  with cells in rows and genes in columns.
+#' @param idents A data frame with a column for cell barcode
+#' and another column for the corresponding cluster or subpopulation.
+#' @param network.genes A data frame with a column for node names
+#' and another column for the corresponding entrez IDs.
+#' @param network A object of class \code{tbl_graph} representing
+#'  our network of interest.
 #'
 #' @return An \code{ingres} object.
 #'
@@ -94,6 +105,10 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 #' }
 #'
 #' @export
-createIngresObject = function(expression.matrix, idents, network.genes, network) {
-  ingres(expression = expression.matrix, idents = idents, network.genes = network.genes, network = network)
-}
+createIngresObject =
+  function(expression.matrix, idents, network.genes, network) {
+    ingrs(
+      expression = expression.matrix, idents = idents,
+      network.genes = network.genes, network = network
+    )
+  }
