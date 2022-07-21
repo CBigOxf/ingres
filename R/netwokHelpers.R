@@ -50,20 +50,23 @@ produceBoolnetNetwork = function(network) {
   sep = ","
   tmp_file = withr::local_tempfile(fileext = ".bn")
   network.boolnet.text = network %>%
-    tidygraph::activate(nodes) %>%
+    tidygraph::activate('nodes') %>%
     mutate(
       line1 = case_when(
-        kind == "input" ~ paste(id, id, 1, sep = sep), # inputs are constant
-        is.na(fixed_p) ~ paste(id, rule, 1, sep = sep), # only one function for fates or genes without NES
-        kind == "gene" ~ paste(id, rule, function_p, sep = sep)
+        # inputs are constant
+        .data$kind == "input" ~ paste(id, id, 1, sep = sep),
+        # only one function for fates or genes without NES
+        is.na(.data$fixed_p) ~ paste(id, rule, 1, sep = sep),
+        .data$kind == "gene" ~ paste(id, rule, function_p, sep = sep)
       ),
       line2 = if_else(
-        kind == "gene" & !is.na(fixed_function), # some genes may not have rules (like AP1)
-        paste(id, fixed_function, fixed_p, sep = sep),
+        # some genes may not have rules (like AP1)
+        .data$kind == "gene" & !is.na(.data$fixed_function),
+        paste(id, .data$fixed_function, .data$fixed_p, sep = sep),
         ""
       )
     ) %>%
-    select(line1, line2) %>%
+    select(.data$line1, .data$line2) %>%
     as.data.frame() %>%
     t() %>%
     as.vector() %>%
@@ -85,8 +88,8 @@ produceBoolnetNetwork = function(network) {
 #' To create an ingres object, a data frame with the network nodes and
 #' the corresponding gene symbols must be provided. This function simplifies
 #' the process. If the gene nodes are correct gene symbols, then modification
-#' is not needed and the returned data frame can be directly passed to the ingres
-#' constructors.
+#' is not needed and the returned data frame can be directly passed to
+#' the ingres constructors.
 #'
 #' @param network A tidygraph network.
 #' @param dir The directory where the csv will be stored, if applicable.
@@ -106,9 +109,9 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
   networkGenes = network %>%
     tidygraph::activate("nodes") %>%
     as_tibble() %>%
-    filter(kind == "gene") %>%
+    filter(.data$kind == "gene") %>%
     select(node = id) %>%
-    mutate(symbol = node)
+    mutate(symbol = .data$node)
 
   if (store) {
     path = paste0(dir, "/networkGenes.csv")
@@ -124,8 +127,8 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
 #' GinSim files have the extension .zginml. This utility function converts such
 #' files into the GraphML format. keeping the kind - fate, input or gene -, the
 #' edge sign and the rule - formulae - data.
-#' @param ginzipFile The path to the .zginml file. The GraphML file will be created
-#' in the same directory.
+#' @param ginzipFile The path to the .zginml file. The GraphML file will be
+#' created in the same directory.
 #' @param fates A vector of fate names. If left empty, both fate and gene nodes
 #' will be labelled as kind='gene'
 #' @param dest The path to the graphml file that will be created. If NULL,
@@ -197,7 +200,8 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
       edgeTag = paste0("<edge source=\"", from, "\" target=\"", to, "\">")
       signTag = paste0("<data key=\"sign\">", sign, "</data>")
       edgeEndTag = "</edge>"
-      result = append(result, c(edgeTag, signTag, edgeEndTag), after = length(result))
+      result = append(result, c(edgeTag, signTag, edgeEndTag),
+                      after = length(result))
     }
   }
   close(gin)

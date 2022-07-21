@@ -10,8 +10,8 @@ edge sign and the rule - formulae - data.}
 ginmlToGraphml(ginzipFile, fates = c(), dest = NULL)
 }
 \arguments{
-\item{ginzipFile}{The path to the .zginml file. The GraphML file will be created
-in the same directory.}
+\item{ginzipFile}{The path to the .zginml file. The GraphML file will be
+created in the same directory.}
 
 \item{fates}{A vector of fate names. If left empty, both fate and gene nodes
 will be labelled as kind='gene'}

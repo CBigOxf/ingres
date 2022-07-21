@@ -35,7 +35,8 @@ Imports:
     igraph,
     purrr,
     readr,
-    usethis
+    usethis,
+    rlang
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,

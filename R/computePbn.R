@@ -45,25 +45,26 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
   )) # ensure unique, non empty column names
   counts = viper.result %>%
     select(c(1, 2)) %>%
-    count(cluster)
+    count(.data$cluster)
   result = viper.result %>%
     select(-1) %>%
-    group_by(cluster) %>%
+    group_by(.data$cluster) %>%
     summarise(across(
       .cols = tidyselect::everything(),
       stats::median
     )) %>%
-    pivot_longer(!cluster, names_to = "symbol") %>%
-    pivot_wider(names_from = cluster, values_from = value) %>%
+    pivot_longer(!.data$cluster, names_to = "symbol") %>%
+    pivot_wider(names_from = .data$cluster, values_from = .data$value) %>%
     merge(ingres.object@network.genes) %>%
-    select(-symbol) %>%
-    group_by(node) %>%
+    select(-.data$symbol) %>%
+    group_by(.data$node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
-    mutate(across(!node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
-    pivot_longer(!node, names_to = "cluster") %>%
-    pivot_wider(names_from = node, values_from = value) %>%
+    mutate(across(
+      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
+    pivot_longer(!.data$node, names_to = "cluster") %>%
+    pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(counts) %>%
-    relocate(n, .after = cluster)
+    relocate(n, .after = .data$cluster)
   ingres.object@cluster.pbn = result
   ingres.object
 }
@@ -79,17 +80,18 @@ computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
   identities = viper.result %>% select(c(1, 2))
   result = viper.result %>%
     select(-2) %>%
-    pivot_longer(!cell, names_to = "symbol") %>%
-    pivot_wider(names_from = cell, values_from = value) %>%
+    pivot_longer(!.data$cell, names_to = "symbol") %>%
+    pivot_wider(names_from = .data$cell, values_from = .data$value) %>%
     merge(ingres.object@network.genes) %>%
-    select(-symbol) %>%
-    group_by(node) %>%
+    select(-.data$symbol) %>%
+    group_by(.data$node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
-    mutate(across(!node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
-    pivot_longer(!node, names_to = "cell") %>%
-    pivot_wider(names_from = node, values_from = value) %>%
+    mutate(across(
+      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
+    pivot_longer(!.data$node, names_to = "cell") %>%
+    pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(identities) %>%
-    relocate(cluster, .after = cell)
+    relocate(.data$cluster, .after = .data$cell)
   ingres.object@single.cell.pbn = result
   ingres.object
 }

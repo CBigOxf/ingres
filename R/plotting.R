@@ -59,9 +59,11 @@ clusterPbnPlot = function(ingres.object, cluster.id) {
 # for internal use only
 networkPlot = function(network, title) {
   plot.data = network %>%
-    tidygraph::activate(nodes) %>%
+    tidygraph::activate('nodes') %>%
     mutate(print.id = stringr::str_replace(id, "_", "\n")) %>%
-    mutate(print.id.p = paste0(print.id, "\np=", round(fixed_p, digits = 2)))
+    mutate(
+      print.id.p =
+        paste0(.data$print.id, "\np=", round(.data$fixed_p, digits = 2)))
 
   p = ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
@@ -72,11 +74,13 @@ networkPlot = function(network, title) {
       )
     ) +
     geom_node_point(aes(
-      fill = as.factor(fixed_function),
-      shape = kind
+      fill = as.factor(.data$fixed_function),
+      shape = .data$kind
     ), size = 25) +
-    geom_node_text(aes(filter = is.na(fixed_p), label = print.id)) +
-    geom_node_text(aes(filter = !is.na(fixed_p), label = print.id.p)) +
+    geom_node_text(aes(
+      filter = is.na(.data$fixed_p), label = .data$print.id)) +
+    geom_node_text(aes(
+      filter = !is.na(.data$fixed_p), label = .data$print.id.p)) +
     scale_fill_manual(values = c("#DB1F48", "#01949A", "#004369")) +
     scale_shape_manual(values = c(22, 21, 23)) +
     scale_edge_width(range = c(0.2, 3)) +
@@ -112,8 +116,8 @@ networkPlot = function(network, title) {
 clusterGenesHeatmap = function(ingres.object) {
   p = ingres.object@cluster.pbn %>%
     select(-2) %>%
-    pivot_longer(!cluster, names_to = "node", values_to = "p") %>%
-    ggplot(aes(x = node, y = cluster)) +
+    pivot_longer(!.data$cluster, names_to = "node", values_to = "p") %>%
+    ggplot(aes(x = .data$node, y = .data$cluster)) +
     geom_raster(aes(fill = p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
     ggpubr::theme_pubr() +
@@ -146,9 +150,10 @@ clusterGenesHeatmap = function(ingres.object) {
 #' @export
 cellGenesHeatmap = function(ingres.object) {
   p = ingres.object@single.cell.pbn %>%
-    pivot_longer(!c(cell, cluster), names_to = "node", values_to = "p") %>%
-    mutate(clustern = substring(cluster, first = 1, last = 20)) %>%
-    ggplot(aes(x = node, y = cell)) +
+    pivot_longer(!c(.data$cell, .data$cluster),
+                 names_to = "node", values_to = "p") %>%
+    mutate(clustern = substring(.data$cluster, first = 1, last = 20)) %>%
+    ggplot(aes(x = .data$node, y = .data$cell)) +
     geom_tile(aes(fill = p)) +
     scale_fill_continuous(low = "violetred3", high = "aquamarine2") +
     ggpubr::theme_pubr(legend = "none") +

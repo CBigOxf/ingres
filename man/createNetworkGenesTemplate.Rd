@@ -7,8 +7,8 @@ and open it for editing
 To create an ingres object, a data frame with the network nodes and
 the corresponding gene symbols must be provided. This function simplifies
 the process. If the gene nodes are correct gene symbols, then modification
-is not needed and the returned data frame can be directly passed to the ingres
-constructors.}
+is not needed and the returned data frame can be directly passed to
+the ingres constructors.}
 \usage{
 createNetworkGenesTemplate(network, dir = getwd(), store = T, modify = T)
 }
@@ -31,8 +31,8 @@ and open it for editing
 To create an ingres object, a data frame with the network nodes and
 the corresponding gene symbols must be provided. This function simplifies
 the process. If the gene nodes are correct gene symbols, then modification
-is not needed and the returned data frame can be directly passed to the ingres
-constructors.
+is not needed and the returned data frame can be directly passed to
+the ingres constructors.
 }
 \examples{
 \dontrun{

@@ -27,7 +27,8 @@ plotSelectedCell = function(ingres.object, seurat.object) {
   optionalPkgs = c("Seurat", "plotly")
   for (pkg in optionalPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop(paste0("Package \"", pkg, "\" needed for this function to work. Please install it."),
+      stop(paste0("Package \"", pkg,
+                  "\" needed for this function to work. Please install it."),
         call. = FALSE
       )
     }
@@ -48,7 +49,9 @@ plotSelectedCell = function(ingres.object, seurat.object) {
     p.data = p$data %>% select(-3)
 
     output$plot = plotly::renderPlotly({
-      Seurat::HoverLocator(plot = p, information = Seurat::FetchData(object = seurat.object, vars = "ident"))
+      Seurat::HoverLocator(
+        plot = p,
+        information = Seurat::FetchData(object = seurat.object, vars = "ident"))
     })
 
     output$result = renderPlot({
@@ -57,7 +60,7 @@ plotSelectedCell = function(ingres.object, seurat.object) {
         dx = d$x
         dy = d$y
         cellrow = p.data %>%
-          filter(near(.[[1]], dx) & near(.[[2]], dy)) %>%
+          filter(near(p.data[[1]], dx) & near(p.data[[2]], dy)) %>%
           tibble::rownames_to_column("cell")
         cellPbnPlot(ingres.object, cellrow$cell)
       }

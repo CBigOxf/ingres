@@ -15,4 +15,5 @@
 #' @import shiny
 #' @importFrom tidyr pivot_longer
 #' @importFrom tidyr pivot_wider
+#' @importFrom rlang .data
 NULL

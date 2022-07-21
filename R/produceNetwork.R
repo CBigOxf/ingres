@@ -21,7 +21,7 @@
 #' @export
 produceNetworkForCluster = function(ingres.object, cluster.id) {
   pbn.data = ingres.object@cluster.pbn %>%
-    filter(cluster == cluster.id) %>%
+    filter(.data$cluster == cluster.id) %>%
     select(-c(1, 2)) %>%
     pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
 
@@ -50,7 +50,7 @@ produceNetworkForCluster = function(ingres.object, cluster.id) {
 #' @export
 produceNetworkForCell = function(ingres.object, cell.id) {
   pbn.data = ingres.object@single.cell.pbn %>%
-    filter(cell == cell.id) %>%
+    filter(.data$cell == cell.id) %>%
     select(-c(1, 2)) %>%
     pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
 
@@ -60,12 +60,12 @@ produceNetworkForCell = function(ingres.object, cell.id) {
 # for internal use only
 produceNetwork = function(network, pbn.data) {
   network = network %>%
-    tidygraph::activate(nodes) %>%
+    tidygraph::activate('nodes') %>%
     left_join(pbn.data, by = "id") %>%
     mutate(fixed_p = ifelse(p == 0,
-      NA, # don't create a fixed function if p==0
-      abs(p)
+                            NA, # don't create a fixed function if p==0
+                            abs(p)
     )) %>%
     mutate(fixed_function = ifelse(p > 0, 1, 0)) %>%
-    mutate(function_p = 1 - fixed_p)
+    mutate(function_p = 1 - .data$fixed_p)
 }
