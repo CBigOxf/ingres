@@ -51,7 +51,7 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
     summarise(across(
       .cols = tidyselect::everything(),
       stats::median
-    )) %>% # why median here but mean below?
+    )) %>%
     pivot_longer(!cluster, names_to = "symbol") %>%
     pivot_wider(names_from = cluster, values_from = value) %>%
     merge(ingres.object@network.genes) %>%

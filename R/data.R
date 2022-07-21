@@ -14,4 +14,6 @@
 
 #' The results of running [performViper()] on an ingres object created with
 #' `small_blca_wang`, intended to speed up vignettes and examples.
+#' This data frame was subset to only contain the genes in the `network_genes`
+#' file, so to keep the file size small.
 "viper_results"
