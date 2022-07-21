@@ -7,13 +7,17 @@
 createIngresObject(expression.matrix, idents, network.genes, network)
 }
 \arguments{
-\item{expression.matrix}{A single-cell expression matrix, with cells in rows and genes in columns.}
+\item{expression.matrix}{A single-cell expression matrix,
+with cells in rows and genes in columns.}
 
-\item{idents}{A data frame with a column for cell barcode and another column for the corresponding cluster or subpopulation.}
+\item{idents}{A data frame with a column for cell barcode
+and another column for the corresponding cluster or subpopulation.}
 
-\item{network.genes}{A data frame with a column for node names and another column for the corresponding entrez IDs.}
+\item{network.genes}{A data frame with a column for node names
+and another column for the corresponding entrez IDs.}
 
-\item{network}{A object of class \code{tbl_graph} representing our network of interest.}
+\item{network}{A object of class \code{tbl_graph} representing
+our network of interest.}
 }
 \value{
 An \code{ingres} object.

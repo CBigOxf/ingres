@@ -1,0 +1,224 @@
+---
+title: "Using *Ingres* to obtain single-cell probabilistic Boolean networks from single-cell RNA-seq data"
+output: rmarkdown::html_vignette
+bibliography: vignette.bib
+link-citations: TRUE
+csl: nature.csl
+vignette: >
+  %\VignetteIndexEntry{Using *Ingres*}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview of Ingres
+
+Gene regulatory networks (GRN) have long been used as a way to integrate heterogeneous data into a discrete model, and are very useful to generate actionable hypotheses on the mechanisms governing these biological processes. Here we present Ingres (Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores) an open-source tool that uses\
+single-cell sequencing data and prior knowledge GRNs to produce a probabilistic\
+Boolean network (PBN) per each cell and/or cluster of cells in the dataset. Ingres allows to better capture the differences between cell phenotypes, using a continuous measure of protein activity while still confined to the simplicity of a GRN. We believe Ingres will be useful to better understand the heterogeneous makeup of cell populations, to gain insight into the specific circuits that drive certain phenotypes, and to use expression and other omics to infer computational cellular models in bulk or single-cell data.
+
+Specifically, we use a previously developed algorithm, VIPER [@alvarezfunctional2016], to infer protein activity starting from a gene expression matrix and a list of regulons ---defined as the list of transcriptional targets of each protein. This computes a matrix of normalised enrichment scores (NES) for each protein. The expression of these regulons represent an optimal indirect method to measure the activity of a specific gene/protein (the nodes in the preexisting Boolean network). This constitutes a novel way to fit the PBN using single-cell RNAseq data.
+
+For more details on the specific algorithms used, please refer to our publication describing Ingres **(pending publication).**
+
+## Citation
+
+**Pending**
+
+## Dependencies
+
+Most of Ingres dependencies are available on CRAN. Some of them need to be installed from Bioconductor:
+
+```{r, dependencies, eval=FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("viper")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("AnnotationDbi")
+BiocManager::install("aracne.networks") # optional dependency
+```
+
+## Creating the Ingres object
+
+First we load the Ingres package:
+
+```{r setup}
+library(ingres)
+```
+
+Then we need to create an Ingres object that will hold all the necessary data. Ingres contains example data to show how to use its functions, we will print them in this vignette so their structure can be seen. There are two main ways of creating an Ingres object. The easiest one is using a `Seurat` [@Seurat] object with the scaling and clustering pipelines already performed (see the corresponding [introductory vignette to Seurat](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html)):
+
+```{r seurat}
+small_blca_wang
+
+```
+
+We also need a network object in `tidygraph` format:
+
+```{r network}
+network
+```
+
+Ingres includes several helper functions that can transform GinSim or `graphml` files to the `tidygraph` format.
+
+```{r network_conversion-1}
+# Load the graphml example file
+filename = system.file("extdata", "example_network.graphml", package = "ingres")
+
+#Convert to tidygraph format
+graphmlAsTidy(filename)
+
+```
+
+```{r network-conversion-2}
+# Load the GinSim (.zginml) example file
+filename = system.file("extdata", "example_ginsim.zginml", package = "ingres")
+
+# Convert to graphml and store it in a temporary file
+temp = tempfile()
+gml = ginmlToGraphml(filename, dest = temp)
+head(gml)
+
+# Convert to tidygraph
+graphmlAsTidy(temp)
+```
+
+A data frame with a row per node in the network and its corresponding gene symbol, in case nodes in the network have different names:
+
+```{r symbols}
+network_genes
+```
+
+We can use the function `createNetworkGenesTemplate` to generate a network_genes file with the node names prepopulated. If using RStudio interactively, the function opens this file for us to modify as needed.
+
+```{r network-genes-template}
+# store and modify = F just for demonstration.
+createNetworkGenesTemplate(network, store = F, modify = F)
+# Then, modify as needed.
+```
+
+Then, we can create the Ingres object:
+
+```{r object-creation}
+ing = createIngresObjectFromSeurat(
+  seurat.object = small_blca_wang,
+  seurat.assay  = "RNA",
+  slot          = "data",
+  network.genes = network_genes,
+  network       = network
+)
+
+ing
+```
+
+An Ingres object can also be created without a `Seurat` object, by providing a expression matrix, with cells in rows and genes in columns, and a idents data.frame with each cell barcode and its corresponding cluster or subpopulation:
+
+```{r matrix-idents}
+exp = ing@expression
+exp[1:2, 1:2]
+
+idents = ing@idents
+head(idents)
+```
+
+```{r create-no-seurat}
+createIngresObject(
+  expression.matrix =  exp, 
+  idents            =  idents,   
+  network.genes     = network_genes,
+  network           = network)
+
+```
+
+## Running VIPER
+
+The next step is to run VIPER. For more information about the algorithm VIPER uses, please refer to [its documentation](https://bioconductor.org/packages/release/bioc/vignettes/viper/inst/doc/viper.pdf).
+
+Ingres runs VIPER on the provided gene expression matrix, using the regulon supplied by the user. This regulon can come from the ARACNe algorithm [@bassoreverse2005; @lachmannaracneap2016] or from other databases such as Dorothea [@garcia-alonsobenchmark2019]. If several regulons are provided, the metaVIPER algorithm [14] will be run instead.\
+This algorithm is designed to integrate multiple interactomes, not necessarily tissue-matched, as VIPER needed to work accurately. This is most valuable in single-cell RNA-seq data, due to its heterogeneity, inherent noisiness and low sequencing depth [@ding2018]. Indeed, metaVIPER has been shown to reduce bias and batch effect, generating reproducible protein-activity signatures [14]. Therefore, we recommend this method for Ingres. Collections of tumour regulons are available at Bioconductor [@giorgiaracne2017]. The package `aracne.networks`, a suggested dependency for *Ingres*, contains ARACNe-inferred networks from TCGA tumor datasets.
+
+VIPER produces a matrix of Normalised Enrichment Scores (NES) per each gene and cell.
+
+```{r viper}
+# Using a single regulon for speed
+ing = performViper(ing, aracne.networks::regulonblca)
+ing
+```
+
+## Computing the PBNs
+
+Now we can generate PBNs for every cell and/or every cluster in our *Ingres* object. This will generate a PBN that is a copy of the provided Boolean network but with a second rule in each gene node that is a fixed 1 or 0 (always active or always inactive). The probability of these rules being chosen will be proportional to the NES computed by VIPER. By default, this step will re-scale NES to (-1,1) for each gene in each cell. This is, the gene with the highest NES in a given cell will be re-scaled to 1 and the gene with the lowest NES in that same cell will be re-scaled to -1, and every other gene will be re-scaled relative to that range. Then, all genes with a re-scaled NES\>0 will have a fixed 1 rule added to the corresponding network node, with a probability equals to its re-scaled NES. All genes with a re-scaled NES\<0 will have a fixed 0 ruled added, with a probability equals to [re-scaled NES]. The original rule for each node will have a probability equals to 1-[fixed rule probability].
+
+The range (-1,1) can be changed by the user, in case a less intense effect by the RNA-seq data is desired. For example, if the range is inputed as (-0.5, 0.5), the gene with the highest expression will have a 0.5 probability of activating its fixed rule, the same chance as its original rule.
+
+```{r compute-cell-pbn}
+ing = computePbnBySingleCell(ing)
+ing
+head(ing@single.cell.pbn)
+
+head(computePbnBySingleCell(ing, c(-0.5, 0.5))@single.cell.pbn)
+```
+
+We can also compute a single PBN per each cluster. In that case, the median NES for each gene across all cells in that cluster is used to produce the PBN:
+
+```{r compute-cluster-pbn}
+ing = computePbnByCluster(ing)
+ing
+
+```
+
+## Visualization of results
+
+We can export any PBN for further analysis by providing its cell barcode or cluster id:
+
+```{r produce-network, eval=FALSE}
+produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
+
+produceNetworkForCluster(ing, "1")
+```
+
+In the same way, we can plot any network:
+
+```{r network-plotting, fig.height=15, fig.width=15, out.width='100%'}
+cellPbnPlot(ing, "sample1@ACAGCTAAGATCCCGC-1")
+
+clusterPbnPlot(ing, "1")
+```
+
+An overview of the results can be plotted as heatmaps:
+
+```{r heatmaps, fig.height=5, fig.width=10, out.width='100%'}
+cellGenesHeatmap(ing)
+
+clusterGenesHeatmap(ing)
+
+```
+
+Finally, any network can be exported as a `BoolNet` [@BoolNet] network. This package includes a variety of functions to analyse networks:
+
+```{r boolnet}
+ing_network = produceNetworkForCluster(ing, "1")
+
+boolnet_network = produceBoolnetNetwork(ing_network)
+
+# Generate a initial state where all nodes have state 1
+initial_state = rep(1, length(network))
+
+# Compute one state transition from the given initial state.
+transition1 = BoolNet::stateTransition(
+  boolnet_network, 
+  type  = "probabilistic",
+  state = initial_state)
+
+head(transition1)
+
+```
+
+## References

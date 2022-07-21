@@ -107,7 +107,7 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 #' @export
 createIngresObject =
   function(expression.matrix, idents, network.genes, network) {
-    ingrs(
+    ingres(
       expression = expression.matrix, idents = idents,
       network.genes = network.genes, network = network
     )

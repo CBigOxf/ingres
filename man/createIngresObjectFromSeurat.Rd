@@ -2,32 +2,38 @@
 % Please edit documentation in R/ingresClass.R
 \name{createIngresObjectFromSeurat}
 \alias{createIngresObjectFromSeurat}
-\title{Create a new \code{ingres} object using the expression data in a \code{Seurat} object.}
+\title{Create a new \code{ingres} object using the expression data in a
+\code{Seurat} object.}
 \usage{
 createIngresObjectFromSeurat(
   seurat.object,
   seurat.assay = "RNA",
-  slot,
+  slot = "data",
   network.genes,
   network
 )
 }
 \arguments{
-\item{seurat.object}{A \code{Seurat} object with QC, scaling and clustering already executed.}
+\item{seurat.object}{A \code{Seurat} object with QC, scaling and
+clustering already executed.}
 
-\item{seurat.assay}{The name of the assay to be imported, normally 'RNA' or 'Spatial'.}
+\item{seurat.assay}{The name of the assay to be imported,
+normally 'RNA' or 'Spatial'.}
 
 \item{slot}{The name of the slot that contains the matrix to be used.}
 
-\item{network.genes}{A data frame with a column for node names and another column for the corresponding entrez IDs.}
+\item{network.genes}{A data frame with a column for node names
+and another column for the corresponding entrez IDs.}
 
-\item{network}{A object of class \code{tbl_graph} representing our network of interest.}
+\item{network}{A object of class \code{tbl_graph} representing
+our network of interest.}
 }
 \value{
 An \code{ingres} object.
 }
 \description{
-Create a new \code{ingres} object using the expression data in a \code{Seurat} object.
+Create a new \code{ingres} object using the expression data in a
+\code{Seurat} object.
 }
 \examples{
 createIngresObjectFromSeurat(

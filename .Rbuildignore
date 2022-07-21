@@ -6,3 +6,5 @@
 ^codecov\.yml$
 ^data-raw$
 ^TODO$
+^doc$
+^Meta$

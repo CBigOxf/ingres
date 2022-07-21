@@ -43,9 +43,12 @@ Suggests:
     aracne.networks,
     BoolNet,
     covr,
-    withr
+    withr,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
 URL: https://github.com/CBigOxf/ingres
 BugReports: https://github.com/CBigOxf/ingres/issues
 Remotes: 
     plotly/plotly.R
+VignetteBuilder: knitr
