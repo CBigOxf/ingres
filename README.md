@@ -24,3 +24,8 @@ You can install the development version of **ingres** with:
 # install.packages("devtools")
 devtools::install_github("CBigOxf/ingres")
 ```
+
+## Citation
+To cite ingres in publications use:
+
+  Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint at https://doi.org/10.1101/2022.09.04.506528 (2022).
