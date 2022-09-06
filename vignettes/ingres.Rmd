@@ -25,11 +25,11 @@ Boolean network (PBN) per each cell and/or cluster of cells in the dataset. Ingr
 
 Specifically, we use a previously developed algorithm, VIPER [@alvarezfunctional2016], to infer protein activity starting from a gene expression matrix and a list of regulons ---defined as the list of transcriptional targets of each protein. This computes a matrix of normalised enrichment scores (NES) for each protein. The expression of these regulons represent an optimal indirect method to measure the activity of a specific gene/protein (the nodes in the preexisting Boolean network). This constitutes a novel way to fit the PBN using single-cell RNAseq data.
 
-For more details on the specific algorithms used, please refer to our publication describing Ingres **(pending publication).**
+For more details on the specific algorithms used, please refer to our publication describing Ingres[@victori_ingres_2022].
 
 ## Citation
 
-**Pending**
+Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint at <https://doi.org/10.1101/2022.09.04.506528> (2022).
 
 ## Dependencies
 
