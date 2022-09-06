@@ -10,3 +10,4 @@
 ^Meta$
 .Rhistory
 ^cran-comments\.md$
+^revdep$
