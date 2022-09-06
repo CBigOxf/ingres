@@ -1,3 +1,3 @@
-# ingres 0.0.0.9000
+# ingres 1.0.0
 
-* Added a `NEWS.md` file to track changes to the package.
+First complete release. Please check the [preprint](https://www.biorxiv.org/content/10.1101/2022.09.04.506528v1) and the package vignette for more information on all the features.
