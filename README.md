@@ -4,7 +4,11 @@
 # ingres
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml)
+[![Codecov test
+coverage](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg)](https://codecov.io/gh/CBigOxf/ingres?branch=master)
+
 <!-- badges: end -->
 
 ***I**nferring Probabilistic Boolean **N**etworks of **G**ene
@@ -26,6 +30,9 @@ devtools::install_github("CBigOxf/ingres")
 ```
 
 ## Citation
+
 To cite ingres in publications use:
 
-  Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint at https://doi.org/10.1101/2022.09.04.506528 (2022).
+*Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to
+single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint
+at <https://doi.org/10.1101/2022.09.04.506528> (2022).*

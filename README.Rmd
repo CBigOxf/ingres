@@ -16,12 +16,12 @@ knitr::opts_chunk$set(
 # ingres
 
 <!-- badges: start -->
-[![R-CMD-check-bioc](https://github.com/CBigOxf/ingres/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/CBigOxf/ingres/actions)
-[![R-CMD-check](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml)
-[![Codecov test coverage](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg)](https://codecov.io/gh/CBigOxf/ingres?branch=master)
+
+[![R-CMD-check](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/CBigOxf/ingres/actions/workflows/r-cmd-check.yml) [![Codecov test coverage](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg)](https://codecov.io/gh/CBigOxf/ingres?branch=master)
+
 <!-- badges: end -->
 
-_**I**nferring Probabilistic Boolean **N**etworks of **G**ene **R**egulation Using Protein Activity **E**nrichment **S**cores_
+***I**nferring Probabilistic Boolean **N**etworks of **G**ene **R**egulation Using Protein Activity **E**nrichment **S**cores*
 
 Given a gene regulatory boolean network and a RNA-seq dataset, **ingres** computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions.
 
@@ -33,3 +33,9 @@ You can install the development version of **ingres** with:
 # install.packages("devtools")
 devtools::install_github("CBigOxf/ingres")
 ```
+
+## Citation
+
+To cite ingres in publications use:
+
+| *Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint at <https://doi.org/10.1101/2022.09.04.506528> (2022).*

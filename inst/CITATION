@@ -1,0 +1,19 @@
+citHeader("To cite ingres in publications use:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "Ingres: From Single-Cell {{RNA-seq}} Data to Single-Cell Probabilistic {{Boolean}} Networks",
+  author   = personList(as.person("Pedro Victori"), as.person("Francesca M. Buffa")),
+  journal  = "bioRxiv",
+  year     = "2022",
+  pages    = "2022.09.04.506528",
+  url      = "https://www.biorxiv.org/content/10.1101/2022.09.04.506528v1",
+  doi      = "10.1101/2022.09.04.506528",
+  textVersion = "Victori, P. & Buffa, F. M. Ingres: from single-cell RNA-seq data to single-cell probabilistic Boolean networks. 2022.09.04.506528 Preprint at https://doi.org/10.1101/2022.09.04.506528 (2022)."
+)
+
+
+
+
+
+
