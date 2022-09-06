@@ -3,6 +3,6 @@ test_that("performViper returns the correct messages and output", {
   expect_snapshot(
     performViper(obj, regulon = aracne.networks::regulonbrca,
                  verbose = T)@viper,
-    cran = TRUE
+    cran = FALSE
   )
 })
