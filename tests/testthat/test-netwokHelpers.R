@@ -36,7 +36,10 @@ test_that("createNetworkGenesTemplate correctly creates the template file", {
   }
 
   announce_snapshot_file(name = "networkGenes.csv")
-  expect_snapshot_file(createTest(), "networkGenes.csv", cran = T)
+  skip_on_cran()
+  skip_on_ci()
+
+  expect_snapshot_file(createTest(), "networkGenes.csv", cran = F)
 })
 
 test_that("createNetworkGenesTemplate correctly returns the template file", {
@@ -67,7 +70,9 @@ test_that("ginmlToGraphml correctly creates a graphml file", {
     return(path)
   }
   announce_snapshot_file("snapshot.graphml")
-  expect_snapshot_file(createGraphml(), name = "snapshot.graphml", cran = T)
+  skip_on_cran()
+  skip_on_ci()
+  expect_snapshot_file(createGraphml(), name = "snapshot.graphml", cran = F)
 })
 
 test_that("ginmlToGraphml recognises given fates", {
