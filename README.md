@@ -29,6 +29,14 @@ You can install the development version of **ingres** with:
 devtools::install_github("CBigOxf/ingres")
 ```
 
+You may need to manually install some of the BioConductor dependencies
+before you can install **ingres**:
+
+``` r
+# install.packages("BiocManager")
+BiocManager::install(c("viper", "AnnotationDbi", "org.Hs.eg.db", "aracne.networks"))
+```
+
 ## Citation
 
 To cite ingres in publications use:

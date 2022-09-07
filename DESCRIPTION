@@ -14,7 +14,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Depends: 
-    R (>= 2.10)
+    R (>= 3.6.0)
+DependsNote:
+    BioC (>= 3.2)
 Imports: 
     methods,
     viper,
@@ -36,7 +38,8 @@ Imports:
     purrr,
     readr,
     usethis,
-    rlang
+    rlang,
+    BiocManager(>= 1.30.10)
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,
