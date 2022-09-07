@@ -9,10 +9,12 @@
 
         # Assert that the package can be successfully loaded
         if (!requireNamespace(pkg, quietly = TRUE)) {
-          throw(paste("Package '", package, "' could not be loaded. Please install it from Bioconductor, cf. https://www.bioconductor.org/"))
+          stop(paste("Package '", pkg,
+                     "' could not be loaded. Please install it from Bioconductor, cf. https://www.bioconductor.org/"),
+               call. = FALSE)
         }
       } else {
-        warning("Package '", package, "' could not be loaded. Without it, ingres will not work. Please install it from Bioconductor, cf. https://www.bioconductor.org/")
+        warning("Package '", pkg, "' could not be loaded. Without it, ingres will not work. Please install it from Bioconductor, cf. https://www.bioconductor.org/")
       }
     }
   }
