@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Pedro Victori \email{pedroluisvictori@gmail.com} (\href{https://orcid.org/0000-0001-6321-5584}{ORCID})
 
+Authors:
+\itemize{
+  \item Francesca M. Buffa \email{francesca.buffa@unibocconi.it} (\href{https://orcid.org/00000-0003-0409-406X}{ORCID})
+}
+
 }
 \keyword{internal}
