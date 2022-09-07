@@ -12,6 +12,7 @@ Given a gene regulatory boolean network and a RNA-seq dataset, this package comp
 Useful links:
 \itemize{
   \item \url{https://github.com/CBigOxf/ingres}
+  \item \url{https://cbigoxf.github.io/ingres/}
   \item Report bugs at \url{https://github.com/CBigOxf/ingres/issues}
 }
 

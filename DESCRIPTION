@@ -15,8 +15,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 3.6.0)
-DependsNote:
-    BioC (>= 3.2)
 Imports: 
     methods,
     viper,
@@ -37,8 +35,7 @@ Imports:
     purrr,
     readr,
     usethis,
-    rlang,
-    BiocManager(>= 1.30.10)
+    rlang
 Suggests: 
     testthat (>= 3.0.0),
     Seurat,
