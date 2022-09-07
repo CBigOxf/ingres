@@ -24,7 +24,7 @@
 #'
 #' @export
 plotSelectedCell = function(ingres.object, seurat.object) {
-  optionalPkgs = c("Seurat", "plotly")
+  optionalPkgs = c("Seurat", "shiny", "plotly")
   for (pkg in optionalPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(paste0("Package \"", pkg,
@@ -34,12 +34,12 @@ plotSelectedCell = function(ingres.object, seurat.object) {
     }
   }
 
-  ui = fillPage(
-    titlePanel("Click on a cell to see its PBN"),
-    h4("You can zoom in by dragging the mouse"),
-    fillRow(
+  ui = shiny::fillPage(
+    shiny::titlePanel("Click on a cell to see its PBN"),
+    shiny:: h4("You can zoom in by dragging the mouse"),
+    shiny::fillRow(
       plotly::plotlyOutput("plot", height = "90%", width = "100%"),
-      plotOutput("result", height = "90%", width = "100%")
+      shiny::plotOutput("result", height = "90%", width = "100%")
     ),
     padding = 10
   )
@@ -54,7 +54,7 @@ plotSelectedCell = function(ingres.object, seurat.object) {
         information = Seurat::FetchData(object = seurat.object, vars = "ident"))
     })
 
-    output$result = renderPlot({
+    output$result = shiny::renderPlot({
       d = plotly::event_data("plotly_click")
       if (!is.null(d)) {
         dx = d$x
@@ -66,6 +66,6 @@ plotSelectedCell = function(ingres.object, seurat.object) {
       }
     })
   }
-  app = shinyApp(ui, server)
-  return(runApp(app))
+  app = shiny::shinyApp(ui, server)
+  return(shiny::runApp(app))
 }

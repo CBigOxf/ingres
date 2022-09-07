@@ -12,7 +12,6 @@
 #' @import magrittr
 #' @import ggplot2
 #' @import ggraph
-#' @import shiny
 #' @importFrom tidyr pivot_longer
 #' @importFrom tidyr pivot_wider
 #' @importFrom rlang .data
