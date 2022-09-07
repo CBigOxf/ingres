@@ -1,11 +1,11 @@
 ---
-title: "Using *Ingres* to obtain single-cell probabilistic Boolean networks from single-cell RNA-seq data"
+title: "Using Ingres to obtain single-cell probabilistic Boolean networks from single-cell RNA-seq data"
 output: rmarkdown::html_vignette
 bibliography: vignette.bib
 link-citations: TRUE
 csl: nature.csl
 vignette: >
-  %\VignetteIndexEntry{Using *Ingres* to obtain single-cell probabilistic Boolean networks from single-cell RNA-seq data}
+  %\VignetteIndexEntry{Using Ingres to obtain single-cell probabilistic Boolean networks from single-cell RNA-seq data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

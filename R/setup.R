@@ -4,7 +4,6 @@
     if (!requireNamespace(pkg, quietly = TRUE)) {
       if (interactive()) {
         base::cat("Package '", pkg, "' is not available or could not be loaded. Will now try to install it from Bioconductor (requires a working internet connection):\n")
-
         BiocManager::install(pkg)
 
         # Assert that the package can be successfully loaded
