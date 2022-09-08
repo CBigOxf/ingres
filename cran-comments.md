@@ -4,7 +4,11 @@
 
 0 errors \| 0 warnings \| 0 note
 
-I ran R CMD checks on Windows and Linux and there were no errors, no warnings and no notes. In MacOS the check may fail if the user doesn't install the package 'rgdal' manually first, this is a dependency of Seurat, which is suggested by ingres, not a hard dependency.
+I ran R CMD checks on Windows and Linux and there were no errors, no warnings and no notes. In MacOS the check may fail if the user doesn't install the package 'rgdal' manually first, this is a dependency of Seurat, which is suggested by ingres, not a hard dependency. 
+
+## Preprint
+The in-depth explanation of the purpose and implementation of this package can be found in this pre-print: https://www.biorxiv.org/content/10.1101/2022.09.04.506528v1
+and also in the accompanying vignette.
 
 ## Dependencies from BioConductor
 
