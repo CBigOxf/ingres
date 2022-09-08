@@ -13,7 +13,7 @@ Authors@R:
            "Francesca M.", "Buffa",
            role = "aut",
            email = "francesca.buffa@unibocconi.it",
-           comment = c(ORCID = "https://orcid.org/00000-0003-0409-406X"))
+           comment = c(ORCID = "https://orcid.org/0000-0003-0409-406X"))
      )
 Description: Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions.
 License: GPL (>= 3)
