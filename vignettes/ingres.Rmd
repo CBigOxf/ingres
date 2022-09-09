@@ -146,7 +146,7 @@ This algorithm is designed to integrate multiple interactomes, not necessarily t
 
 VIPER produces a matrix of Normalised Enrichment Scores (NES) per each gene and cell.
 
-```{r viper}
+```{r viper, eval=requireNamespace("aracne.networks")}
 # Using a single regulon for speed
 ing = performViper(ing, aracne.networks::regulonblca)
 ing
