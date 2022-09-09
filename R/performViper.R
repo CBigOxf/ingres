@@ -10,12 +10,12 @@
 #' the \code{viper} slot
 #'
 #' @examples
-#' if(require("aracne.networks")){
-#'     ing = createIngresObjectFromSeurat(
-#'         small_blca_wang, "RNA", "data", network_genes, network
-#'     )
+#' if (require("aracne.networks")) {
+#'   ing = createIngresObjectFromSeurat(
+#'     small_blca_wang, "RNA", "data", network_genes, network
+#'   )
 #'
-#'     performViper(ing, aracne.networks::regulonblca)
+#'   performViper(ing, aracne.networks::regulonblca)
 #' }
 #' @export
 performViper = function(ingres.object, regulon, verbose = F) {

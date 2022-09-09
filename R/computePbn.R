@@ -60,7 +60,8 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
     group_by(.data$node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
     mutate(across(
-      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
+      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0)
+    )) %>%
     pivot_longer(!.data$node, names_to = "cluster") %>%
     pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(counts) %>%
@@ -87,7 +88,8 @@ computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
     group_by(.data$node) %>%
     summarise(across(.cols = tidyselect::everything(), mean)) %>%
     mutate(across(
-      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0))) %>%
+      !.data$node, ~ scales::rescale_mid(.x, to = range, mid = 0)
+    )) %>%
     pivot_longer(!.data$node, names_to = "cell") %>%
     pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(identities) %>%

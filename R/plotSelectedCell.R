@@ -27,16 +27,18 @@ plotSelectedCell = function(ingres.object, seurat.object) {
   optionalPkgs = c("Seurat", "shiny", "plotly")
   for (pkg in optionalPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop(paste0("Package \"", pkg,
-                  "\" needed for this function to work. Please install it."),
-        call. = FALSE
+      stop(paste0(
+        "Package \"", pkg,
+        "\" needed for this function to work. Please install it."
+      ),
+      call. = FALSE
       )
     }
   }
 
   ui = shiny::fillPage(
     shiny::titlePanel("Click on a cell to see its PBN"),
-    shiny:: h4("You can zoom in by dragging the mouse"),
+    shiny::h4("You can zoom in by dragging the mouse"),
     shiny::fillRow(
       plotly::plotlyOutput("plot", height = "90%", width = "100%"),
       shiny::plotOutput("result", height = "90%", width = "100%")
@@ -51,7 +53,8 @@ plotSelectedCell = function(ingres.object, seurat.object) {
     output$plot = plotly::renderPlotly({
       Seurat::HoverLocator(
         plot = p,
-        information = Seurat::FetchData(object = seurat.object, vars = "ident"))
+        information = Seurat::FetchData(object = seurat.object, vars = "ident")
+      )
     })
 
     output$result = shiny::renderPlot({

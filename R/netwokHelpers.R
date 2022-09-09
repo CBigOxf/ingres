@@ -50,7 +50,7 @@ produceBoolnetNetwork = function(network) {
   sep = ","
   tmp_file = withr::local_tempfile(fileext = ".bn")
   network.boolnet.text = network %>%
-    tidygraph::activate('nodes') %>%
+    tidygraph::activate("nodes") %>%
     mutate(
       line1 = case_when(
         # inputs are constant
@@ -201,7 +201,8 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
       signTag = paste0("<data key=\"sign\">", sign, "</data>")
       edgeEndTag = "</edge>"
       result = append(result, c(edgeTag, signTag, edgeEndTag),
-                      after = length(result))
+        after = length(result)
+      )
     }
   }
   close(gin)

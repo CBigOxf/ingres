@@ -6,7 +6,7 @@ ing = createIngresObjectFromSeurat(
 
 viper_results = ing@viper
 
-#keep only the genes in the network to make the file smaller
+# keep only the genes in the network to make the file smaller
 viper_results = viper_results %>%
   select(c(cell, cluster) | any_of(network_genes$symbol))
 usethis::use_data(viper_results, overwrite = TRUE, compress = "xz")
