@@ -2,9 +2,9 @@
 
 ## R CMD check results
 
-0 errors \| 0 warnings \| 2 note
+0 errors \| 0 warnings \| 1 note
 
-I ran R CMD checks on Windows and Linux and there were no errors, no warnings and two notes. In MacOS the check may fail if the user doesn't install the package 'rgdal' manually first, this is a dependency of Seurat, which is suggested by ingres, not a hard dependency.
+I ran R CMD checks on Windows and Linux and there were no errors, no warnings and one note. In MacOS the check may fail if the user doesn't install the package 'rgdal' manually first, this is a dependency of Seurat, which is suggested by ingres, not a hard dependency.
 
 The notes are:
 
@@ -13,12 +13,9 @@ The notes are:
 > New submission
 >
 > Package has a FOSS license but eventually depends on the following package which may restrict use: viper
->
-> Found the following (possibly) invalid URLs: URL: <https://codecov.io/gh/CBigOxf/ingres> (moved to <https://app.codecov.io/gh/CBigOxf/ingres>) From: README.md Status: 200 Message: OK
 
 I can't do anything about viper's license, as there is not an appropriate FOSS substitute.
 
-I have tested the URL and it is valid.
 
 > checking package dependencies ... NOTE Package suggested but not available for checking: 'aracne.networks'
 

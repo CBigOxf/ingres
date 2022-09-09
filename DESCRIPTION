@@ -43,11 +43,10 @@ Imports:
     purrr,
     readr,
     usethis,
-    rlang
+    rlang,
+    Seurat
 Suggests: 
     testthat (>= 3.0.0),
-    Seurat,
-    SeuratObject,
     shiny,
     plotly (>= 4.10.0),
     aracne.networks,

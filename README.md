@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)[![codecov](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg?token=XQHKMZPKEB)](https://codecov.io/gh/CBigOxf/ingres)
+[![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)[![codecov](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg?token=XQHKMZPKEB)](https://app.codecov.io/gh/CBigOxf/ingres)
 <!-- badges: end -->
 
 ***I**nferring Probabilistic Boolean **N**etworks of **G**ene
