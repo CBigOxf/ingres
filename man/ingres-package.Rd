@@ -22,7 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Francesca M. Buffa \email{francesca.buffa@unibocconi.it} (\href{https://orcid.org/00000-0003-0409-406X}{ORCID})
+  \item Francesca M. Buffa \email{francesca.buffa@unibocconi.it} (\href{https://orcid.org/0000-0003-0409-406X}{ORCID})
 }
 
 }

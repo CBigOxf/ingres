@@ -24,10 +24,11 @@ This function is merely a wrapper around the
 designed to suit the ingres workflow and properly prepare the input data.
 }
 \examples{
-ing = createIngresObjectFromSeurat(
-  small_blca_wang, "RNA", "data", network_genes, network
-)
+if(require("aracne.networks")){
+    ing = createIngresObjectFromSeurat(
+        small_blca_wang, "RNA", "data", network_genes, network
+    )
 
-performViper(ing, aracne.networks::regulonblca)
-
+    performViper(ing, aracne.networks::regulonblca)
+}
 }
