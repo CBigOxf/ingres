@@ -1,6 +1,6 @@
 Package: ingres
 Title: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     c(
       person(
@@ -60,4 +60,4 @@ URL: https://github.com/CBigOxf/ingres,
     https://cbigoxf.github.io/ingres/
 BugReports: https://github.com/CBigOxf/ingres/issues
 VignetteBuilder: knitr
-Language:en-GB
+Language: en-GB
