@@ -1,3 +1,10 @@
+## Resubmission
+This is a resubmission. 
+- I have modified the example in 'performViper' to ensure it takes less than 5 seconds.
+- Unfortunately I cannot do anything about viper's license, as I don't have any involvement with its authors and therefore don't have any say in which license they use.
+
+
+## New release
 -   This is a new release.
 
 ## R CMD check results
@@ -35,5 +42,3 @@ The user is instructed in the README to install the BioConductor dependencies, l
 > install.packages("BiocManager")
 > BiocManager::install(c("viper", "AnnotationDbi", "org.Hs.eg.db", "aracne.networks"))
 > ```
-
-## 

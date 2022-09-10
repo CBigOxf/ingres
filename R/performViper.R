@@ -9,22 +9,22 @@
 #' @return An ingres object with the result of the VIPER inference in
 #' the \code{viper} slot
 #'
-#' @examples
-#' if (require("aracne.networks")) {
-#'   ing = createIngresObjectFromSeurat(
+#' @examplesIf require("aracne.networks")
+#' # Subset regulon to speed up example run
+#' regulon = aracne.networks::regulonblca[1:100]
+#' ing = createIngresObjectFromSeurat(
 #'     small_blca_wang, "RNA", "data", network_genes, network
-#'   )
+#' )
+#' performViper(ing, regulon)
 #'
-#'   performViper(ing, aracne.networks::regulonblca)
-#' }
 #' @export
 performViper = function(ingres.object, regulon, verbose = F) {
   expression.matrix = ingres.object@expression
   # translate gene symbols to entrezid
   geneIds = suppressMessages(AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
-    keys = rownames(expression.matrix),
-    column = "ENTREZID", keytype = "SYMBOL",
-    multiVals = "first"
+                                                   keys = rownames(expression.matrix),
+                                                   column = "ENTREZID", keytype = "SYMBOL",
+                                                   multiVals = "first"
   ))
   # remove those not found
   geneIds = geneIds[which(!is.na(geneIds))]
@@ -42,9 +42,9 @@ performViper = function(ingres.object, regulon, verbose = F) {
   # translate back to gene symbols
   geneSymbols = suppressMessages(
     AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
-      keys = colnames(viperMatrix),
-      column = "SYMBOL", keytype = "ENTREZID",
-      multiVals = "first"
+                          keys = colnames(viperMatrix),
+                          column = "SYMBOL", keytype = "ENTREZID",
+                          multiVals = "first"
     )
   )
   colnames(viperMatrix) = geneSymbols

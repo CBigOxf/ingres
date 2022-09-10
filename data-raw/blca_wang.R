@@ -11,7 +11,7 @@ Seurat::VlnPlot(seu, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), n
 Seurat::FeatureScatter(seu, feature1 = "nCount_RNA", feature2 = "percent.mt")
 Seurat::FeatureScatter(seu, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
 
-seu = Seurat::subset(seu, subset = nFeature_RNA > 0 &
+seu = subset(seu, subset = nFeature_RNA > 0 &
   nFeature_RNA < 3000 & percent.mt < 3)
 
 # standard pipeline
@@ -20,7 +20,7 @@ seu %<>% Seurat::NormalizeData() %>%
   Seurat::ScaleData(features = rownames(seu))
 
 # PCA
-seu %<>% Seurat::RunPCA(features = VariableFeatures(.))
+seu %<>% Seurat::RunPCA(features = Seurat::VariableFeatures(.))
 Seurat::DimPlot(seu)
 
 # clustering
@@ -33,7 +33,7 @@ Seurat::DimPlot(seu, reduction = "tsne", pt.size = 1)
 
 # keep only 10 cells from each cluster and remove unneeded slots
 reduced.seu = seu %>%
-  Seurat::subset(downsample = 10) %>%
+  subset(downsample = 10) %>%
   Seurat::DietSeurat(dimreducs = "tsne")
 
 table(Seurat::Idents(seu))
