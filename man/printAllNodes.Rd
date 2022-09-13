@@ -10,6 +10,9 @@ printAllNodes(network)
 \arguments{
 \item{network}{The network which nodes will be printed.}
 }
+\value{
+No return value, called only to print into the output.
+}
 \description{
 Print all nodes in a network
 For testing and checks purposes.

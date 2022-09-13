@@ -4,9 +4,9 @@
 \name{ingres-package}
 \alias{ingres-package}
 \alias{_PACKAGE}
-\title{ingres: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores}
+\title{ingres: Infer Gene Probabilistic Boolean Networks from Single-Cell Data}
 \description{
-Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions.
+Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using 'VIPER', and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original Boolean functions. For more information, refer to the preprint: Victori and Buffa (2022) <doi:10.1101/2022.09.04.506528>.
 }
 \seealso{
 Useful links:

@@ -15,6 +15,9 @@ created with the same dataset as the ingres object. Ideally, this object
 was used to create the ingres object through
 \code{\link{createIngresObjectFromSeurat}}.}
 }
+\value{
+No return value, called only to launch the Shiny app.
+}
 \description{
 Launches a Shiny app with an interactive tSNE plot from a Seurat object. When
 a cell is clicked, the PBN for that cell is plotted side by side
@@ -22,13 +25,12 @@ with the tSNE plot.
 Internally, it uses \code{\link{cellPbnPlot}} on the selected cell.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ing = createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
 ing@viper = viper_results
 ing = computePbnBySingleCell(ing)
 plotSelectedCell(ing, small_blca_wang)
-}
-
+\dontshow{\}) # examplesIf}
 }

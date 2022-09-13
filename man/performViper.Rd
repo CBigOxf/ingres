@@ -4,7 +4,7 @@
 \alias{performViper}
 \title{Perform VIPER}
 \usage{
-performViper(ingres.object, regulon, verbose = F)
+performViper(ingres.object, regulon, verbose = FALSE)
 }
 \arguments{
 \item{ingres.object}{An ingres object.}
@@ -28,7 +28,7 @@ designed to suit the ingres workflow and properly prepare the input data.
 # Subset regulon to speed up example run
 regulon = aracne.networks::regulonblca[1:100]
 ing = createIngresObjectFromSeurat(
-    small_blca_wang, "RNA", "data", network_genes, network
+  small_blca_wang, "RNA", "data", network_genes, network
 )
 performViper(ing, regulon)
 \dontshow{\}) # examplesIf}

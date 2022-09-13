@@ -26,8 +26,21 @@ An \code{ingres} object.
 Create a new \code{ingres} object.
 }
 \examples{
-\dontrun{
-ing = createIngresObject(exp, idents, network.genes, network)
-}
+# Get expression matrix from small_blca_wang for convenience, but it can be
+# any single-cell expression matrix, from any source. Same for idents.
+expression.matrix =
+  as.matrix(Seurat::GetAssayData(
+    small_blca_wang,
+    assay = "RNA", slot = "data"
+  ))
+
+idents = data.frame(
+  cell = names(Seurat::Idents(small_blca_wang)),
+  cluster = as.character(Seurat::Idents(small_blca_wang)),
+  check.names = FALSE
+)
+
+ing = createIngresObject(expression.matrix, idents, network_genes, network)
+ing
 
 }

@@ -12,15 +12,15 @@
 #' was used to create the ingres object through
 #' \code{\link{createIngresObjectFromSeurat}}.
 #'
-#' @examples
-#' \dontrun{
+#' @return No return value, called only to launch the Shiny app.
+#'
+#' @examplesIf interactive()
 #' ing = createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
 #' ing@viper = viper_results
 #' ing = computePbnBySingleCell(ing)
 #' plotSelectedCell(ing, small_blca_wang)
-#' }
 #'
 #' @export
 plotSelectedCell = function(ingres.object, seurat.object) {

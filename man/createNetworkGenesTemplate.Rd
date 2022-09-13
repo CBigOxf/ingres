@@ -10,7 +10,7 @@ the process. If the gene nodes are correct gene symbols, then modification
 is not needed and the returned data frame can be directly passed to
 the ingres constructors.}
 \usage{
-createNetworkGenesTemplate(network, dir = getwd(), store = T, modify = T)
+createNetworkGenesTemplate(network, dir = getwd(), store = TRUE, modify = TRUE)
 }
 \arguments{
 \item{network}{A tidygraph network.}
@@ -35,8 +35,8 @@ is not needed and the returned data frame can be directly passed to
 the ingres constructors.
 }
 \examples{
-\dontrun{
-createNetworkGenesTemplate(network, dir = dir)
-}
+tmp = tempdir()
+createNetworkGenesTemplate(network, dir = tmp)
+file.remove(paste(tmp, "/networkGenes.csv")) # cleanup
 
 }

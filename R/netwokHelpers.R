@@ -99,13 +99,13 @@ produceBoolnetNetwork = function(network) {
 #' @return The template data frame.
 #'
 #' @examples
-#' \dontrun{
-#' createNetworkGenesTemplate(network, dir = dir)
-#' }
+#' tmp = tempdir()
+#' createNetworkGenesTemplate(network, dir = tmp)
+#' file.remove(paste(tmp, "/networkGenes.csv")) # cleanup
 #'
 #' @export
 createNetworkGenesTemplate = function(network, dir = getwd(),
-                                      store = T, modify = T) {
+                                      store = TRUE, modify = TRUE) {
   networkGenes = network %>%
     tidygraph::activate("nodes") %>%
     as_tibble() %>%
@@ -218,6 +218,8 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
 #' For testing and checks purposes.
 #'
 #' @param network The network which nodes will be printed.
+#'
+#' @return No return value, called only to print into the output.
 #'
 #' @examples
 #' printAllNodes(network)

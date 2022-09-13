@@ -1,5 +1,5 @@
 Package: ingres
-Title: Inferring Probabilistic Boolean Networks of Gene Regulation Using Protein Activity Enrichment Scores
+Title: Infer Gene Probabilistic Boolean Networks from Single-Cell Data
 Version: 1.0.0
 Authors@R: 
     c(
@@ -15,7 +15,13 @@ Authors@R:
            email = "francesca.buffa@unibocconi.it",
            comment = c(ORCID = "https://orcid.org/0000-0003-0409-406X"))
      )
-Description: Given a gene regulatory boolean network and a RNA-seq dataset, this package computes protein activity normalised enrichment scores using VIPER, and then produces a probabilistic network using the scores as probabilities for fixed node activation or deactivation, in addition to the original boolean functions.
+Description: Given a gene regulatory boolean network and a RNA-seq dataset, 
+    this package computes protein activity normalised enrichment scores 
+    using 'VIPER', and then produces a probabilistic network using the scores 
+    as probabilities for fixed node activation or deactivation, 
+    in addition to the original Boolean functions.
+    For more information, refer to the preprint: 
+    Victori and Buffa (2022) <doi:10.1101/2022.09.04.506528>.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

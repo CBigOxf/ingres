@@ -1,3 +1,13 @@
+## Second resubmission
+- I have reduced the length of the title to less than 65 characters.
+- I have fixed the format of package names, software names and APIs.
+- I have added the reference to our preprint to the DESCRIPTION.
+- I have added a \value tag to plotSelectedCell.Rd and printAllNodes.Rd
+- I have replaced T and F with TRUE and FALSE.
+- I have replaced \dontrun with \donttest, or changed the examples so they can
+  be run in any circumstances.
+
+
 ## Resubmission
 This is a resubmission. 
 - I have modified the example in 'performViper' to ensure it takes less than 5 seconds.
