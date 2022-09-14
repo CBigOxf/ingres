@@ -3,10 +3,10 @@
 
 # ingres
 
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)[![codecov](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg?token=XQHKMZPKEB)](https://app.codecov.io/gh/CBigOxf/ingres)
-<!-- badges: end -->
+[![CRAN](https://www.r-pkg.org/badges/version/ingres?color=green)](https://cran.r-project.org/package=ingres)
+[![codecov](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg?token=XQHKMZPKEB)](https://app.codecov.io/gh/CBigOxf/ingres)
+[![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)
+[![doi](https://img.shields.io/badge/doi-10.1101/2022.09.04.506528-yellow.svg)](https://doi.org/10.1101/2022.09.04.506528)
 
 ***I**nferring Probabilistic Boolean **N**etworks of **G**ene
 **R**egulation Using Protein Activity **E**nrichment **S**cores*
@@ -19,7 +19,13 @@ the original boolean functions.
 
 ## Installation
 
-You can install the development version of **ingres** with:
+You can install **ingres** from CRAN:
+
+``` r
+install.packages("ingres")
+```
+
+Or you can install the development version of **ingres** with:
 
 ``` r
 # install.packages("devtools")
