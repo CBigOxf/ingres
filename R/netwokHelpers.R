@@ -99,9 +99,7 @@ produceBoolnetNetwork = function(network) {
 #' @return The template data frame.
 #'
 #' @examples
-#' tmp = tempdir()
-#' createNetworkGenesTemplate(network, dir = tmp)
-#' file.remove(paste(tmp, "/networkGenes.csv")) # cleanup
+#' createNetworkGenesTemplate(network, store = FALSE)
 #'
 #' @export
 createNetworkGenesTemplate = function(network, dir = getwd(),

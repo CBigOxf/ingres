@@ -1,7 +1,7 @@
 # createNetworkGenesTemplate correctly returns the template file
 
     Code
-      createNetworkGenesTemplate(network, store = F, modify = F)
+      createNetworkGenesTemplate(network, store = FALSE, modify = FALSE)
     Output
       # A tibble: 25 x 2
          node     symbol  
@@ -22,7 +22,7 @@
 
     Code
       ginmlToGraphml(system.file("extdata", "example_ginsim.zginml", package = "ingres"),
-      dest = withr::local_tempfile(fileext = ".graphml"))
+      dest = tempfile(fileext = ".graphml"))
     Output
         [1] "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">"
         [2] "<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>"                            

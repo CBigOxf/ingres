@@ -35,8 +35,6 @@ is not needed and the returned data frame can be directly passed to
 the ingres constructors.
 }
 \examples{
-tmp = tempdir()
-createNetworkGenesTemplate(network, dir = tmp)
-file.remove(paste(tmp, "/networkGenes.csv")) # cleanup
+createNetworkGenesTemplate(network, store = FALSE)
 
 }

@@ -31,7 +31,7 @@ test_that("produceBoolnetNetwork converts to Boolnet object correctly", {
 test_that("createNetworkGenesTemplate correctly creates the template file", {
   createTest = function() {
     tempdir = tempdir()
-    createNetworkGenesTemplate(network, dir = tempdir, store = T, modify = F)
+    createNetworkGenesTemplate(network, dir = tempdir, store = TRUE, modify = FALSE)
     paste0(tempdir, "/networkGenes.csv")
   }
 
@@ -39,28 +39,31 @@ test_that("createNetworkGenesTemplate correctly creates the template file", {
   skip_on_cran()
   skip_on_ci()
 
-  expect_snapshot_file(createTest(), "networkGenes.csv", cran = F)
+  expect_snapshot_file(createTest(), "networkGenes.csv", cran = FALSE)
 })
 
 test_that("createNetworkGenesTemplate correctly returns the template file", {
   expect_snapshot(
-    createNetworkGenesTemplate(network, store = F, modify = F),
-    cran = T
+    createNetworkGenesTemplate(network, store = FALSE, modify = FALSE),
+    cran = FALSE
   )
 })
 
 test_that("ginmlToGraphml correctly returns a graphml file as a vector", {
+  skip_on_cran()
+  skip_on_ci()
   expect_snapshot(
     ginmlToGraphml(
       system.file("extdata", "example_ginsim.zginml", package = "ingres"),
-      dest =
-        withr::local_tempfile(fileext = ".graphml")
+      dest = tempfile(fileext = ".graphml")
     ),
-    cran = T
+    cran = FALSE
   )
 })
 
 test_that("ginmlToGraphml correctly creates a graphml file", {
+  skip_on_cran()
+  skip_on_ci()
   createGraphml = function() {
     path = tempfile(fileext = ".graphml")
     ginmlToGraphml(
@@ -70,9 +73,7 @@ test_that("ginmlToGraphml correctly creates a graphml file", {
     return(path)
   }
   announce_snapshot_file("snapshot.graphml")
-  skip_on_cran()
-  skip_on_ci()
-  expect_snapshot_file(createGraphml(), name = "snapshot.graphml", cran = F)
+  expect_snapshot_file(createGraphml(), name = "snapshot.graphml", cran = FALSE)
 })
 
 test_that("ginmlToGraphml recognises given fates", {
@@ -96,5 +97,5 @@ test_that("ginmlToGraphml recognises given fates", {
 })
 
 test_that("printAllNodes correctly prints a network", {
-  expect_snapshot(printAllNodes(network), cran = T)
+  expect_snapshot(printAllNodes(network), cran = TRUE)
 })
