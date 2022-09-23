@@ -9,18 +9,22 @@
 #' createExampleIngresObject()
 #' createExampleIngresObjectWithViper()
 createExampleIngresObject <- function() {
+  data("small_blca_wang")
+  data("network")
+  data("network_genes")
   obj <- createIngresObjectFromSeurat(
-    ingres::small_blca_wang,
+    small_blca_wang,
     "RNA", "data",
-    ingres::network_genes,
-    ingres::network
+    network_genes,
+    network
   )
 }
 
 #' @rdname createExampleIngresObject
 createExampleIngresObjectWithViper <- function() {
   ing <- createExampleIngresObject()
-  ing@viper <- ingres::viper_results
+  data("viper_results")
+  ing@viper <- viper_results
   return(ing)
 }
 

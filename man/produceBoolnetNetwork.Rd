@@ -29,6 +29,6 @@ ing <- computePbnByCluster(ing)
 # Produce a network for an arbitrary cluster
 network <- produceNetworkForCluster(ing, "1")
 
-produceBoolnetNetwork(ingres::network)
+produceBoolnetNetwork(network)
 
 }

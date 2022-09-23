@@ -1,7 +1,7 @@
 # createNetworkGenesTemplate correctly returns the template file
 
     Code
-      createNetworkGenesTemplate(ingres::network, store = FALSE, modify = FALSE)
+      createNetworkGenesTemplate(network, store = FALSE, modify = FALSE)
     Output
       # A tibble: 25 x 2
          node     symbol  
@@ -351,7 +351,7 @@
 # printAllNodes correctly prints a network
 
     Code
-      printAllNodes(ingres::network)
+      printAllNodes(network)
     Output
       # A tibble: 30 x 3
          kind  rule                                                              id   
