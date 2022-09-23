@@ -22,7 +22,7 @@ Description: Given a gene regulatory boolean network and a RNA-seq dataset,
     in addition to the original Boolean functions.
     For more information, refer to the preprint: 
     Victori and Buffa (2022) <doi:10.1101/2022.09.04.506528>.
-License: GPL (>= 3)
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
