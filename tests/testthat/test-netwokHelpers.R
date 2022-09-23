@@ -1,11 +1,11 @@
 test_that("graphmlAsTidy creates a valid tidygraph object", {
-  tidyg = graphmlAsTidy(
+  tidyg <- graphmlAsTidy(
     system.file("extdata", "example_network.graphml", package = "ingres")
   )
 
   expect_s3_class(tidyg, "tbl_graph")
 
-  tb = tidyg %>%
+  tb <- tidyg %>%
     tidygraph::activate("nodes") %>%
     tidygraph::as_tibble()
 
@@ -15,11 +15,11 @@ test_that("graphmlAsTidy creates a valid tidygraph object", {
 })
 
 test_that("produceBoolnetNetwork converts to Boolnet object correctly", {
-  network = ingresAfterViper %>%
+  network <- ingresAfterViper %>%
     computePbnByCluster() %>%
     produceNetworkForCluster("1")
 
-  bn = produceBoolnetNetwork(network)
+  bn <- produceBoolnetNetwork(network)
 
   expect_s3_class(bn, "ProbabilisticBooleanNetwork")
 
@@ -29,8 +29,8 @@ test_that("produceBoolnetNetwork converts to Boolnet object correctly", {
 })
 
 test_that("createNetworkGenesTemplate correctly creates the template file", {
-  createTest = function() {
-    tempdir = tempdir()
+  createTest <- function() {
+    tempdir <- tempdir()
     createNetworkGenesTemplate(network, dir = tempdir, store = TRUE, modify = FALSE)
     paste0(tempdir, "/networkGenes.csv")
   }
@@ -64,8 +64,8 @@ test_that("ginmlToGraphml correctly returns a graphml file as a vector", {
 test_that("ginmlToGraphml correctly creates a graphml file", {
   skip_on_cran()
   skip_on_ci()
-  createGraphml = function() {
-    path = tempfile(fileext = ".graphml")
+  createGraphml <- function() {
+    path <- tempfile(fileext = ".graphml")
     ginmlToGraphml(
       system.file("extdata", "example_ginsim.zginml", package = "ingres"),
       dest = path
@@ -77,16 +77,16 @@ test_that("ginmlToGraphml correctly creates a graphml file", {
 })
 
 test_that("ginmlToGraphml recognises given fates", {
-  networkFates = c("Proliferation", "Apoptosis")
-  path = withr::local_tempfile(fileext = ".graphml")
-  graphml = ginmlToGraphml(
+  networkFates <- c("Proliferation", "Apoptosis")
+  path <- withr::local_tempfile(fileext = ".graphml")
+  graphml <- ginmlToGraphml(
     system.file("extdata", "example_ginsim.zginml", package = "ingres"),
     dest = path,
     fates = networkFates
   )
 
-  tn = graphmlAsTidy(path)
-  fateNodes = tn %>%
+  tn <- graphmlAsTidy(path)
+  fateNodes <- tn %>%
     tidygraph::activate("nodes") %>%
     tidygraph::as_tibble() %>%
     filter(kind == "fate")

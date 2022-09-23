@@ -15,16 +15,16 @@
 #' @return No return value, called only to launch the Shiny app.
 #'
 #' @examplesIf interactive()
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
-#' ing = computePbnBySingleCell(ing)
+#' ing@viper <- viper_results
+#' ing <- computePbnBySingleCell(ing)
 #' plotSelectedCell(ing, small_blca_wang)
 #'
 #' @export
-plotSelectedCell = function(ingres.object, seurat.object) {
-  optionalPkgs = c("Seurat", "shiny", "plotly")
+plotSelectedCell <- function(ingres.object, seurat.object) {
+  optionalPkgs <- c("Seurat", "shiny", "plotly")
   for (pkg in optionalPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(paste0(
@@ -36,7 +36,7 @@ plotSelectedCell = function(ingres.object, seurat.object) {
     }
   }
 
-  ui = shiny::fillPage(
+  ui <- shiny::fillPage(
     shiny::titlePanel("Click on a cell to see its PBN"),
     shiny::h4("You can zoom in by dragging the mouse"),
     shiny::fillRow(
@@ -46,29 +46,29 @@ plotSelectedCell = function(ingres.object, seurat.object) {
     padding = 10
   )
 
-  server = function(input, output) {
-    p = Seurat::DimPlot(seurat.object, reduction = "tsne", pt.size = 1)
-    p.data = p$data %>% select(-3)
+  server <- function(input, output) {
+    p <- Seurat::DimPlot(seurat.object, reduction = "tsne", pt.size = 1)
+    p.data <- p$data %>% select(-3)
 
-    output$plot = plotly::renderPlotly({
+    output$plot <- plotly::renderPlotly({
       Seurat::HoverLocator(
         plot = p,
         information = Seurat::FetchData(object = seurat.object, vars = "ident")
       )
     })
 
-    output$result = shiny::renderPlot({
-      d = plotly::event_data("plotly_click")
+    output$result <- shiny::renderPlot({
+      d <- plotly::event_data("plotly_click")
       if (!is.null(d)) {
-        dx = d$x
-        dy = d$y
-        cellrow = p.data %>%
+        dx <- d$x
+        dy <- d$y
+        cellrow <- p.data %>%
           filter(near(p.data[[1]], dx) & near(p.data[[2]], dy)) %>%
           tibble::rownames_to_column("cell")
         cellPbnPlot(ingres.object, cellrow$cell)
       }
     })
   }
-  app = shiny::shinyApp(ui, server)
+  app <- shiny::shinyApp(ui, server)
   return(shiny::runApp(app))
 }

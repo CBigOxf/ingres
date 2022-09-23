@@ -1,8 +1,8 @@
 test_that("The plots produced match the snapshots", {
-  obj = ingresAfterViper
+  obj <- ingresAfterViper
   obj %<>% computePbnByCluster() %>% computePbnBySingleCell()
-  cell.id = "sample1@ACAGCTAAGATCCCGC-1"
-  cluster.id = "1"
+  cell.id <- "sample1@ACAGCTAAGATCCCGC-1"
+  cluster.id <- "1"
   expect_snapshot_plot(
     "cellPbnPlotSnap",
     obj %>% cellPbnPlot(cell.id), 10, 15

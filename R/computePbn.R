@@ -19,34 +19,34 @@
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnByCluster(ing)
+#' ing <- computePbnByCluster(ing)
 #' head(ing@cluster.pbn)
 #'
-#' ing = computePbnBySingleCell(ing)
+#' ing <- computePbnBySingleCell(ing)
 #' head(ing@single.cell.pbn)
 #'
 #' # Restrict range to (-0.5, 0.5)
-#' ing = computePbnByCluster(ing, range = c(-0.5, 0.5))
+#' ing <- computePbnByCluster(ing, range = c(-0.5, 0.5))
 #' head(ing@cluster.pbn)
 #'
-#' ing = computePbnBySingleCell(ing, range = c(-0.5, 0.5))
+#' ing <- computePbnBySingleCell(ing, range = c(-0.5, 0.5))
 #' head(ing@single.cell.pbn)
 #'
 #' @export
-computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
+computePbnByCluster <- function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
-  viper.result = suppressMessages(tibble(ingres.object@viper,
+  viper.result <- suppressMessages(tibble(ingres.object@viper,
     .name_repair = "unique"
   )) # ensure unique, non empty column names
-  counts = viper.result %>%
+  counts <- viper.result %>%
     select(c(1, 2)) %>%
     count(.data$cluster)
-  result = viper.result %>%
+  result <- viper.result %>%
     select(-1) %>%
     group_by(.data$cluster) %>%
     summarise(across(
@@ -66,20 +66,20 @@ computePbnByCluster = function(ingres.object, range = c(-1, 1)) {
     pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(counts) %>%
     relocate(n, .after = .data$cluster)
-  ingres.object@cluster.pbn = result
+  ingres.object@cluster.pbn <- result
   ingres.object
 }
 
 #' @describeIn computePbnByCluster
 #' Compute a Probabilistic Boolean Network (PBN) for each cell
 #' @export
-computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
+computePbnBySingleCell <- function(ingres.object, range = c(-1, 1)) {
   checkRange(range)
-  viper.result = suppressMessages(tibble(ingres.object@viper,
+  viper.result <- suppressMessages(tibble(ingres.object@viper,
     .name_repair = "unique"
   )) # ensure unique, non empty column names
-  identities = viper.result %>% select(c(1, 2))
-  result = viper.result %>%
+  identities <- viper.result %>% select(c(1, 2))
+  result <- viper.result %>%
     select(-2) %>%
     pivot_longer(!.data$cell, names_to = "symbol") %>%
     pivot_wider(names_from = .data$cell, values_from = .data$value) %>%
@@ -94,11 +94,11 @@ computePbnBySingleCell = function(ingres.object, range = c(-1, 1)) {
     pivot_wider(names_from = .data$node, values_from = .data$value) %>%
     merge(identities) %>%
     relocate(.data$cluster, .after = .data$cell)
-  ingres.object@single.cell.pbn = result
+  ingres.object@single.cell.pbn <- result
   ingres.object
 }
 
-checkRange = function(range) {
+checkRange <- function(range) {
   if (!is.numeric(range)) {
     stop("'range' must be a numeric vector")
   }

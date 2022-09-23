@@ -1,5 +1,5 @@
-.onLoad = function(libname, pkgname) {
-  biocPkgs = c("viper", "AnnotationDbi", "org.Hs.eg.db")
+.onLoad <- function(libname, pkgname) {
+  biocPkgs <- c("viper", "AnnotationDbi", "org.Hs.eg.db")
   for (pkg in biocPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(paste(

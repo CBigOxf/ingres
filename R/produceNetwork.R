@@ -8,19 +8,19 @@
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnByCluster(ing)
+#' ing <- computePbnByCluster(ing)
 #'
-#' network = produceNetworkForCluster(ing, "1")
+#' network <- produceNetworkForCluster(ing, "1")
 #' print(network)
 #'
 #' @export
-produceNetworkForCluster = function(ingres.object, cluster.id) {
-  pbn.data = ingres.object@cluster.pbn %>%
+produceNetworkForCluster <- function(ingres.object, cluster.id) {
+  pbn.data <- ingres.object@cluster.pbn %>%
     filter(.data$cluster == cluster.id) %>%
     select(-c(1, 2)) %>%
     pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
@@ -37,19 +37,19 @@ produceNetworkForCluster = function(ingres.object, cluster.id) {
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnBySingleCell(ing)
+#' ing <- computePbnBySingleCell(ing)
 #'
-#' network = produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
+#' network <- produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
 #' print(network)
 #'
 #' @export
-produceNetworkForCell = function(ingres.object, cell.id) {
-  pbn.data = ingres.object@single.cell.pbn %>%
+produceNetworkForCell <- function(ingres.object, cell.id) {
+  pbn.data <- ingres.object@single.cell.pbn %>%
     filter(.data$cell == cell.id) %>%
     select(-c(1, 2)) %>%
     pivot_longer(tidyselect::everything(), names_to = "id", values_to = "p")
@@ -58,8 +58,8 @@ produceNetworkForCell = function(ingres.object, cell.id) {
 }
 
 # for internal use only
-produceNetwork = function(network, pbn.data) {
-  network = network %>%
+produceNetwork <- function(network, pbn.data) {
+  network <- network %>%
     tidygraph::activate("nodes") %>%
     left_join(pbn.data, by = "id") %>%
     mutate(fixed_p = ifelse(.data$p == 0,

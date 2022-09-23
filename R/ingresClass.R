@@ -12,7 +12,7 @@ setOldClass("tbl_graph")
 #' @slot network \code{tbl_graph}.
 #'
 #' @return An \code{ingres} object.
-ingres = setClass("ingres", slots = list(
+ingres <- setClass("ingres", slots = list(
   expression = "matrix",
   idents = "data.frame",
   network.genes = "data.frame",
@@ -22,16 +22,16 @@ ingres = setClass("ingres", slots = list(
   network = "tbl_graph"
 ))
 
-print.ingres = function(object) {
-  ncells = ncol(object@expression)
-  nfeat = nrow(object@expression)
-  nclusters = length(unique(object@idents$cluster))
-  nnodes = object@network %>%
+print.ingres <- function(object) {
+  ncells <- ncol(object@expression)
+  nfeat <- nrow(object@expression)
+  nclusters <- length(unique(object@idents$cluster))
+  nnodes <- object@network %>%
     tidygraph::activate("nodes") %>%
     length()
-  viper = nrow(object@viper) > 0
-  pbnCell = nrow(object@single.cell.pbn) > 0
-  pbnCluster = nrow(object@cluster.pbn) > 0
+  viper <- nrow(object@viper) > 0
+  pbnCell <- nrow(object@single.cell.pbn) > 0
+  pbnCluster <- nrow(object@cluster.pbn) > 0
 
   cat("An ingres object\n")
   cat("--------------------\n")
@@ -66,8 +66,8 @@ setMethod("show", "ingres", print.ingres)
 #' )
 #'
 #' @export
-createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
-                                        slot = "data", network.genes, network) {
+createIngresObjectFromSeurat <- function(seurat.object, seurat.assay = "RNA",
+                                         slot = "data", network.genes, network) {
   if (!requireNamespace("Seurat", quietly = TRUE)) {
     stop(
       "Package \"Seurat\" needed for this function to work. Please install it.",
@@ -75,10 +75,10 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
     )
   }
 
-  expression.matrix = as.matrix(
+  expression.matrix <- as.matrix(
     Seurat::GetAssayData(seurat.object, assay = seurat.assay, slot = slot)
   )
-  idents = data.frame(
+  idents <- data.frame(
     cell = names(Seurat::Idents(seurat.object)),
     cluster = as.character(Seurat::Idents(seurat.object)),
     check.names = FALSE
@@ -102,23 +102,23 @@ createIngresObjectFromSeurat = function(seurat.object, seurat.assay = "RNA",
 #' @examples
 #' # Get expression matrix from small_blca_wang for convenience, but it can be
 #' # any single-cell expression matrix, from any source. Same for idents.
-#' expression.matrix =
+#' expression.matrix <-
 #'   as.matrix(Seurat::GetAssayData(
 #'     small_blca_wang,
 #'     assay = "RNA", slot = "data"
 #'   ))
 #'
-#' idents = data.frame(
+#' idents <- data.frame(
 #'   cell = names(Seurat::Idents(small_blca_wang)),
 #'   cluster = as.character(Seurat::Idents(small_blca_wang)),
 #'   check.names = FALSE
 #' )
 #'
-#' ing = createIngresObject(expression.matrix, idents, network_genes, network)
+#' ing <- createIngresObject(expression.matrix, idents, network_genes, network)
 #' ing
 #'
 #' @export
-createIngresObject =
+createIngresObject <-
   function(expression.matrix, idents, network.genes, network) {
     ingres(
       expression = expression.matrix, idents = idents,

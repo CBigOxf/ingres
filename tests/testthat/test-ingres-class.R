@@ -1,5 +1,5 @@
 test_that("object is created from Seurat object", {
-  obj = createIngresObjectFromSeurat(
+  obj <- createIngresObjectFromSeurat(
     small_blca_wang,
     "RNA", "scale.data",
     network_genes,

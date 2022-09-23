@@ -1,5 +1,5 @@
-createExampleIngresObject = function() {
-  obj = createIngresObjectFromSeurat(
+createExampleIngresObject <- function() {
+  obj <- createIngresObjectFromSeurat(
     small_blca_wang,
     "RNA", "data",
     network_genes,
@@ -7,10 +7,10 @@ createExampleIngresObject = function() {
   )
 }
 
-createExampleIngresObjectWithViper = function() {
-  ing = createExampleIngresObject()
-  ing@viper = viper_results
+createExampleIngresObjectWithViper <- function() {
+  ing <- createExampleIngresObject()
+  ing@viper <- viper_results
   return(ing)
 }
 
-ingresAfterViper = createExampleIngresObjectWithViper()
+ingresAfterViper <- createExampleIngresObjectWithViper()

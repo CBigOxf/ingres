@@ -11,16 +11,16 @@
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnBySingleCell(ing)
+#' ing <- computePbnBySingleCell(ing)
 #' cellPbnPlot(ing, "sample1@ACAGCTAAGATCCCGC-1")
 #'
 #' @export
-cellPbnPlot = function(ingres.object, cell.id) {
+cellPbnPlot <- function(ingres.object, cell.id) {
   networkPlot(
     produceNetworkForCell(ingres.object, cell.id),
     paste0("PBN for cell ", cell.id)
@@ -40,16 +40,16 @@ cellPbnPlot = function(ingres.object, cell.id) {
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnByCluster(ing)
+#' ing <- computePbnByCluster(ing)
 #' clusterPbnPlot(ing, "1")
 #'
 #' @export
-clusterPbnPlot = function(ingres.object, cluster.id) {
+clusterPbnPlot <- function(ingres.object, cluster.id) {
   networkPlot(
     produceNetworkForCluster(ingres.object, cluster.id),
     paste0("PBN for cluster ", cluster.id)
@@ -57,8 +57,8 @@ clusterPbnPlot = function(ingres.object, cluster.id) {
 }
 
 # for internal use only
-networkPlot = function(network, title) {
-  plot.data = network %>%
+networkPlot <- function(network, title) {
+  plot.data <- network %>%
     tidygraph::activate("nodes") %>%
     mutate(print.id = stringr::str_replace(id, "_", "\n")) %>%
     mutate(
@@ -66,7 +66,7 @@ networkPlot = function(network, title) {
         paste0(.data$print.id, "\np=", round(.data$fixed_p, digits = 2))
     )
 
-  p = ggraph(plot.data, layout = "stress") +
+  p <- ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
       start_cap = circle(12, "mm"), end_cap = circle(12, "mm"),
       arrow = arrow(
@@ -107,17 +107,17 @@ networkPlot = function(network, title) {
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnByCluster(ing)
+#' ing <- computePbnByCluster(ing)
 #' clusterGenesHeatmap(ing)
 #'
 #' @export
-clusterGenesHeatmap = function(ingres.object) {
-  p = ingres.object@cluster.pbn %>%
+clusterGenesHeatmap <- function(ingres.object) {
+  p <- ingres.object@cluster.pbn %>%
     select(-2) %>%
     pivot_longer(!.data$cluster, names_to = "node", values_to = "p") %>%
     ggplot(aes(x = .data$node, y = .data$cluster)) +
@@ -142,17 +142,17 @@ clusterGenesHeatmap = function(ingres.object) {
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
-#' ing = computePbnBySingleCell(ing)
+#' ing <- computePbnBySingleCell(ing)
 #' cellGenesHeatmap(ing)
 #'
 #' @export
-cellGenesHeatmap = function(ingres.object) {
-  p = ingres.object@single.cell.pbn %>%
+cellGenesHeatmap <- function(ingres.object) {
+  p <- ingres.object@single.cell.pbn %>%
     pivot_longer(!c(.data$cell, .data$cluster),
       names_to = "node", values_to = "p"
     ) %>%

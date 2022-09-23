@@ -7,12 +7,12 @@
 #' @return A tidygraph object
 #'
 #' @examples
-#' filename =
+#' filename <-
 #'   system.file("extdata", "example_network.graphml", package = "ingres")
 #' graphmlAsTidy(filename)
 #'
 #' @export
-graphmlAsTidy = function(filename) {
+graphmlAsTidy <- function(filename) {
   tidygraph::as_tbl_graph(igraph::read_graph(filename, format = "graphml")) %>%
     filter(id != "null")
 }
@@ -26,30 +26,30 @@ graphmlAsTidy = function(filename) {
 #'
 #' @examples
 #' # Create an ingres object with viper slot
-#' ing = createIngresObjectFromSeurat(
+#' ing <- createIngresObjectFromSeurat(
 #'   small_blca_wang, "RNA", "data", network_genes, network
 #' )
-#' ing@viper = viper_results
+#' ing@viper <- viper_results
 #'
 #' # Compute PBNs by cluster
-#' ing = computePbnByCluster(ing)
+#' ing <- computePbnByCluster(ing)
 #'
 #' # Produce a network for an arbitrary cluster
-#' network = produceNetworkForCluster(ing, "1")
+#' network <- produceNetworkForCluster(ing, "1")
 #'
 #' produceBoolnetNetwork(network)
 #'
 #' @export
-produceBoolnetNetwork = function(network) {
+produceBoolnetNetwork <- function(network) {
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
     stop("Package \"BoolNet\" needed for this function to work. Please install it.",
       call. = FALSE
     )
   }
 
-  sep = ","
-  tmp_file = withr::local_tempfile(fileext = ".bn")
-  network.boolnet.text = network %>%
+  sep <- ","
+  tmp_file <- withr::local_tempfile(fileext = ".bn")
+  network.boolnet.text <- network %>%
     tidygraph::activate("nodes") %>%
     mutate(
       line1 = case_when(
@@ -79,7 +79,7 @@ produceBoolnetNetwork = function(network) {
     purrr::prepend("targets, factors, probabilities") %>%
     readr::write_lines(tmp_file)
 
-  network = BoolNet::loadNetwork(tmp_file)
+  network <- BoolNet::loadNetwork(tmp_file)
   return(network)
 }
 
@@ -102,9 +102,9 @@ produceBoolnetNetwork = function(network) {
 #' createNetworkGenesTemplate(network, store = FALSE)
 #'
 #' @export
-createNetworkGenesTemplate = function(network, dir = getwd(),
-                                      store = TRUE, modify = TRUE) {
-  networkGenes = network %>%
+createNetworkGenesTemplate <- function(network, dir = getwd(),
+                                       store = TRUE, modify = TRUE) {
+  networkGenes <- network %>%
     tidygraph::activate("nodes") %>%
     as_tibble() %>%
     filter(.data$kind == "gene") %>%
@@ -112,7 +112,7 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
     mutate(symbol = .data$node)
 
   if (store) {
-    path = paste0(dir, "/networkGenes.csv")
+    path <- paste0(dir, "/networkGenes.csv")
     readr::write_csv(networkGenes, path)
     if (modify) {
       usethis::edit_file(path)
@@ -134,17 +134,17 @@ createNetworkGenesTemplate = function(network, dir = getwd(),
 #' @return A vector with the lines of the newly created GraphML file.
 #'
 #' @examples
-#' filename =
+#' filename <-
 #'   system.file("extdata", "example_ginsim.zginml", package = "ingres")
 #' head(ginmlToGraphml(filename))
 #'
 #' @export
-ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
+ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
   if (is.null(dest)) {
-    dest = paste0(unlist(strsplit(ginzipFile, split = ".zginml")), ".graphml")
+    dest <- paste0(unlist(strsplit(ginzipFile, split = ".zginml")), ".graphml")
   }
 
-  header = c(
+  header <- c(
     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\">",
     "<key attr.name=\"kind\" attr.type=\"string\" for=\"node\" id=\"kind\"/>",
     "<key attr.name=\"rule\" attr.type=\"string\" for=\"node\" id=\"rule\"/>",
@@ -152,60 +152,60 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
     "<graph edgedefault=\"directed\">"
   )
 
-  result = c()
-  gin = unz(
+  result <- c()
+  gin <- unz(
     description = ginzipFile,
     filename = "GINsim-data/regulatoryGraph.ginml"
   )
-  rule = F
-  id = ""
+  rule <- F
+  id <- ""
 
-  lin = readLines(gin)
+  lin <- readLines(gin)
   for (i in 1:length(lin)) {
-    line = stringr::str_squish(lin[i])
+    line <- stringr::str_squish(lin[i])
     if (stringr::str_starts(line, "<node id=")) { # node start tag
-      id = strsplit(line, "\"", fixed = T)[[1]][2]
-      nodeTag = paste0("<node id=\"", id, "\">")
-      result[length(result) + 1] = nodeTag
+      id <- strsplit(line, "\"", fixed = T)[[1]][2]
+      nodeTag <- paste0("<node id=\"", id, "\">")
+      result[length(result) + 1] <- nodeTag
     } else if (stringr::str_starts(line, "<exp str=")) { # rule tag
-      expr = strsplit(line, "\"", fixed = T)[[1]][2]
-      rule = T
-      expr = stringr::str_replace_all(
+      expr <- strsplit(line, "\"", fixed = T)[[1]][2]
+      rule <- T
+      expr <- stringr::str_replace_all(
         expr,
         c("&amp;" = "and", "\\|" = "or", "!" = "not ")
       )
-      ruleTag = paste0("<data key=\"rule\">", expr, "</data>")
-      result[length(result) + 1] = ruleTag
+      ruleTag <- paste0("<data key=\"rule\">", expr, "</data>")
+      result[length(result) + 1] <- ruleTag
     } else if (stringr::str_starts(line, "</node>")) { # node end tag
-      kind = "input"
+      kind <- "input"
       if (rule) {
         if (id %in% fates) {
-          kind = "fate"
+          kind <- "fate"
         } else {
-          kind = "gene"
+          kind <- "gene"
         }
       }
-      kindTag = paste0("<data key=\"kind\">", kind, "</data>")
-      endTag = "</node>"
-      result = append(result, c(kindTag, endTag), after = length(result))
-      rule = F
+      kindTag <- paste0("<data key=\"kind\">", kind, "</data>")
+      endTag <- "</node>"
+      result <- append(result, c(kindTag, endTag), after = length(result))
+      rule <- F
     } else if (stringr::str_starts(line, "<edge id=")) { # edge tag
-      pattern = "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
-      matches = stringr::str_match(line, pattern)
-      from = matches[1, 2]
-      to = matches[1, 3]
-      sign = matches[1, 4]
-      edgeTag = paste0("<edge source=\"", from, "\" target=\"", to, "\">")
-      signTag = paste0("<data key=\"sign\">", sign, "</data>")
-      edgeEndTag = "</edge>"
-      result = append(result, c(edgeTag, signTag, edgeEndTag),
+      pattern <- "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
+      matches <- stringr::str_match(line, pattern)
+      from <- matches[1, 2]
+      to <- matches[1, 3]
+      sign <- matches[1, 4]
+      edgeTag <- paste0("<edge source=\"", from, "\" target=\"", to, "\">")
+      signTag <- paste0("<data key=\"sign\">", sign, "</data>")
+      edgeEndTag <- "</edge>"
+      result <- append(result, c(edgeTag, signTag, edgeEndTag),
         after = length(result)
       )
     }
   }
   close(gin)
-  result = append(result, header, 0)
-  result = append(result, c("</graph>", "</graphml>"), after = length(result))
+  result <- append(result, header, 0)
+  result <- append(result, c("</graph>", "</graphml>"), after = length(result))
   readr::write_lines(result, dest)
   return(result)
 }
@@ -223,10 +223,10 @@ ginmlToGraphml = function(ginzipFile, fates = c(), dest = NULL) {
 #' printAllNodes(network)
 #'
 #' @export
-printAllNodes = function(network) {
-  tb = network %>%
+printAllNodes <- function(network) {
+  tb <- network %>%
     tidygraph::activate("nodes") %>%
     tidygraph::as_tibble()
-  le = nrow(tb)
+  le <- nrow(tb)
   print(tb, n = le)
 }
