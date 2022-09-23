@@ -3,7 +3,6 @@
 
 # ingres
 
-[![CRAN](https://www.r-pkg.org/badges/version/ingres?color=green)](https://cran.r-project.org/package=ingres)
 [![codecov](https://codecov.io/gh/CBigOxf/ingres/branch/master/graph/badge.svg?token=XQHKMZPKEB)](https://app.codecov.io/gh/CBigOxf/ingres)
 [![R-CMD-check](https://github.com/CBigOxf/ingres/workflows/R-CMD-check/badge.svg)](https://github.com/CBigOxf/ingres/actions)
 [![doi](https://img.shields.io/badge/doi-10.1101/2022.09.04.506528-yellow.svg)](https://doi.org/10.1101/2022.09.04.506528)
