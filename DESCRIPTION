@@ -8,12 +8,12 @@ Authors@R:
            family = "Victori",
            role = c("aut", "cre"),
            email = "pedroluisvictori@gmail.com",
-           comment = c(ORCID = "https://orcid.org/0000-0001-6321-5584")),
+           comment = c(ORCID = "0000-0001-6321-5584")),
       person(
            "Francesca M.", "Buffa",
            role = "aut",
            email = "francesca.buffa@unibocconi.it",
-           comment = c(ORCID = "https://orcid.org/0000-0003-0409-406X"))
+           comment = c(ORCID = "0000-0003-0409-406X"))
      )
 Description: Given a gene regulatory boolean network and a RNA-seq dataset, 
     this package computes protein activity normalised enrichment scores 
@@ -24,11 +24,11 @@ Description: Given a gene regulatory boolean network and a RNA-seq dataset,
     Victori and Buffa (2022) <doi:10.1101/2022.09.04.506528>.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+biocViews: NetworkInference, GraphAndNetwork, GeneRegulation, GeneExpression, SystemsBiology, Software
 Depends: 
-    R (>= 3.6.0)
+    R (>= 4.2.0)
 Imports: 
     methods,
     viper,
