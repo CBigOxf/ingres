@@ -1,7 +1,8 @@
 #' Convert GraphML format to tidygraph
 #'
 #' In order to be used by ingres,
-#' GraphML files have to be converted to tidygraph format. This helper does that.
+#' GraphML files have to be converted to tidygraph format.
+#' This helper does that.
 #' @param filename The path to the the GraphML file.
 #'
 #' @return A tidygraph object
@@ -42,8 +43,9 @@ graphmlAsTidy <- function(filename) {
 #' @export
 produceBoolnetNetwork <- function(network) {
   if (!requireNamespace("BoolNet", quietly = TRUE)) {
-    stop("Package \"BoolNet\" needed for this function to work. Please install it.",
-      call. = FALSE
+    stop("Package \"BoolNet\" needed for this function to work.
+         Please install it.",
+         call. = FALSE
     )
   }
 
@@ -161,7 +163,7 @@ ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
   id <- ""
 
   lin <- readLines(gin)
-  for (i in 1:length(lin)) {
+  for (i in seq_along(lin)) {
     line <- stringr::str_squish(lin[i])
     if (stringr::str_starts(line, "<node id=")) { # node start tag
       id <- strsplit(line, "\"", fixed = TRUE)[[1]][2]
@@ -190,7 +192,8 @@ ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
       result <- append(result, c(kindTag, endTag), after = length(result))
       rule <- FALSE
     } else if (stringr::str_starts(line, "<edge id=")) { # edge tag
-      pattern <- "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
+      pattern <-
+        "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
       matches <- stringr::str_match(line, pattern)
       from <- matches[1, 2]
       to <- matches[1, 3]
@@ -199,7 +202,7 @@ ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
       signTag <- paste0("<data key=\"sign\">", sign, "</data>")
       edgeEndTag <- "</edge>"
       result <- append(result, c(edgeTag, signTag, edgeEndTag),
-        after = length(result)
+                       after = length(result)
       )
     }
   }

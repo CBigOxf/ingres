@@ -66,8 +66,10 @@ setMethod("show", "ingres", print.ingres)
 #' )
 #'
 #' @export
-createIngresObjectFromSeurat <- function(seurat.object, seurat.assay = "RNA",
-                                         slot = "data", network.genes, network) {
+createIngresObjectFromSeurat <- function(seurat.object,
+                                         seurat.assay = "RNA",
+                                         slot = "data",
+                                         network.genes, network) {
   if (!requireNamespace("Seurat", quietly = TRUE)) {
     stop(
       "Package \"Seurat\" needed for this function to work. Please install it.",

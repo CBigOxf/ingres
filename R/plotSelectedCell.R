@@ -27,11 +27,10 @@ plotSelectedCell <- function(ingres.object, seurat.object) {
   optionalPkgs <- c("Seurat", "shiny", "plotly")
   for (pkg in optionalPkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop(paste0(
+      stop(
         "Package \"", pkg,
-        "\" needed for this function to work. Please install it."
-      ),
-      call. = FALSE
+        "\" needed for this function to work. Please install it.",
+        call. = FALSE
       )
     }
   }

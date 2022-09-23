@@ -68,11 +68,11 @@ networkPlot <- function(network, title) {
 
   p <- ggraph(plot.data, layout = "stress") +
     geom_edge_fan2(aes(edge_colour = sign),
-      start_cap = circle(12, "mm"), end_cap = circle(12, "mm"),
-      arrow = arrow(
-        angle = 30, length = unit(3, "mm"),
-        ends = "last", type = "open"
-      )
+                   start_cap = circle(12, "mm"), end_cap = circle(12, "mm"),
+                   arrow = arrow(
+                     angle = 30, length = unit(3, "mm"),
+                     ends = "last", type = "open"
+                   )
     ) +
     geom_node_point(aes(
       fill = as.factor(.data$fixed_function),
@@ -154,7 +154,7 @@ clusterGenesHeatmap <- function(ingres.object) {
 cellGenesHeatmap <- function(ingres.object) {
   p <- ingres.object@single.cell.pbn %>%
     pivot_longer(!c(.data$cell, .data$cluster),
-      names_to = "node", values_to = "p"
+                 names_to = "node", values_to = "p"
     ) %>%
     mutate(clustern = substring(.data$cluster, first = 1, last = 20)) %>%
     ggplot(aes(x = .data$node, y = .data$cell)) +

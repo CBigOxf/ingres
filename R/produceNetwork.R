@@ -63,8 +63,8 @@ produceNetwork <- function(network, pbn.data) {
     tidygraph::activate("nodes") %>%
     left_join(pbn.data, by = "id") %>%
     mutate(fixed_p = ifelse(.data$p == 0,
-      NA, # don't create a fixed function if p==0
-      abs(.data$p)
+                            NA, # don't create a fixed function if p==0
+                            abs(.data$p)
     )) %>%
     mutate(fixed_function = ifelse(.data$p > 0, 1, 0)) %>%
     mutate(function_p = 1 - .data$fixed_p)

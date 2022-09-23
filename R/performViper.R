@@ -21,11 +21,12 @@
 performViper <- function(ingres.object, regulon, verbose = FALSE) {
   expression.matrix <- ingres.object@expression
   # translate gene symbols to entrezid
-  geneIds <- suppressMessages(AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
-    keys = rownames(expression.matrix),
-    column = "ENTREZID", keytype = "SYMBOL",
-    multiVals = "first"
-  ))
+  geneIds <- suppressMessages(
+    AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
+                          keys = rownames(expression.matrix),
+                          column = "ENTREZID", keytype = "SYMBOL",
+                          multiVals = "first"
+    ))
   # remove those not found
   geneIds <- geneIds[which(!is.na(geneIds))]
   # subsetting to found genes
@@ -42,9 +43,9 @@ performViper <- function(ingres.object, regulon, verbose = FALSE) {
   # translate back to gene symbols
   geneSymbols <- suppressMessages(
     AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
-      keys = colnames(viperMatrix),
-      column = "SYMBOL", keytype = "ENTREZID",
-      multiVals = "first"
+                          keys = colnames(viperMatrix),
+                          column = "SYMBOL", keytype = "ENTREZID",
+                          multiVals = "first"
     )
   )
   colnames(viperMatrix) <- geneSymbols
