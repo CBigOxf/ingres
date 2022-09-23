@@ -18,6 +18,6 @@ Print all nodes in a network
 For testing and checks purposes.
 }
 \examples{
-printAllNodes(network)
+printAllNodes(ingres::network)
 
 }

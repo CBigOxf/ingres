@@ -35,6 +35,6 @@ is not needed and the returned data frame can be directly passed to
 the ingres constructors.
 }
 \examples{
-createNetworkGenesTemplate(network, store = FALSE)
+createNetworkGenesTemplate(ingres::network, store = FALSE)
 
 }
