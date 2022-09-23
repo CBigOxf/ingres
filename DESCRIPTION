@@ -7,7 +7,7 @@ Authors@R:
            given = "Pedro",
            family = "Victori",
            role = c("aut", "cre"),
-           email = "pedroluisvictori@gmail.com",
+           email = "pedro.victori@oncology.ox.ac.uk",
            comment = c(ORCID = "0000-0001-6321-5584")),
       person(
            "Francesca M.", "Buffa",
