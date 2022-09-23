@@ -228,4 +228,9 @@ head(transition1)
 
 ```
 
+## Session information
+```{r sessionInfo}
+sessionInfo()
+```
+
 ## References
