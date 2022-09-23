@@ -45,6 +45,109 @@ print.ingres <- function(object) {
 
 setMethod("show", "ingres", print.ingres)
 
+
+#' Get the Expression Matrix from an \code{\linkS4class{ingres}} object
+#'
+#' @param ingres.object an \code{\linkS4class{ingres}} object
+#'
+#' @return An expression matrix
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObject()
+#' head(GetExpressionMatrix(ing))
+getExpressionMatrix <- function(ingres.object){
+  ingres.object@expression
+}
+
+#' Get the idents from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return A data frame with a column for cell barcode
+#' and another column for the corresponding cluster or subpopulation.
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObject()
+#' head(GetIdents(ing))
+getIdents <- function(ingres.object){
+  ingres.object@idents
+}
+
+#' Get the network genes from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return A data frame with a column for node names
+#' and another column for the corresponding entrez IDs.
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObject()
+#' head(tetNetworkGenes(ing))
+getNetworkGenes <- function(ingres.object){
+  ingres.object@network.genes
+}
+
+#' Get the viper results from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return A data frame containing viper results
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObjectWithViper()
+#' head(getViperResults(ing))
+getViperResults <- function(ingres.object){
+  ingres.object@viper
+}
+
+#' Get the cluster PBNs from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return A data frame containing the generated cluster PBNs
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObjectWithViper()
+#' ing <- ing %>% computePbnByCluster()
+#' head(getClusterPbns(ing))
+getClusterPbns <- function(ingres.object){
+  ingres.object@cluster.pbn
+}
+
+#' Get the single-cell PBNs from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return A data frame containing the generated single-cell PBNs
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObjectWithViper()
+#' ing <- ing %>% computePbnBySingleCell()
+#' head(getSingleCellPbns(ing))
+getSingleCellPbns <- function(ingres.object){
+  ingres.object@single.cell.pbn
+}
+
+#' Get the network from an \code{\linkS4class{ingres}} object
+#'
+#' @inheritParams getExpressionMatrix
+#'
+#' @return The network as a object of class \code{tbl_graph}
+#' @export
+#'
+#' @examples
+#' ing <- createExampleIngresObject()
+#' head(getNetwork(ing))
+getNetwork <- function(ingres.object){
+  ingres.object@network
+}
+
 #' Create a new \code{ingres} object using the expression data in a
 #'  \code{Seurat} object.
 #'

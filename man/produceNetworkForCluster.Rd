@@ -20,14 +20,14 @@ Produce a tidygraph network for a given cluster
 }
 \examples{
 # Create an ingres object with viper slot
-ing = createIngresObjectFromSeurat(
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
-ing@viper = viper_results
+ing@viper <- viper_results
 
-ing = computePbnByCluster(ing)
+ing <- computePbnByCluster(ing)
 
-network = produceNetworkForCluster(ing, "1")
+network <- produceNetworkForCluster(ing, "1")
 print(network)
 
 }

@@ -26,8 +26,8 @@ designed to suit the ingres workflow and properly prepare the input data.
 \examples{
 \dontshow{if (require("aracne.networks")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Subset regulon to speed up example run
-regulon = aracne.networks::regulonblca[1:100]
-ing = createIngresObjectFromSeurat(
+regulon <- aracne.networks::regulonblca[1:100]
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
 performViper(ing, regulon)

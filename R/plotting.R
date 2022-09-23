@@ -10,12 +10,7 @@
 #' @return A \code{ggplot} object containing the cell PBN plot.
 #'
 #' @examples
-#' # Create an ingres object with viper slot
-#' ing <- createIngresObjectFromSeurat(
-#'   small_blca_wang, "RNA", "data", network_genes, network
-#' )
-#' ing@viper <- viper_results
-#'
+#' createExampleIngresObjectWithViper
 #' ing <- computePbnBySingleCell(ing)
 #' cellPbnPlot(ing, "sample1@ACAGCTAAGATCCCGC-1")
 #'
@@ -39,12 +34,7 @@ cellPbnPlot <- function(ingres.object, cell.id) {
 #' @return A \code{ggplot} object containing the cluster PBN plot.
 #'
 #' @examples
-#' # Create an ingres object with viper slot
-#' ing <- createIngresObjectFromSeurat(
-#'   small_blca_wang, "RNA", "data", network_genes, network
-#' )
-#' ing@viper <- viper_results
-#'
+#' createExampleIngresObjectWithViper
 #' ing <- computePbnByCluster(ing)
 #' clusterPbnPlot(ing, "1")
 #'

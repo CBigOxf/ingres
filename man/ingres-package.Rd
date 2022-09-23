@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Pedro Victori \email{pedroluisvictori@gmail.com} (\href{https://orcid.org/0000-0001-6321-5584}{ORCID})
+\strong{Maintainer}: Pedro Victori \email{pedro.victori@oncology.ox.ac.uk} (\href{https://orcid.org/0000-0001-6321-5584}{ORCID})
 
 Authors:
 \itemize{

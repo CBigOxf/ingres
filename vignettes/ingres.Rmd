@@ -56,6 +56,7 @@ library(ingres)
 Then we need to create an Ingres object that will hold all the necessary data. Ingres contains example data to show how to use its functions, we will print them in this vignette so their structure can be seen. There are two main ways of creating an Ingres object. The easiest one is using a `Seurat` [@Seurat] object with the scaling and clustering pipelines already performed (see the corresponding [introductory vignette to Seurat](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html)):
 
 ```{r seurat}
+data(small_blca_wang)
 small_blca_wang
 
 ```
@@ -63,6 +64,7 @@ small_blca_wang
 We also need a network object in `tidygraph` format:
 
 ```{r network}
+data("network")
 network
 ```
 
@@ -93,6 +95,7 @@ graphmlAsTidy(temp)
 A data frame with a row per node in the network and its corresponding gene symbol, in case nodes in the network have different names:
 
 ```{r symbols}
+data("network_genes")
 network_genes
 ```
 

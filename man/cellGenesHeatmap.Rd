@@ -21,12 +21,12 @@ ggplot object.
 }
 \examples{
 # Create an ingres object with viper slot
-ing = createIngresObjectFromSeurat(
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
-ing@viper = viper_results
+ing@viper <- viper_results
 
-ing = computePbnBySingleCell(ing)
+ing <- computePbnBySingleCell(ing)
 cellGenesHeatmap(ing)
 
 }

@@ -14,10 +14,11 @@ A tidygraph object
 }
 \description{
 In order to be used by ingres,
-GraphML files have to be converted to tidygraph format. This helper does that.
+GraphML files have to be converted to tidygraph format.
+This helper does that.
 }
 \examples{
-filename =
+filename <-
   system.file("extdata", "example_network.graphml", package = "ingres")
 graphmlAsTidy(filename)
 

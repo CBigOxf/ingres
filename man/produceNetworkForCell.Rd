@@ -19,14 +19,14 @@ Produce a tidygraph network for a given cell
 }
 \examples{
 # Create an ingres object with viper slot
-ing = createIngresObjectFromSeurat(
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
-ing@viper = viper_results
+ing@viper <- viper_results
 
-ing = computePbnBySingleCell(ing)
+ing <- computePbnBySingleCell(ing)
 
-network = produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
+network <- produceNetworkForCell(ing, "sample1@ACAGCTAAGATCCCGC-1")
 print(network)
 
 }

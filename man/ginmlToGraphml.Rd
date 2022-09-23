@@ -29,7 +29,7 @@ files into the GraphML format. keeping the kind - fate, input or gene -, the
 edge sign and the rule - formulae - data.
 }
 \examples{
-filename =
+filename <-
   system.file("extdata", "example_ginsim.zginml", package = "ingres")
 head(ginmlToGraphml(filename))
 

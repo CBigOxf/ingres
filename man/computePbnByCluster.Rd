@@ -36,22 +36,22 @@ the median NES for all cells in that cluster will be used.
 
 \examples{
 # Create an ingres object with viper slot
-ing = createIngresObjectFromSeurat(
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
-ing@viper = viper_results
+ing@viper <- viper_results
 
-ing = computePbnByCluster(ing)
+ing <- computePbnByCluster(ing)
 head(ing@cluster.pbn)
 
-ing = computePbnBySingleCell(ing)
+ing <- computePbnBySingleCell(ing)
 head(ing@single.cell.pbn)
 
 # Restrict range to (-0.5, 0.5)
-ing = computePbnByCluster(ing, range = c(-0.5, 0.5))
+ing <- computePbnByCluster(ing, range = c(-0.5, 0.5))
 head(ing@cluster.pbn)
 
-ing = computePbnBySingleCell(ing, range = c(-0.5, 0.5))
+ing <- computePbnBySingleCell(ing, range = c(-0.5, 0.5))
 head(ing@single.cell.pbn)
 
 }

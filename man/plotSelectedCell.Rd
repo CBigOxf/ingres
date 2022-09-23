@@ -26,11 +26,11 @@ Internally, it uses \code{\link{cellPbnPlot}} on the selected cell.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-ing = createIngresObjectFromSeurat(
+ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 )
-ing@viper = viper_results
-ing = computePbnBySingleCell(ing)
+ing@viper <- viper_results
+ing <- computePbnBySingleCell(ing)
 plotSelectedCell(ing, small_blca_wang)
 \dontshow{\}) # examplesIf}
 }
