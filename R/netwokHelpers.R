@@ -157,19 +157,19 @@ ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
     description = ginzipFile,
     filename = "GINsim-data/regulatoryGraph.ginml"
   )
-  rule <- F
+  rule <- FALSE
   id <- ""
 
   lin <- readLines(gin)
   for (i in 1:length(lin)) {
     line <- stringr::str_squish(lin[i])
     if (stringr::str_starts(line, "<node id=")) { # node start tag
-      id <- strsplit(line, "\"", fixed = T)[[1]][2]
+      id <- strsplit(line, "\"", fixed = TRUE)[[1]][2]
       nodeTag <- paste0("<node id=\"", id, "\">")
       result[length(result) + 1] <- nodeTag
     } else if (stringr::str_starts(line, "<exp str=")) { # rule tag
-      expr <- strsplit(line, "\"", fixed = T)[[1]][2]
-      rule <- T
+      expr <- strsplit(line, "\"", fixed = TRUE)[[1]][2]
+      rule <- TRUE
       expr <- stringr::str_replace_all(
         expr,
         c("&amp;" = "and", "\\|" = "or", "!" = "not ")
@@ -188,7 +188,7 @@ ginmlToGraphml <- function(ginzipFile, fates = c(), dest = NULL) {
       kindTag <- paste0("<data key=\"kind\">", kind, "</data>")
       endTag <- "</node>"
       result <- append(result, c(kindTag, endTag), after = length(result))
-      rule <- F
+      rule <- FALSE
     } else if (stringr::str_starts(line, "<edge id=")) { # edge tag
       pattern <- "(?<=from=\")([^\"]+).*(?<=to=\")([^\"]+).*(?<=sign=\")([^\"]+)"
       matches <- stringr::str_match(line, pattern)

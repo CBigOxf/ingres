@@ -99,8 +99,8 @@ network_genes
 We can use the function `createNetworkGenesTemplate` to generate a network_genes file with the node names prepopulated. If using RStudio interactively, the function opens this file for us to modify as needed.
 
 ```{r network-genes-template}
-# store and modify = F just for demonstration.
-createNetworkGenesTemplate(network, store = F, modify = F)
+# store and modify = FALSE just for demonstration.
+createNetworkGenesTemplate(network, store = FALSE, modify = FALSE)
 # Then, modify as needed.
 ```
 

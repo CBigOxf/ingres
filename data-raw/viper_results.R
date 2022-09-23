@@ -2,7 +2,7 @@
 ing <- createIngresObjectFromSeurat(
   small_blca_wang, "RNA", "data", network_genes, network
 ) %>%
-  performViper(aracne.networks::regulonblca, verbose = F)
+  performViper(aracne.networks::regulonblca, verbose = FALSE)
 
 viper_results <- ing@viper
 
