@@ -31,7 +31,8 @@ test_that("produceBoolnetNetwork converts to Boolnet object correctly", {
 test_that("createNetworkGenesTemplate correctly creates the template file", {
   createTest <- function() {
     tempdir <- tempdir()
-    createNetworkGenesTemplate(network, dir = tempdir, store = TRUE, modify = FALSE)
+    createNetworkGenesTemplate(ingres::network, dir = tempdir,
+                               store = TRUE, modify = FALSE)
     paste0(tempdir, "/networkGenes.csv")
   }
 
@@ -44,7 +45,7 @@ test_that("createNetworkGenesTemplate correctly creates the template file", {
 
 test_that("createNetworkGenesTemplate correctly returns the template file", {
   expect_snapshot(
-    createNetworkGenesTemplate(network, store = FALSE, modify = FALSE),
+    createNetworkGenesTemplate(ingres::network, store = FALSE, modify = FALSE),
     cran = FALSE
   )
 })
@@ -97,5 +98,5 @@ test_that("ginmlToGraphml recognises given fates", {
 })
 
 test_that("printAllNodes correctly prints a network", {
-  expect_snapshot(printAllNodes(network), cran = TRUE)
+  expect_snapshot(printAllNodes(ingres::network), cran = TRUE)
 })

@@ -1,9 +1,9 @@
 test_that("object is created from Seurat object", {
   obj <- createIngresObjectFromSeurat(
-    small_blca_wang,
+    ingres::small_blca_wang,
     "RNA", "scale.data",
-    network_genes,
-    network
+    ingres::network_genes,
+    ingres::network
   )
   expect_s4_class(obj, "ingres")
 })
