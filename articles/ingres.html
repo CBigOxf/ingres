@@ -98,28 +98,29 @@ Boolean network (PBN) per each cell and/or cluster of cells in the dataset. Ingr
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"viper"</span><span class="op">)</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"org.Hs.eg.db"</span><span class="op">)</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"AnnotationDbi"</span><span class="op">)</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"aracne.networks"</span><span class="op">)</span> <span class="co"># optional dependency</span></span></code></pre></div>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"viper"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"org.Hs.eg.db"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"AnnotationDbi"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"aracne.networks"</span><span class="op">)</span> <span class="co"># optional dependency</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="creating-the-ingres-object">Creating the Ingres object<a class="anchor" aria-label="anchor" href="#creating-the-ingres-object"></a>
 </h2>
 <p>First we load the Ingres package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CBigOxf/ingres" class="external-link">ingres</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/CBigOxf/ingres" class="external-link">ingres</a></span><span class="op">)</span></span></code></pre></div>
 <p>Then we need to create an Ingres object that will hold all the necessary data. Ingres contains example data to show how to use its functions, we will print them in this vignette so their structure can be seen. There are two main ways of creating an Ingres object. The easiest one is using a <code>Seurat</code><span class="citation"><sup><a href="#ref-Seurat" role="doc-biblioref">3</a></sup></span> object with the scaling and clustering pipelines already performed (see the corresponding <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html" class="external-link">introductory vignette to Seurat</a>):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">small_blca_wang</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">small_blca_wang</span><span class="op">)</span></span>
+<span><span class="va">small_blca_wang</span></span>
 <span><span class="co">#&gt; An object of class Seurat </span></span>
 <span><span class="co">#&gt; 16314 features across 90 samples within 1 assay </span></span>
 <span><span class="co">#&gt; Active assay: RNA (16314 features, 2000 variable features)</span></span>
 <span><span class="co">#&gt;  1 dimensional reduction calculated: tsne</span></span></code></pre></div>
 <p>We also need a network object in <code>tidygraph</code> format:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">network</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"network"</span><span class="op">)</span></span>
+<span><span class="va">network</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tbl_graph: 30 nodes and 110 edges</span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; #</span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # A directed multigraph with 1 component</span></span></span>
@@ -212,7 +213,8 @@ Boolean network (PBN) per each cell and/or cluster of cells in the dataset. Ingr
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 68 more rows</span></span></span></code></pre></div>
 <p>A data frame with a row per node in the network and its corresponding gene symbol, in case nodes in the network have different names:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">network_genes</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"network_genes"</span><span class="op">)</span></span>
+<span><span class="va">network_genes</span></span>
 <span><span class="co">#&gt;        node   symbol</span></span>
 <span><span class="co">#&gt; 1      EGFR     EGFR</span></span>
 <span><span class="co">#&gt; 2     FGFR3    FGFR4</span></span>
@@ -244,8 +246,8 @@ Boolean network (PBN) per each cell and/or cluster of cells in the dataset. Ingr
 <span><span class="co">#&gt; 28     SPRY    SPRY2</span></span></code></pre></div>
 <p>We can use the function <code>createNetworkGenesTemplate</code> to generate a network_genes file with the node names prepopulated. If using RStudio interactively, the function opens this file for us to modify as needed.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># store and modify = F just for demonstration.</span></span>
-<span><span class="fu"><a href="../reference/createNetworkGenesTemplate.html">createNetworkGenesTemplate</a></span><span class="op">(</span><span class="va">network</span>, store <span class="op">=</span> <span class="cn">F</span>, modify <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># store and modify = FALSE just for demonstration.</span></span>
+<span><span class="fu"><a href="../reference/createNetworkGenesTemplate.html">createNetworkGenesTemplate</a></span><span class="op">(</span><span class="va">network</span>, store <span class="op">=</span> <span class="cn">FALSE</span>, modify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 25 × 2</span></span></span>
 <span><span class="co">#&gt;    node     symbol  </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
@@ -457,6 +459,91 @@ This algorithm is designed to integrate multiple interactomes, not necessarily t
 <span><span class="co">#&gt;                1                1                1                1 </span></span>
 <span><span class="co">#&gt;    Growth_Arrest             EGFR </span></span>
 <span><span class="co">#&gt;                1                0</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="sessioninfo">SessionInfo<a class="anchor" aria-label="anchor" href="#sessioninfo"></a>
+</h2>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 20.04.5 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] ingres_1.0.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;   [1] utf8_1.2.2             reticulate_1.26        tidyselect_1.2.0      </span></span>
+<span><span class="co">#&gt;   [4] RSQLite_2.2.18         AnnotationDbi_1.58.0   htmlwidgets_1.5.4     </span></span>
+<span><span class="co">#&gt;   [7] grid_4.2.1             Rtsne_0.16             munsell_0.5.0         </span></span>
+<span><span class="co">#&gt;  [10] codetools_0.2-18       ragg_1.2.3             ica_1.0-3             </span></span>
+<span><span class="co">#&gt;  [13] future_1.28.0          miniUI_0.1.1.1         withr_2.5.0           </span></span>
+<span><span class="co">#&gt;  [16] spatstat.random_2.2-0  colorspace_2.0-3       progressr_0.11.0      </span></span>
+<span><span class="co">#&gt;  [19] Biobase_2.56.0         highr_0.9              knitr_1.40            </span></span>
+<span><span class="co">#&gt;  [22] Seurat_4.2.0           stats4_4.2.1           ROCR_1.0-11           </span></span>
+<span><span class="co">#&gt;  [25] ggsignif_0.6.4         tensor_1.5             listenv_0.8.0         </span></span>
+<span><span class="co">#&gt;  [28] labeling_0.4.2         GenomeInfoDbData_1.2.8 polyclip_1.10-0       </span></span>
+<span><span class="co">#&gt;  [31] bit64_4.0.5            farver_2.1.1           rprojroot_2.0.3       </span></span>
+<span><span class="co">#&gt;  [34] parallelly_1.32.1      vctrs_0.4.2            generics_0.1.3        </span></span>
+<span><span class="co">#&gt;  [37] xfun_0.34              aracne.networks_1.22.0 R6_2.5.1              </span></span>
+<span><span class="co">#&gt;  [40] GenomeInfoDb_1.32.4    graphlayouts_0.8.2     bitops_1.0-7          </span></span>
+<span><span class="co">#&gt;  [43] spatstat.utils_2.3-1   cachem_1.0.6           promises_1.2.0.1      </span></span>
+<span><span class="co">#&gt;  [46] scales_1.2.1           vroom_1.6.0            ggraph_2.1.0          </span></span>
+<span><span class="co">#&gt;  [49] rgeos_0.5-9            gtable_0.3.1           globals_0.16.1        </span></span>
+<span><span class="co">#&gt;  [52] goftest_1.2-3          tidygraph_1.2.2        rlang_1.0.6           </span></span>
+<span><span class="co">#&gt;  [55] systemfonts_1.0.4      splines_4.2.1          rstatix_0.7.0         </span></span>
+<span><span class="co">#&gt;  [58] lazyeval_0.2.2         broom_1.0.1            spatstat.geom_2.4-0   </span></span>
+<span><span class="co">#&gt;  [61] yaml_2.3.6             reshape2_1.4.4         abind_1.4-5           </span></span>
+<span><span class="co">#&gt;  [64] backports_1.4.1        httpuv_1.6.6           tools_4.2.1           </span></span>
+<span><span class="co">#&gt;  [67] ggplot2_3.3.6          ellipsis_0.3.2         spatstat.core_2.4-4   </span></span>
+<span><span class="co">#&gt;  [70] jquerylib_0.1.4        RColorBrewer_1.1-3     proxy_0.4-27          </span></span>
+<span><span class="co">#&gt;  [73] BiocGenerics_0.42.0    ggridges_0.5.4         Rcpp_1.0.9            </span></span>
+<span><span class="co">#&gt;  [76] plyr_1.8.7             zlibbioc_1.42.0        purrr_0.3.5           </span></span>
+<span><span class="co">#&gt;  [79] RCurl_1.98-1.9         ggpubr_0.4.0           rpart_4.1.16          </span></span>
+<span><span class="co">#&gt;  [82] deldir_1.0-6           pbapply_1.5-0          viridis_0.6.2         </span></span>
+<span><span class="co">#&gt;  [85] cowplot_1.1.1          S4Vectors_0.34.0       zoo_1.8-11            </span></span>
+<span><span class="co">#&gt;  [88] SeuratObject_4.1.2     ggrepel_0.9.1          cluster_2.1.4         </span></span>
+<span><span class="co">#&gt;  [91] fs_1.5.2               magrittr_2.0.3         data.table_1.14.4     </span></span>
+<span><span class="co">#&gt;  [94] scattermore_0.8        lmtest_0.9-40          RANN_2.6.1            </span></span>
+<span><span class="co">#&gt;  [97] fitdistrplus_1.1-8     matrixStats_0.62.0     hms_1.1.2             </span></span>
+<span><span class="co">#&gt; [100] patchwork_1.1.2        mime_0.12              evaluate_0.17         </span></span>
+<span><span class="co">#&gt; [103] xtable_1.8-4           XML_3.99-0.11          IRanges_2.30.1        </span></span>
+<span><span class="co">#&gt; [106] gridExtra_2.3          compiler_4.2.1         tibble_3.1.8          </span></span>
+<span><span class="co">#&gt; [109] KernSmooth_2.23-20     crayon_1.5.2           htmltools_0.5.3       </span></span>
+<span><span class="co">#&gt; [112] segmented_1.6-0        mgcv_1.8-40            later_1.3.0           </span></span>
+<span><span class="co">#&gt; [115] tzdb_0.3.0             tidyr_1.2.1            DBI_1.1.3             </span></span>
+<span><span class="co">#&gt; [118] tweenr_2.0.2           MASS_7.3-58.1          car_3.1-0             </span></span>
+<span><span class="co">#&gt; [121] Matrix_1.5-1           readr_2.1.3            cli_3.4.1             </span></span>
+<span><span class="co">#&gt; [124] parallel_4.2.1         igraph_1.3.5           pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt; [127] pkgdown_2.0.6          sp_1.5-0               plotly_4.10.0         </span></span>
+<span><span class="co">#&gt; [130] spatstat.sparse_2.1-1  bslib_0.4.0            XVector_0.36.0        </span></span>
+<span><span class="co">#&gt; [133] viper_1.30.0           stringr_1.4.1          digest_0.6.30         </span></span>
+<span><span class="co">#&gt; [136] sctransform_0.3.5      RcppAnnoy_0.0.19       spatstat.data_2.2-0   </span></span>
+<span><span class="co">#&gt; [139] Biostrings_2.64.1      BoolNet_2.1.7          rmarkdown_2.17        </span></span>
+<span><span class="co">#&gt; [142] leiden_0.4.3           uwot_0.1.14            kernlab_0.9-31        </span></span>
+<span><span class="co">#&gt; [145] shiny_1.7.2            lifecycle_1.0.3        nlme_3.1-160          </span></span>
+<span><span class="co">#&gt; [148] jsonlite_1.8.2         carData_3.0-5          desc_1.4.2            </span></span>
+<span><span class="co">#&gt; [151] viridisLite_0.4.1      fansi_1.0.3            pillar_1.8.1          </span></span>
+<span><span class="co">#&gt; [154] lattice_0.20-45        KEGGREST_1.36.3        fastmap_1.1.0         </span></span>
+<span><span class="co">#&gt; [157] httr_1.4.4             survival_3.4-0         glue_1.6.2            </span></span>
+<span><span class="co">#&gt; [160] png_0.1-7              bit_4.0.4              ggforce_0.4.1         </span></span>
+<span><span class="co">#&gt; [163] class_7.3-20           stringi_1.7.8          sass_0.4.2            </span></span>
+<span><span class="co">#&gt; [166] mixtools_1.2.0         blob_1.2.3             textshaping_0.3.6     </span></span>
+<span><span class="co">#&gt; [169] org.Hs.eg.db_3.15.0    memoise_2.0.1          dplyr_1.0.10          </span></span>
+<span><span class="co">#&gt; [172] irlba_2.3.5.1          e1071_1.7-11           future.apply_1.9.1</span></span></code></pre></div>
 </div>
 <div class="section level2 unnumbered">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

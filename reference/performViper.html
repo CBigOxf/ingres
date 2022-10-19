@@ -91,10 +91,8 @@ the <code>viper</code> slot</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Subset regulon to speed up example run</span></span></span>
-<span class="r-in"><span><span class="va">regulon</span> <span class="op">=</span> <span class="fu">aracne.networks</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/aracne.networks/man/regulonblca.html" class="external-link">regulonblca</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">ing</span> <span class="op">=</span> <span class="fu"><a href="createIngresObjectFromSeurat.html">createIngresObjectFromSeurat</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">small_blca_wang</span>, <span class="st">"RNA"</span>, <span class="st">"data"</span>, <span class="va">network_genes</span>, <span class="va">network</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">regulon</span> <span class="op">&lt;-</span> <span class="fu">aracne.networks</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/aracne.networks/man/regulonblca.html" class="external-link">regulonblca</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">ing</span> <span class="op">&lt;-</span> <span class="fu"><a href="createExampleIngresObject.html">createExampleIngresObject</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">performViper</span><span class="op">(</span><span class="va">ing</span>, <span class="va">regulon</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An ingres object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------</span>

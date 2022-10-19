@@ -74,129 +74,28 @@ by <code><a href="produceNetworkForCluster.html">produceNetworkForCluster()</a><
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create an ingres object with viper slot</span></span></span>
-<span class="r-in"><span><span class="va">ing</span> <span class="op">=</span> <span class="fu"><a href="createIngresObjectFromSeurat.html">createIngresObjectFromSeurat</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">ing</span> <span class="op">&lt;-</span> <span class="fu"><a href="createIngresObjectFromSeurat.html">createIngresObjectFromSeurat</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">small_blca_wang</span>, <span class="st">"RNA"</span>, <span class="st">"data"</span>, <span class="va">network_genes</span>, <span class="va">network</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ing</span><span class="op">@</span><span class="va">viper</span> <span class="op">=</span> <span class="va">viper_results</span></span></span>
+<span class="r-in"><span><span class="va">ing</span><span class="op">@</span><span class="va">viper</span> <span class="op">&lt;-</span> <span class="va">viper_results</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'viper_results' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute PBNs by cluster</span></span></span>
-<span class="r-in"><span><span class="va">ing</span> <span class="op">=</span> <span class="fu"><a href="computePbnByCluster.html">computePbnByCluster</a></span><span class="op">(</span><span class="va">ing</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ing</span> <span class="op">&lt;-</span> <span class="fu"><a href="computePbnByCluster.html">computePbnByCluster</a></span><span class="op">(</span><span class="va">ing</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., c(1, 2)):</span> Can't subset columns past the end.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Locations 1 and 2 don't exist.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> There are only 0 columns.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Produce a network for an arbitrary cluster</span></span></span>
-<span class="r-in"><span><span class="va">network</span> <span class="op">=</span> <span class="fu"><a href="produceNetworkForCluster.html">produceNetworkForCluster</a></span><span class="op">(</span><span class="va">ing</span>, <span class="st">"1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">network</span> <span class="op">&lt;-</span> <span class="fu"><a href="produceNetworkForCluster.html">produceNetworkForCluster</a></span><span class="op">(</span><span class="va">ing</span>, <span class="st">"1"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., .data$cluster == cluster.id):</span> Problem while computing `..1 = .data$cluster == cluster.id`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.data$cluster`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Column `cluster` not found in `.data`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">produceBoolnetNetwork</span><span class="op">(</span><span class="va">network</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Probabilistic Boolean network with 30 genes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Involved genes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DNAdamage GrowthInhibitors Proliferation Apoptosis Growth_Arrest EGFR FGFR3 RAS E2F1_1 E2F1_2 E2F3_1 E2F3_2 CyclinD1 CyclinE1 CyclinA CDC25A p16INK4a RB1 RBL2 p21CIP ATM_1 ATM_2 CHEK1_2_1 CHEK1_2_2 MDM2 TP53 PI3K AKT GRB2 SPRY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Transition functions:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene DNAdamage:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DNAdamage = DNAdamage ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene GrowthInhibitors:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GrowthInhibitors = GrowthInhibitors ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene Proliferation:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Proliferation = CyclinE1 | CyclinA ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene Apoptosis:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Apoptosis = E2F1_2 | TP53 ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene Growth_Arrest:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Growth_Arrest = p21CIP | RB1 | RBL2 ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene EGFR:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR = SPRY &amp; ! FGFR3 &amp; ! GRB2 ( probability: 0.8311771)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR = 0 ( probability: 0.1688229)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene FGFR3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FGFR3 = ! EGFR &amp; ! GRB2 ( probability: 0.9524404)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FGFR3 = 0 ( probability: 0.04755962)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene RAS:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RAS = EGFR | FGFR3 | GRB2 ( probability: 0.4948559)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RAS = 1 ( probability: 0.5051441)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene E2F1_1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> E2F1_1 = ! RB1 &amp; ! RBL2 &amp; ((! (CHEK1_2_2 &amp; ATM_2) &amp; (RAS | (E2F3_1 | E2F3_2))) | (CHEK1_2_2 &amp; ATM_2 &amp; ! RAS &amp; E2F3_2)) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene E2F1_2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> E2F1_2 = ! RBL2 &amp; ! RB1 &amp; ATM_2 &amp; CHEK1_2_2 &amp; (RAS | E2F3_2) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene E2F3_1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> E2F3_1 = ! RB1 &amp; ! CHEK1_2_2 &amp; RAS ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene E2F3_2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> E2F3_2 = ! RB1 &amp; CHEK1_2_2 &amp; RAS ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CyclinD1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinD1 = (RAS | AKT) &amp; ! p16INK4a &amp; ! p21CIP ( probability: 0.9560934)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinD1 = 0 ( probability: 0.04390661)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CyclinE1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinE1 = ! RBL2 &amp; ! p21CIP &amp; CDC25A &amp; ((E2F1_1 | E2F1_2) | (E2F3_1 | E2F3_2)) ( probability: 0.9553101)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinE1 = 1 ( probability: 0.0446899)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CyclinA:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinA = ! RBL2 &amp; ! p21CIP &amp; CDC25A &amp; ((E2F1_1 | E2F1_2) | (E2F3_1 | E2F3_2)) ( probability: 0.647193)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CyclinA = 1 ( probability: 0.352807)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CDC25A:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CDC25A = ! (CHEK1_2_1 | CHEK1_2_2) &amp; ! RBL2 &amp; ((E2F1_1 | E2F1_2) | (E2F3_1 | E2F3_2)) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene p16INK4a:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p16INK4a = GrowthInhibitors &amp; ! RB1 ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene RB1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RB1 = ! CyclinD1 &amp; ! CyclinE1 &amp; ! p16INK4a &amp; ! CyclinA ( probability: 0.7869289)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RB1 = 0 ( probability: 0.2130711)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene RBL2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RBL2 = ! CyclinD1 &amp; ! CyclinE1 ( probability: 0.6568599)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RBL2 = 0 ( probability: 0.3431401)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene p21CIP:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p21CIP = ! CyclinE1 &amp; (GrowthInhibitors | TP53) &amp; ! AKT ( probability: 0.7388874)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p21CIP = 1 ( probability: 0.2611126)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene ATM_1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ATM_1 = DNAdamage &amp; ! (E2F1_1 | E2F1_2) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene ATM_2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ATM_2 = (E2F1_1 | E2F1_2) &amp; DNAdamage ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CHEK1_2_1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CHEK1_2_1 = (ATM_1 | ATM_2) &amp; ! (E2F1_1 | E2F1_2) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene CHEK1_2_2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CHEK1_2_2 = (E2F1_1 | E2F1_2) &amp; (ATM_1 | ATM_2) ( probability: 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene MDM2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> MDM2 = (TP53 | AKT) &amp; ! (E2F1_1 | E2F1_2) &amp; ! (ATM_1 | ATM_2) &amp; ! RB1 ( probability: 0.9155916)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> MDM2 = 0 ( probability: 0.08440837)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene TP53:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TP53 = ! MDM2 &amp; (((ATM_1 | ATM_2) &amp; (CHEK1_2_1 | CHEK1_2_2)) | E2F1_2) ( probability: 0.9947854)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TP53 = 1 ( probability: 0.005214565)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene PI3K:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> PI3K = GRB2 &amp; RAS &amp; ! TP53 ( probability: 0.2483101)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> PI3K = 0 ( probability: 0.7516899)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene AKT:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AKT = PI3K ( probability: 0.9036732)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AKT = 0 ( probability: 0.09632681)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene GRB2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GRB2 = (FGFR3 &amp; ! GRB2 &amp; ! SPRY) | EGFR ( probability: 0.7720136)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GRB2 = 1 ( probability: 0.2279864)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative transition functions for gene SPRY:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> SPRY = RAS ( probability: 0.7885904)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> SPRY = 0 ( probability: 0.2114096)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mutate(d_tmp, ...):</span> Problem while computing `line1 = case_when(...)`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.data$fixed_p`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Column `fixed_p` not found in `.data`.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

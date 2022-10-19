@@ -77,28 +77,35 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create an ingres object with viper slot</span></span></span>
-<span class="r-in"><span><span class="va">ing</span> <span class="op">=</span> <span class="fu"><a href="createIngresObjectFromSeurat.html">createIngresObjectFromSeurat</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">ing</span> <span class="op">&lt;-</span> <span class="fu"><a href="createIngresObjectFromSeurat.html">createIngresObjectFromSeurat</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">small_blca_wang</span>, <span class="st">"RNA"</span>, <span class="st">"data"</span>, <span class="va">network_genes</span>, <span class="va">network</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ing</span><span class="op">@</span><span class="va">viper</span> <span class="op">=</span> <span class="va">viper_results</span></span></span>
+<span class="r-in"><span><span class="va">ing</span><span class="op">@</span><span class="va">viper</span> <span class="op">&lt;-</span> <span class="va">viper_results</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'viper_results' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">ing</span> <span class="op">=</span> <span class="fu"><a href="computePbnByCluster.html">computePbnBySingleCell</a></span><span class="op">(</span><span class="va">ing</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ing</span> <span class="op">&lt;-</span> <span class="fu"><a href="computePbnByCluster.html">computePbnBySingleCell</a></span><span class="op">(</span><span class="va">ing</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., c(1, 2)):</span> Can't subset columns past the end.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Locations 1 and 2 don't exist.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> There are only 0 columns.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">network</span> <span class="op">=</span> <span class="fu">produceNetworkForCell</span><span class="op">(</span><span class="va">ing</span>, <span class="st">"sample1@ACAGCTAAGATCCCGC-1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">network</span> <span class="op">&lt;-</span> <span class="fu">produceNetworkForCell</span><span class="op">(</span><span class="va">ing</span>, <span class="st">"sample1@ACAGCTAAGATCCCGC-1"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., .data$cell == cell.id):</span> Problem while computing `..1 = .data$cell == cell.id`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.data$cell`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Column `cell` not found in `.data`.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_graph: 30 nodes and 110 edges</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A directed multigraph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 30 × 7 (active)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   kind  rule                              id           p fixed_p fixed_… functi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> input <span style="color: #949494;">""</span>                                DNAdam… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>  <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> input <span style="color: #949494;">""</span>                                Growth… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>  <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> fate  <span style="color: #949494;">"</span>CyclinE1 or CyclinA<span style="color: #949494;">"</span>             Prolif… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>  <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> fate  <span style="color: #949494;">"</span>E2F1_2 or TP53<span style="color: #949494;">"</span>                  Apopto… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>  <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fate  <span style="color: #949494;">"</span>p21CIP or RB1 or RBL2<span style="color: #949494;">"</span>           Growth… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>  <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> gene  <span style="color: #949494;">"</span>SPRY and not FGFR3 and not GRB2<span style="color: #949494;">"</span> EGFR    -<span style="color: #BB0000;">0.103</span>   0.103       0   0.897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 30 × 3 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   kind  rule                              id              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> input <span style="color: #949494;">""</span>                                DNAdamage       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> input <span style="color: #949494;">""</span>                                GrowthInhibitors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> fate  <span style="color: #949494;">"</span>CyclinE1 or CyclinA<span style="color: #949494;">"</span>             Proliferation   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> fate  <span style="color: #949494;">"</span>E2F1_2 or TP53<span style="color: #949494;">"</span>                  Apoptosis       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fate  <span style="color: #949494;">"</span>p21CIP or RB1 or RBL2<span style="color: #949494;">"</span>           Growth_Arrest   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> gene  <span style="color: #949494;">"</span>SPRY and not FGFR3 and not GRB2<span style="color: #949494;">"</span> EGFR            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 24 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 110 × 3</span></span>

@@ -4,9 +4,6 @@
     <loc>https://cbigoxf.github.io/ingres/404.html</loc>
   </url>
   <url>
-    <loc>https://cbigoxf.github.io/ingres/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://cbigoxf.github.io/ingres/LICENSE.html</loc>
   </url>
   <url>
@@ -40,6 +37,9 @@
     <loc>https://cbigoxf.github.io/ingres/reference/computePbnByCluster.html</loc>
   </url>
   <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/createExampleIngresObject.html</loc>
+  </url>
+  <url>
     <loc>https://cbigoxf.github.io/ingres/reference/createIngresObject.html</loc>
   </url>
   <url>
@@ -47,6 +47,27 @@
   </url>
   <url>
     <loc>https://cbigoxf.github.io/ingres/reference/createNetworkGenesTemplate.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getClusterPbns.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getExpressionMatrix.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getIdents.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getNetwork.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getNetworkGenes.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getSingleCellPbns.html</loc>
+  </url>
+  <url>
+    <loc>https://cbigoxf.github.io/ingres/reference/getViperResults.html</loc>
   </url>
   <url>
     <loc>https://cbigoxf.github.io/ingres/reference/ginmlToGraphml.html</loc>
