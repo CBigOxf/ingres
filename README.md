@@ -18,13 +18,7 @@ the original boolean functions.
 
 ## Installation
 
-You can install **ingres** from CRAN:
-
-``` r
-install.packages("ingres")
-```
-
-Or you can install the development version of **ingres** with:
+You can install the development version of **ingres** with:
 
 ``` r
 # install.packages("devtools")
