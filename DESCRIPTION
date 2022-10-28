@@ -29,7 +29,7 @@ RoxygenNote: 7.1.2
 biocViews: NetworkInference, GraphAndNetwork, NetworkEnrichment, Network, 
     GeneRegulation, GeneExpression, SingleCell, SystemsBiology, Software
 Depends: 
-    R (>= 4.2.0)
+    R (>= 4.0.0)
 Imports: 
     methods,
     viper,
